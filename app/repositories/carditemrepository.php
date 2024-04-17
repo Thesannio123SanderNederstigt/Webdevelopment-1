@@ -39,7 +39,7 @@ class cardItemRepository extends Repository
 
     function getOne($id)
     {
-        try{
+        try {
             $stmt = $this->connection->prepare("SELECT * FROM cardItem WHERE id = :id");
             $stmt->bindParam(':id', $id);
 
@@ -54,7 +54,7 @@ class cardItemRepository extends Repository
 
     function create($cardItem)
     {
-        try{
+        try {
             $stmt = $this->connection->prepare("INSERT INTO cardItem (id, content, category, points, isPremiumItem) VALUES (?,?,?,?,?)");
 
             $stmt->execute([$cardItem->id, $cardItem->content, $cardItem->category, $cardItem->points, $cardItem->isPremiumItem]);
@@ -67,7 +67,7 @@ class cardItemRepository extends Repository
 
     function update($cardItem, $id)
     {
-        try{
+        try {
             $stmt = $this->connection->prepare("UPDATE cardItem SET content = ?, category = ?, points = ?, isPremiumItem = ? WHERE id = ?");
 
             $stmt->execute([$cardItem->content, $cardItem->category, $cardItem->points, $cardItem->isPremiumItem, $id]);
@@ -80,61 +80,12 @@ class cardItemRepository extends Repository
 
     function delete($id)
     {
-        try{
+        try {
             $stmt = $this->connection->prepare("DELETE FROM cardItem WHERE id = :id");
             $stmt->bindParam(':id', $id);
 
             $stmt->execute();
 
-            return;
-        } catch(PDOException $e) {
-            echo $e;
-        }
-        return true;
-    }
-
-    //connecting table/koppeltabel voor de n:n relatie tussen de kaart en kaart-item tabellen bewerkingen hieronder 
-    //(update functie is/was hier onnodig, ON UPDATE CASCADE is de bedoeling voor daadwerkelijke bingocard en cardItem tabel data bewerkingen; ook/zelfs bij id wijzigingen)
-
-    function getBingocardItems($bingocardId) //* L00K HERE part 2*\\
-    {
-        try {
-            $stmt = $this->connection->prepare("SELECT * FROM bingocardItem WHERE bingocardId = :id");
-            $stmt->bindParam(':id', $bingocardId);
-
-            $stmt->execute();
-
-            $bingocardItems = $stmt->fetchAll();
-            return $bingocardItems;
-        } catch(PDOException $e) {
-            echo $e;
-        }
-    }
-
-    //NOTE TO SELF: IK WIL AUTO_INCREMENT OP DEZE KOPPELTABEL (anders moet ik later hier alsnog een guid o.i.d. als id hier toevoegen!)
-    function createBingocardItem($bingocardId, $cardItemId) //* L00K HERE part 3*\\ 
-    {
-        try{
-            $stmt = $this->connection->prepare("INSERT INTO bingocardItem (bingocardId, cardItemId) VALUES (?,?)");
-
-            $stmt->execute([$bingocardId, $cardItemId]);
-
-            $bingocardItemId = $this->connection->lastInsertId();
-
-            return $bingocardItemId;
-        } catch(PDOException $e) {
-            echo $e;
-        }
-    }
-
-    function deleteBingocardItem($bingocardId, $cardItemId) //* L00K HERE part 4*\\
-    {
-        try{
-            $stmt = $this->connection->prepare("DELETE FROM bingocardItem WHERE bingocardId = :bingocardId AND cardItemId = :cardItemId");
-            $stmt->bindParam(':bingocardId', $bingocardId);
-            $stmt->bindParam(':cardItemId', $cardItemId);
-
-            $stmt->execute();
             return;
         } catch(PDOException $e) {
             echo $e;

@@ -1,7 +1,10 @@
 <?php
-require __DIR__ . '/controller.php';
+namespace viewControllers;
 
-class HomeController extends Controller 
+use viewControllers\viewController;
+//require __DIR__ . '/controller.php';
+
+class HomeController extends viewController 
 {
     function __construct()
     {
@@ -16,6 +19,26 @@ class HomeController extends Controller
     public function index()
     {
         require __DIR__ . '../views/' . $viewName . '/index.php';
+    }
+
+    public function users()
+    {
+
+    }
+
+    public function sportsclubs()
+    {
+
+    }
+
+    public function cardItems()
+    {
+
+    }
+
+    public function bingocards()
+    {
+        
     }
 }
 ?>

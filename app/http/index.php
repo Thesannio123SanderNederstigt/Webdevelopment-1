@@ -6,4 +6,5 @@ $uri = trim($_SERVER['REQUEST_URI'], '/');
 
 $router = new Router();
 $router->route($uri);
+//$router->add()
 ?>

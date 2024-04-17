@@ -6,15 +6,13 @@ include_once '../guid.php';
 
 class cardItemDTO
 {
-    public string $id;
     public string $content;
     public int $category;
     public int $points;
     public bool $isPremiumItem;
 
-    public function __construct($_id, $_content, $_category, $_points, $_isPremiumItem)
+    public function __construct($_content, $_category, $_points, $_isPremiumItem)
     {
-        $this->id = $_id;
         $this->content = $_content;
         $this->category = $_category;
         $this->points = $_points;
