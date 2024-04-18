@@ -80,7 +80,6 @@ class UserController extends viewController
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
-            
             //input sanitation
             $username = htmlspecialchars($_POST['username']);
             $password = htmlspecialchars($_POST['password']);
@@ -98,6 +97,11 @@ class UserController extends viewController
     
     public function update()
     {
+        if($_SERVER['REQUEST_METHOD'] == "GET") 
+        {
+            require '../views/user/index.php'; //geen aparte view single, update of delete pagina's toch? (of wil ik dit hier helemaal verwijderen en gewoon de API gaan gebruiken?)
+        }
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
@@ -120,6 +124,11 @@ class UserController extends viewController
 
     public function delete()
     {
+        if($_SERVER['REQUEST_METHOD'] == "GET")
+        {
+            require '../views/user/index.php';
+        }
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation

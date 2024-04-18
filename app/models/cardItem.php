@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-Class CardItem
+Class cardItem
 {
     private string $id; //guid
     private string $content; //text
