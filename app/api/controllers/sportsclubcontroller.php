@@ -21,25 +21,29 @@ class sportsclubController extends apiController
     public function getAll()
     {
         // controleren op jwt, geeft 401 terug zonder token
-        // $token = $this->checkForJwt();
-        // if (!$token)
-        // {
-        //    return;
-        // }
-
-        $offset = NULL;
-        $limit = NULL;
-
-        if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
-            $offset = $_GET["offset"];
-        }
-        if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
-            $limit = $_GET["limit"];
+        $token = $this->checkForJwt();
+        if (!$token)
+        {
+            return;
         }
 
-        $sportsclubs = $this->service->getAll($offset, $limit);
-
-        $this->respond($sportsclubs);
+        try {
+            $offset = NULL;
+            $limit = NULL;
+    
+            if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
+                $offset = $_GET["offset"];
+            }
+            if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
+                $limit = $_GET["limit"];
+            }
+    
+            $sportsclubs = $this->service->getAll($offset, $limit);
+    
+            $this->respond($sportsclubs);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
+        }
     }
 
     public function getOne($id)
@@ -50,15 +54,20 @@ class sportsclubController extends apiController
             return;
         }
 
-        $sportsclub = $this->service->getOne($id);
+        try {
+            $cleanId = htmlspecialchars($id);
+            $sportsclub = $this->service->getOne($cleanId);
 
-        if(!$sportsclub)
-        {
-            $this->respondWithError(404, "Sportsclub niet gevonden");
-            return;
+            if(!$sportsclub)
+            {
+                $this->respondWithError(404, "Sportsclub niet gevonden");
+                return;
+            }
+    
+            $this->respond($sportsclub);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-
-        $this->respond($sportsclub);
     }
 
     public function create()
@@ -89,8 +98,9 @@ class sportsclubController extends apiController
         }
 
         try {
+            $cleanId = htmlspecialchars($id);
             $sportsclub = $this->createObjectFromPostedJson("Models\\Sportsclub");
-            $this->service->update($sportsclub, $id);
+            $this->service->update($sportsclub, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -107,7 +117,8 @@ class sportsclubController extends apiController
         }
 
         try {
-            $this->service->delete($id);
+            $cleanId = htmlspecialchars($id);
+            $this->service->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }

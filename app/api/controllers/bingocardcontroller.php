@@ -29,41 +29,46 @@ class bingocardController extends apiController
             return;
         }
 
-        $offset = NULL;
-        $limit = NULL;
+        try {
 
-        if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
-            $offset = $_GET["offset"];
-        }
-        if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
-            $limit = $_GET["limit"];
-        }
-
-
-        $bingocards = $this->bingocardService->getAll($offset, $limit);
-
-        foreach($bingocards as $bingocard)
-        {
-            /*
-            $cardItems = array();
-
-            $cardItemIds = $this->bingocardService->getBingocardItemIds($bingocard->getId());
-
-            foreach($cardItemIds as $cardItemId)
-            {
-                $cardItem = $this->cardItemService->getOne($cardItemId);
-
-                array_push($cardItems,$cardItem);
+            $offset = NULL;
+            $limit = NULL;
+    
+            if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
+                $offset = $_GET["offset"];
             }
+            if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
+                $limit = $_GET["limit"];
+            }
+    
+    
+            $bingocards = $this->bingocardService->getAll($offset, $limit);
+    
+            foreach($bingocards as $bingocard)
+            {
+                /*
+                $cardItems = array();
+    
+                $cardItemIds = $this->bingocardService->getBingocardItemIds($bingocard->getId());
+    
+                foreach($cardItemIds as $cardItemId)
+                {
+                    $cardItem = $this->cardItemService->getOne($cardItemId);
+    
+                    array_push($cardItems,$cardItem);
+                }
+    
+                $bingocard->setItems($cardItems);
+                */
+    
+                $this->setBingocardItems($bingocard);
+            }
+    
+            $this->respond($bingocards);
 
-            $bingocard->setItems($cardItems);
-            */
-
-            $this->setBingocardItems($bingocard);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-
-
-        $this->respond($bingocards);
     }
 
     public function getOne($id)
@@ -74,32 +79,39 @@ class bingocardController extends apiController
             return;
         }
 
-        $bingocard = $this->bingocardService->getOne($id);
+        try {
+            $cleanId = htmlspecialchars($id);
 
-        /*
-        $cardItems = array();
+            $bingocard = $this->bingocardService->getOne($cleanId);
 
-        $cardItemIds = $this->bingocardService->getBingocardItemIds($bingocard->getId());
+            /*
+            $cardItems = array();
+    
+            $cardItemIds = $this->bingocardService->getBingocardItemIds($bingocard->getId());
+    
+            foreach($cardItemIds as $cardItemId)
+            {
+                $cardItem = $this->cardItemService->getOne($cardItemId);
+    
+                array_push($cardItems,$cardItem);
+            }
+    
+            $bingocard->setItems($cardItems);
+            */
+    
+            $this->setBingocardItems($bingocard);
+    
+            if(!$bingocard)
+            {
+                $this->respondWithError(404, "bingokaart niet gevonden");
+                return;
+            }
+    
+            $this->respond($bingocard);
 
-        foreach($cardItemIds as $cardItemId)
-        {
-            $cardItem = $this->cardItemService->getOne($cardItemId);
-
-            array_push($cardItems,$cardItem);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-
-        $bingocard->setItems($cardItems);
-        */
-
-        $this->setBingocardItems($bingocard);
-
-        if(!$bingocard)
-        {
-            $this->respondWithError(404, "bingokaart niet gevonden");
-            return;
-        }
-
-        $this->respond($bingocard);
     }
 
     private function setBingocardItems($bingocard)
@@ -149,8 +161,9 @@ class bingocardController extends apiController
         }
 
         try {
+            $cleanId = htmlspecialchars($id);
             $bingocard = $this->createObjectFromPostedJson("Models\\Bingocard");
-            $this->bingocardService->update($bingocard, $id);
+            $this->bingocardService->update($bingocard, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -167,7 +180,8 @@ class bingocardController extends apiController
         }
 
         try {
-            $bingocard = $this->bingocardService->updateLastAccessedOn($id);
+            $cleanId = htmlspecialchars($id);
+            $bingocard = $this->bingocardService->updateLastAccessedOn($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -184,7 +198,8 @@ class bingocardController extends apiController
         }
 
         try {
-            $this->bingocardService->delete($id);
+            $cleanId = htmlspecialchars($id);
+            $this->bingocardService->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -202,7 +217,9 @@ class bingocardController extends apiController
         }
 
         try {
-            $this->bingocardService->deleteBingocardItem($bingocardId, $cardItemId);
+            $cleanBingocardId = htmlspecialchars($bingocardId);
+            $cleanCardItemId = htmlspecialchars($cardItemId);
+            $this->bingocardService->deleteBingocardItem($cleanBingocardId, $cleanCardItemId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }

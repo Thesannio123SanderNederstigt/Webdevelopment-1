@@ -26,19 +26,23 @@ class cardItemController extends apiController
             return;
         }
 
-        $offset = NULL;
-        $limit = NULL;
-
-        if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
-            $offset = $_GET["offset"];
+        try {
+            $offset = NULL;
+            $limit = NULL;
+    
+            if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
+                $offset = $_GET["offset"];
+            }
+            if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
+                $limit = $_GET["limit"];
+            }
+    
+            $cardItems = $this->service->getAll($offset, $limit);
+    
+            $this->respond($cardItems);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-        if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
-            $limit = $_GET["limit"];
-        }
-
-        $cardItems = $this->service->getAll($offset, $limit);
-
-        $this->respond($cardItems);
     }
 
     public function getOne($id)
@@ -49,15 +53,22 @@ class cardItemController extends apiController
             return;
         }
 
-        $cardItem = $this->service->getOne($id);
+        try {
+            //input (id) sanitazation
+            $cleanId = htmlspecialchars($id);
 
-        if(!$cardItem)
-        {
-            $this->respondWithError(404, "bingokaart-item niet gevonden");
-            return;
+            $cardItem = $this->service->getOne($cleanId);
+
+            if(!$cardItem)
+            {
+                $this->respondWithError(404, "bingokaart-item niet gevonden");
+                return;
+            }
+
+            $this->respond($cardItem);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-
-        $this->respond($cardItem);
     }
 
     public function create()
@@ -88,8 +99,11 @@ class cardItemController extends apiController
         }
 
         try {
+            //input (id) sanitazation
+            $cleanId = htmlspecialchars($id);
+
             $cardItem = $this->createObjectFromPostedJson("Models\\CardItem");
-            $this->service->update($cardItem, $id);
+            $this->service->update($cardItem, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -106,7 +120,10 @@ class cardItemController extends apiController
         }
 
         try {
-            $this->service->delete($id);
+            //input (id) sanitazation
+            $cleanId = htmlspecialchars($id);
+
+            $this->service->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }

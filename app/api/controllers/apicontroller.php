@@ -14,6 +14,7 @@ class apiController
 
         $object = new $className();
         foreach ($data as $key => $value) {
+            htmlspecialchars($value); //TODO: check of dit een goed idee is als filter om te doen of niet...
             if(is_object($value)) {
                 continue;
             }
@@ -61,7 +62,11 @@ class apiController
                $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
                // username is now found in
                // echo $decoded->data->username;
-               return $decoded;
+               if($this->JwtValidation($decoded))
+               {
+                return $decoded;
+               }
+
            } catch (Exception $e) {
                $this->respondWithError(401, $e->getMessage());
                return;
@@ -69,9 +74,9 @@ class apiController
        }
    }
 
-    /*function inputSanitation($array)
-    {
-
-    }*/
+   function JwtValidation($decodedJWT): bool
+   {
+        return true;
+   }
 }
 ?>

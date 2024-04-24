@@ -35,25 +35,29 @@ class userController extends apiController
             return;
         }
 
-        $offset = NULL;
-        $limit = NULL;
-
-        if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
-            $offset = $_GET["offset"];
+        try {
+            $offset = NULL;
+            $limit = NULL;
+    
+            if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
+                $offset = $_GET["offset"];
+            }
+            if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
+                $limit = $_GET["limit"];
+            }
+    
+            $users = $this->userService->getAll($offset, $limit);
+    
+            foreach($users as $user)
+            {
+                $this->setUserBingocardsAndItems($user);
+                $this->setUserSportsclubs($user);
+            }
+    
+            $this->respond($users);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-        if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
-            $limit = $_GET["limit"];
-        }
-
-        $users = $this->userService->getAll($offset, $limit);
-
-        foreach($users as $user)
-        {
-            $this->setUserBingocardsAndItems($user);
-            $this->setUserSportsclubs($user);
-        }
-
-        $this->respond($users);
     }
 
     public function getOne($id)
@@ -64,18 +68,25 @@ class userController extends apiController
             return;
         }
 
-        $user = $this->userService->getOne($id);
+        try {
+            //input (id) sanitazation
+            $cleanId = htmlspecialchars($id);
 
-        $this->setUserBingocardsAndItems($user);
-        $this->setUserSportsclubs($user);
-
-        if(!$user)
-        {
-            $this->respondWithError(404, "gebruiker niet gevonden");
-            return;
+            $user = $this->userService->getOne($cleanId);
+    
+            $this->setUserBingocardsAndItems($user);
+            $this->setUserSportsclubs($user);
+    
+            if(!$user)
+            {
+                $this->respondWithError(404, "gebruiker niet gevonden");
+                return;
+            }
+    
+            $this->respond($user);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
         }
-
-        $this->respond($user);
     }
 
 
@@ -151,8 +162,9 @@ class userController extends apiController
         }
 
         try {
-            $user = $this->createObjectFromPostedJson("Models\\uSER");
-            $this->userService->update($user, $id);
+            $user = $this->createObjectFromPostedJson("Models\\User");
+            $cleanId = htmlspecialchars($id);
+            $this->userService->update($user, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -169,7 +181,8 @@ class userController extends apiController
         }
 
         try {
-            $this->userService->delete($id);
+            $cleanId = htmlspecialchars($id);
+            $this->userService->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -187,7 +200,9 @@ class userController extends apiController
         }
 
         try {
-            $this->userService->deleteUserSportsclub($userId, $sportsclubId);
+            $cleanUserId = htmlspecialchars($userId);
+            $cleanSportsclubId = htmlspecialchars($sportsclubId);
+            $this->userService->deleteUserSportsclub($cleanUserId, $cleanSportsclubId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -200,26 +215,25 @@ class userController extends apiController
     //TODO: ONDERSTAANDE FUNCTIES NOG AANPASSEN/TWEAKEN/BIJWERKEN/MIJN EIGEN MAKEN EN VERDER CONTROLEREN/NAGAAN EN JE WEET WEL!!!!
     public function login() {
 
-        // read user data from request body
+        // gebruiker lezen vanuit request body data
         $postedUser = $this->createObjectFromPostedJson("Models\\User");
 
-        // get user from db
+        // gebruiker ophalen
         $user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
 
-        // if the method returned false, the username and/or password were incorrect
         if(!$user) {
-            $this->respondWithError(401, "Invalid login");
+            $this->respondWithError(401, "Onjuiste gebruikersnaam en/of wachtwoord ingevoerd");
             return;
         }
 
-        // generate jwt
-        $tokenResponse = $this->generateJwt($user);       
+        //jwt generatie
+        $tokenResponse = $this->generateJwt($user);
 
         $this->respond($tokenResponse);    
     }
 
     public function generateJwt($user) {
-        $secret_key = "YOUR_SECRET_KEY";
+        $secret_key = "YOUR_SECRET_KEY"; 
 
         $issuer = "THE_ISSUER"; // this can be the domain/servername that issues the token
         $audience = "THE_AUDIENCE"; // this can be the domain/servername that checks the token
