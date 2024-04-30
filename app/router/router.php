@@ -1,4 +1,7 @@
 <?php
+namespace Routers;
+
+use Error;
 class Router
 {
     private function stripParameters($uri)

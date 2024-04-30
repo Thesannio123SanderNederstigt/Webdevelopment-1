@@ -1,12 +1,4 @@
 {
-    "name": "Thesannio123SanderNederstigt/webdevelopment-1",
-    "description": "Web development 1 course PHP project and application backend (API)",
-    "type": "project",
-    "authors": [
-        {
-            "name": "Sander Nederstigt (thesannio123)"
-        }
-    ],
     "autoload": {
         "psr-4": {
           "Routers\\": "routers",
@@ -17,10 +9,7 @@
         }
     },
     "require": {
-        "bramus/router": "~1.6",
         "firebase/php-jwt": "^6.0",
-        "mollie/mollie-api-php": "2.0",
-        "tecnickcom/tcpdf": "^6.2.13",
-        "phpmailer/phpmailer": "^6.4"
+        "vlucas/phpdotenv": "5.6.0"
     }
 }

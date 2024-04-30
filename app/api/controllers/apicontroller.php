@@ -1,9 +1,11 @@
 <?php
 namespace apiControllers;
 
+use Dotenv\Dotenv;
 use Exception;
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
+use Services\userService;
 
 class apiController
 {
@@ -41,6 +43,49 @@ class apiController
         echo json_encode($data);
     }
 
+    public function generateJwt($user) {
+
+        // phpdotenv utilization
+        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv->required(['SECRET_KEY', 'ISSUER', 'AUDIENCE']);
+        $dotenv->load();
+
+        $secret_key = $_ENV['SECRET_KEY'];
+        $issuer = $_ENV["ISSUER"];
+        $audience = $_ENV["AUDIENCE"];
+
+        $issuedAt = time(); // issued at
+        $notbefore = $issuedAt; //not valid before 
+        $expire = $issuedAt + 900; // expiration time is set at +900 seconds (15 minutes)
+
+        // JWT expiration times should be kept short (10-30 minutes)
+        // A refresh token system should be implemented if we want clients to stay logged in for longer periods
+
+        // note how these claims are 3 characters long to keep the JWT as small as possible
+        $payload = array(
+            "iss" => $issuer,
+            "aud" => $audience,
+            "iat" => $issuedAt,
+            "nbf" => $notbefore,
+            "exp" => $expire,
+            "data" => array(
+                "id" => $user->getId(),
+                "username" => $user->getUsername(),
+                "email" => $user->getEmail(),
+                "isAdmin" => $user->getIsAdmin()
+        ));
+
+        $jwt = JWT::encode($payload, $secret_key, 'HS256');
+
+        return 
+            array(
+                "message" => "Successful login.",
+                "jwt" => $jwt,
+                "username" => $user->getUsername(),
+                "expireAt" => $expire
+            );
+    } 
+
     function checkForJwt() {
         // Check for token header
         if(!isset($_SERVER['HTTP_AUTHORIZATION'])) {
@@ -54,8 +99,13 @@ class apiController
        $arr = explode(" ", $authHeader);
        $jwt = $arr[1];
 
+        // phpdotenv utilization
+       $dotenv = Dotenv::createImmutable(__DIR__);
+       $dotenv->required(['SECRET_KEY', 'ISSUER', 'AUDIENCE']);
+       $dotenv->load();
+
        // Decode JWT
-       $secret_key = "YOUR_SECRET_KEY";
+       $secret_key = $_SERVER["SECRET_KEY"];
 
        if ($jwt) {
            try {
@@ -64,7 +114,7 @@ class apiController
                // echo $decoded->data->username;
                if($this->JwtValidation($decoded))
                {
-                return $decoded;
+                    return $decoded;
                }
 
            } catch (Exception $e) {
@@ -74,8 +124,23 @@ class apiController
        }
    }
 
-   function JwtValidation($decodedJWT): bool
+   private function JwtValidation($decodedJWT): bool
    {
+        if($decodedJWT->iss !== $_SERVER['ISSUER'] || $decodedJWT->aud !== $_SERVER['AUDIENCE']) {
+            return false;
+        }
+
+        if($decodedJWT->iat > time() || $decodedJWT->nbf > time() || $decodedJWT->exp < time()) {
+            return false;
+        }
+
+        $userService = new UserService();
+        $user = $this->$userService->getOne($decodedJWT->data->id);
+
+        if(!$user) {
+            return false;
+        }
+
         return true;
    }
 }

@@ -41,8 +41,7 @@ class HomeController extends viewController
 
             $this->userService->loginCheck($username, $password);
 
-            //return a jwt/token here too? (dus ook hier een token terug gaan geven of niet?)
-
+            //hier ook een jwt token teruggeven? NOPE hier niet voor deze applicatie, dit wordt wel geïmplementeerd voor de API back-end kant voor de web development 2 nuxt applicatie
             $this->checkMappingAndDisplayView('home');
         }
     }
