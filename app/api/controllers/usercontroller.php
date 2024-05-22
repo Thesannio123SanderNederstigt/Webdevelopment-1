@@ -216,18 +216,19 @@ class userController extends apiController
         try {
             // gebruiker lezen vanuit request body data
             $postedUser = $this->createObjectFromPostedJson("Models\\User");
-            
+
             // gebruiker ophalen
-            $user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
-            
+            //$user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
+            $user = $this->userService->loginCheck($postedUser->getUsername(), $postedUser->getPassword());
+
             if(!$user) {
                 $this->respondWithError(401, "Onjuiste gebruikersnaam en/of wachtwoord ingevoerd");
                 return;
             }
-        
+
             //jwt generen en teruggeven als/in de response
             $tokenResponse = $this->generateJwt($user);
-        
+
             $this->respond($tokenResponse);  
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());

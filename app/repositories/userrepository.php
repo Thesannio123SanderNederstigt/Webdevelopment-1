@@ -132,7 +132,7 @@ class userRepository extends Repository
     }
 
     //username en password check voor inlog service/controller endpoint(s)
-    function loginCredentialsCheck($username, $password): User
+    function loginCredentialsCheck($username, $password): User //TODO: checken of dit teruggeven van user object hier wel kan aangezien dit ook false terug kan geven...
     {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM user WHERE username = :username");
@@ -144,7 +144,7 @@ class userRepository extends Repository
             $user = $stmt->fetch();
 
             // verifiëren van het wachtwoord
-            $result = $this->verifyPassword($password, $user->password);
+            $result = $this->verifyPassword($password, $user->getPassword());
 
             if (!$result)
             {

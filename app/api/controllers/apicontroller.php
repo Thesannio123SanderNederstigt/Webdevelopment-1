@@ -51,8 +51,8 @@ class apiController
         $dotenv->load();
 
         $secret_key = $_ENV['SECRET_KEY'];
-        $issuer = $_ENV["ISSUER"];
-        $audience = $_ENV["AUDIENCE"];
+        $issuer = $_ENV['ISSUER'];
+        $audience = $_ENV['AUDIENCE'];
 
         $issuedAt = time(); // issued at
         $notbefore = $issuedAt; //not valid before 
@@ -79,10 +79,12 @@ class apiController
 
         return 
             array(
-                "message" => "Successful login.",
+                "message" => "Successful login",
                 "jwt" => $jwt,
+                "userId" => $user->getId(),
                 "username" => $user->getUsername(),
-                "expireAt" => $expire
+                "userIsPremium" => $user->getIsPremium(),
+                "expiresAt" => $expire
             );
     } 
 
@@ -105,7 +107,7 @@ class apiController
        $dotenv->load();
 
        // Decode JWT
-       $secret_key = $_SERVER["SECRET_KEY"];
+       $secret_key = $_SERVER['SECRET_KEY'];
 
        if ($jwt) {
            try {
