@@ -40,7 +40,7 @@ class userService
         $userSportsclubs = $user->getSportsclubs();
 
         foreach($userSportsclubs as $sportsclub) {
-            $this->createUserSportsclub($user->getId(), $sportsclub->getId());
+            $this->addUserSportsclub($user->getId(), $sportsclub->getId());
         }
 
         return $newUser;
@@ -69,9 +69,9 @@ class userService
         return $this->repository->getUserSportsclubIds($userId);
     }
 
-    public function createUserSportsclub($userId, $sportsclubId)
+    public function addUserSportsclub($userId, $sportsclubId)
     {
-        return $this->repository->createUserSportsclub($userId, $sportsclubId);
+        return $this->repository->insertUserSportsclub($userId, $sportsclubId);
     }
 
     public function deleteUserSportsclub($userId, $sportsclubId)

@@ -73,10 +73,10 @@ class UserController extends viewController
     }
 
     public function create() {        
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
+        /*if($_SERVER['REQUEST_METHOD'] == "GET") 
         {
             require '../views/user/create.php';
-        }
+        }*/
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
@@ -92,6 +92,26 @@ class UserController extends viewController
             $this->userService->create($user);
 
             $this->index();
+        }
+    }
+
+    public function alter()
+    {
+        if($_SERVER['REQUEST_METHOD'] == "GET") 
+        {
+            require '../views/user/index.php';
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            if(isset($_POST["wijzigen"])) 
+            {
+                //update();
+            }
+            else if(isset($_POST["verwijderen"]))
+            {
+                //delete();
+            }
         }
     }
     

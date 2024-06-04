@@ -53,7 +53,7 @@ class bingocardService
         $bingocardItems = $bingocard->getItems();
 
         foreach($bingocardItems as $cardItem) {
-            $this->createBingocardItem($bingocard->getId(), $cardItem->getId());
+            $this->addBingocardItem($bingocard->getId(), $cardItem->getId());
         }
 
         return $newBingocard;
@@ -82,9 +82,9 @@ class bingocardService
         return $this->repository->getBingocardItemIds($bingocardId);
     }
 
-    public function createBingocardItem($bingocardId, $cardItemId)
+    public function addBingocardItem($bingocardId, $cardItemId)
     {
-        return $this->repository->createBingocardItem($bingocardId, $cardItemId);
+        return $this->repository->insertBingocardItem($bingocardId, $cardItemId);
     }
 
     public function deleteBingocardItem($bingocardId, $cardItemId)

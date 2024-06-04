@@ -108,7 +108,7 @@ class userRepository extends Repository
         try {
             $hashedPassword = $this->hashPassword($user->password);
 
-            $stmt = $this->connection->prepare("UPDATE user SET userName = ?, password = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
+            $stmt = $this->connection->prepare("UPDATE user SET userName = ?, [password] = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
             $stmt->execute([$user->userId, $user->userName, $hashedPassword, $user->email, $user->isAdmin, $user->isPremium, $user->cardsAmount, $user->sharedCardsAmount, $id]);
             
             return $user;
@@ -189,7 +189,7 @@ class userRepository extends Repository
         }
     }
 
-    function createUserSportsclub($userId, $sportsclubId)
+    function insertUserSportsclub($userId, $sportsclubId)
     {
         try {
             $stmt = $this->connection->prepare("INSERT INTO userSportsclub (userId, sportsclubId) VALUES (?,?)");

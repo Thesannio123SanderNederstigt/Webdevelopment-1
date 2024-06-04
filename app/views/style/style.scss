@@ -1,0 +1,198 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+  
+footer {
+    margin-top: auto;
+}
+  
+#logincontainer {
+      background-color: #2F5597 !important;
+      min-width: 100% !important;
+      min-height: 100% !important;
+      padding: 5em 2em !important;
+}
+  
+.headerfooter {
+    background-color: #002060!important;
+    min-width: 100% !important;
+}
+
+.headernavbar {
+    background-color: #002060!important;
+    font-family: 'Berlin Sans FB' !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.5em !important;
+}
+
+#header-login-info {
+    flex: 40 !important;
+    text-align: center;
+}
+
+#offcanvas-bar-header {
+    background-color: #1f0c6a !important;
+}
+
+#offcanvas-bar-body {
+    background-color: #2d60b9 !important;
+}
+
+@media screen and (min-width: 992px)
+{
+    #offcanvas-bar-body {
+        border-radius: var(--bs-border-radius-lg);
+    }
+}
+
+.navbar-linkitems {
+    color: #ffffff !important;
+}
+
+.active, .navbar-linkitems:hover {
+    color: #f7d012 !important;
+}
+
+#close-button {
+    background: transparent url("../assets/close-button.svg") center/1em auto no-repeat !important;
+    opacity: 1.0 !important;
+}
+
+#close-button:hover {
+    background-color: #c30808 !important;
+    opacity: 1.0 !important;
+}
+
+.bingo-danger-btn:hover {
+    background-color: #c30808;
+    border-color: #c30808;
+}
+
+#footersection {
+    padding-bottom: 0 !important;
+}
+
+#bingo-ball-footer-image {
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.footer-text {
+    margin-top: 0.5em !important;
+    font-size: 1.2em !important;
+}
+
+.website-logo-text {
+    color: #002060 !important; 
+    font-family: 'Berlin Sans FB' !important;
+    font-size: 2.2em !important;
+    text-align: center !important;
+}
+
+.warningtext {
+    font-size: larger;
+    font-weight: bold;
+    color: #ff0000 !important;
+}
+
+.website-logo-image {
+    margin-left: 2.3em !important;
+}
+
+.card-body > h2 {
+    font-size: 2em !important;
+}
+
+.flex-categories-container {
+    max-width: 900 !important;
+}
+
+.card-categories {
+    background-color: #2d60b9 !important; 
+    padding: 2rem !important;
+}
+
+.card-categories:hover {
+    background-color: #002060!important
+}
+
+.categorie-text {
+    font-family: 'Berlin Sans FB' !important;
+    color: #ffffff !important;
+    font-size: 2em !important;
+}
+
+.anchor-tag {
+    text-decoration: none !important;
+}
+
+#table-container {
+    max-width: 95% !important;
+}
+
+.table-title-text {
+    text-align: start !important;
+    font-size: 2em !important;
+}
+
+.bingo-table-header-row {
+    border-bottom: 0.1em solid #000000 !important;
+}
+
+.bingo-table-bottom-row {
+    border-top: 0.1em solid #000000 !important;
+}
+
+.bingo-table-columns {
+    border: none;
+    outline: none;
+    vertical-align: middle;
+    padding: 0em !important;
+    resize: none !important;
+    width: 100% !important;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.bingo-id-column {
+    min-width: 10rem !important;
+    margin-right: 1rem !important;
+}
+
+.bingo-email-column {
+    min-width: 13rem !important;
+}
+
+.bingo-content-column {
+    min-width: 55rem !important;
+}
+
+.bingo-clubname-column {
+    min-width: 16rem !important;
+}
+
+.bingo-club-description-column {
+    min-width: 50rem !important;
+}
+
+.bingo-nieuw-header-text {
+    padding-bottom: 0.75rem;
+}
+
+.table>:not(caption)>*>* {
+    padding: 1rem 0.5rem !important;
+}
+
+#bingocard-table-section, #carditems-table-section, #sportsclubs-table-section {
+    display: none !important;
+}
+
+.bingo-subtable-text {
+    display: flex !important;
+}
+
+select, input, .bingo-table-buttons, .bingo-table-add-button {
+    margin-bottom: 1.1rem !important;
+}

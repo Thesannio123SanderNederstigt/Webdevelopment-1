@@ -1,6 +1,7 @@
 <?php
 namespace viewControllers;
 
+use Exception;
 use viewControllers\viewController;
 use Services\userService;
 //require __DIR__ . '/controller.php';
@@ -14,7 +15,7 @@ class HomeController extends viewController
         $this->userService = new userService();
 
         if(session_status() !== PHP_SESSION_ACTIVE || !isset($_SERVER['HTTP_AUTHORIZATION'])){
-            //session_start();
+            session_start();
             $viewName = 'login';
         } else {
             $viewName = 'home';
@@ -36,20 +37,30 @@ class HomeController extends viewController
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
             //input sanitation
-            $username = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
+            $username = htmlspecialchars($_POST['form-username']);
+            $password = htmlspecialchars($_POST['form-password']);
 
             $user = $this->userService->loginCheck($username, $password);
 
             if($user->getIsAdmin() == true)
             {
                 session_start();
-                $_SESSION['userIsAdmin'] = true;
+
+                $_SESSION['user']['id'] = $user->getId();
+                $_SESSION['user']['username'] = $user->getUsername();
+                $_SESSION['user']['email'] = $user->getEmail();
+                $_SESSION['user']['isAdmin'] = true;
+                $_SESSION['user']['isPremium'] = $user->getIsPremium();
+                $_SESSION['user']['cardsAmount'] = $user->getCardsAmount();
+                $_SESSION['user']['sharedCardsAmount'] = $user->getSharedCardsAmount();
+
+                //$_SESSION['userIsAdmin'] = true;
                 $this->checkMappingAndDisplayView('home');
             }
             else{
-                //of doe hier niets of display login error op login pagina I guess
                 $_SESSION['userIsAdmin'] = false;
+                $_SESSION['loginError'] = 'Onjuiste inloggegevens ingevoerd';
+                $this->checkMappingAndDisplayView('login');
             }
 
             //hier ook een jwt token teruggeven? NOPE.. hier niet voor deze applicatie, dit wordt wel geïmplementeerd voor de API back-end kant voor de web development 2 nuxt applicatie
@@ -60,24 +71,18 @@ class HomeController extends viewController
         }
     }
 
-    public function users()
+    public function logout()
     {
-
-    }
-
-    public function sportsclubs()
-    {
-
-    }
-
-    public function cardItems()
-    {
-
-    }
-
-    public function bingocards()
-    {
-
+        if(isset($_POST['logout']))
+        {
+            unset($_SESSION['user']);
+            //session_destroy();
+            $this->checkMappingAndDisplayView('login');
+        }
+        else
+        {
+            $this->checkMappingAndDisplayView('home');
+        }
     }
 }
 ?>

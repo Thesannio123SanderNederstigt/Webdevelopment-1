@@ -46,9 +46,9 @@ class apiController
     public function generateJwt($user) {
 
         // phpdotenv utilization
-        $dotenv = Dotenv::createImmutable(__DIR__);
-        $dotenv->required(['SECRET_KEY', 'ISSUER', 'AUDIENCE']);
+        $dotenv = Dotenv::createImmutable(__DIR__ . '../../..');
         $dotenv->load();
+        $dotenv->required(['SECRET_KEY', 'ISSUER', 'AUDIENCE']);
 
         $secret_key = $_ENV['SECRET_KEY'];
         $issuer = $_ENV['ISSUER'];

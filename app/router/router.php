@@ -39,31 +39,27 @@ class Router
         $methodName = $explodedUri[1];
         
         //load the controller file
-        $filename = __DIR__ . '../controllers/' .$controllerName . '.php';
+        $filename = __DIR__ . '../../controllers' .$controllerName . '.php';
+
+        $controllerName = "viewControllers\\" . $controllerName;
         
         if ($api) {
-            $filename = __DIR__ . '../api/controllers/' . $controllerName . '.php';
+            $filename = __DIR__ . '../../api/controllers/' . $controllerName . '.php';
+
+            $controllerName = "apiControllers\\" . $controllerName;
         }
         
-        if (file_exists($filename)) {
+        if (file_exists($filename) || method_exists($controllerName, $methodName)) {
             require $filename;
         } else {
             http_response_code(404);
             return;
         }
         
-        /*
-        if(!class_exists($controllerName) || !method_exists($conrollerName, $methodName)) {
-            http_response_code(404);
-            //die();
-            //exit();
-            return;
-        }
-        */
         
         try {
             $controllerObj = new $controllerName();
-            $controllerObj->$methodName();
+            $controllerObj->{$methodName}();
         } catch(Error $e) {
             //$_SESSION['ERROR'] = $e;
             //var_dump($_SESSION);

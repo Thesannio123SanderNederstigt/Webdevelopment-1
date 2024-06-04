@@ -190,6 +190,29 @@ class userController extends apiController
         $this->respond(true);
     }
 
+    //TODO: maak nog een get user sportsclub (waar inhoud sportclubs wordt opgehaald, bij updaten voor gebruiker wordt verwijderd uit DB en opnieuw wordt aangemaakt (allemaal in loops)?)
+
+    //Endpoint voor het toevoegen van sportsclubs voor een gebruiker (in de koppeltabel)
+    public function addUserSportsclub($userId, $sportsclubId)
+    {
+        $token = $this->checkForJwt();
+        if (!$token)
+        {
+            return;
+        }
+
+        try {
+            $cleanUserId = htmlspecialchars($userId);
+            $cleanSportsclubId = htmlspecialchars($sportsclubId);
+            $this->userService->addUserSportsclub($cleanUserId, $cleanSportsclubId);
+        } catch (Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
+        }
+
+        $this->respond(true);
+    }
+
+
     //Endpoint voor het verwijderen van een gebruiker van een sportsclub (zonder de user of de sportclub zelf te verwijderen)
     public function deleteUserSportsclub($userId, $sportsclubId)
     {

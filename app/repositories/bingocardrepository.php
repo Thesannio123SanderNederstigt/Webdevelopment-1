@@ -167,7 +167,7 @@ class bingocardRepository extends Repository
         }
     }
 
-    function createBingocardItem($bingocardId, $cardItemId)
+    function insertBingocardItem($bingocardId, $cardItemId)
     {
         try{
             $stmt = $this->connection->prepare("INSERT INTO bingocardItem (bingocardId, cardItemId) VALUES (?,?)");

@@ -15,9 +15,10 @@ class Repository
         try {
 
             //utilizing environmental variables with phpdotenv
-            $dotenv = Dotenv::createImmutable(__DIR__);
-            $dotenv->required(['TYPE', 'SERVERNAME', 'USERNAME', 'PASSWORD', 'DATABASE']);
+            $dotenv = Dotenv::createImmutable(__DIR__ . '../..');
             $dotenv->load();
+            $dotenv->required(['TYPE', 'SERVERNAME', 'USERNAME', 'PASSWORD', 'DATABASE']);
+
 
             $type = $_ENV['TYPE'];
             $servername = $_ENV['SERVERNAME'];
@@ -26,6 +27,7 @@ class Repository
             $password = $_ENV['PASSWORD'];
 
             $this->connection = new PDO("$type:host=$servername;dbname=$database", $username, $password);
+            //$this->connection = new PDO("mysql:host=localhost;dbname=webdevelopmentdb", 'webdeveloper', 'sander123');
 
             //setting the PDO error mode to exception
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
