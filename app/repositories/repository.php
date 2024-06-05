@@ -11,14 +11,12 @@ class Repository
 
     public function __construct()
     {
-        //require __DIR__ . '/../config/dbconfig.php';
         try {
 
             //utilizing environmental variables with phpdotenv
             $dotenv = Dotenv::createImmutable(__DIR__ . '../..');
             $dotenv->load();
             $dotenv->required(['TYPE', 'SERVERNAME', 'USERNAME', 'PASSWORD', 'DATABASE']);
-
 
             $type = $_ENV['TYPE'];
             $servername = $_ENV['SERVERNAME'];

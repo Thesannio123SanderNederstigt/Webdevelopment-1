@@ -17,9 +17,7 @@
         <!-- <script src="https://kit.fontawesome.com/47208c5e2d.js" crossorigin="anonymous"></script> --> <!-- outdated -->
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --> <!-- outdated -->
 
-        <script src="../js/login.js"></script>
-
-        <!-- bootstrap 5.3.3. (&js en wellicht ook popper?) FontAwesome, mijn JS login script, eigen stylesheet?-->
+        <script src="js/login.js"></script>
 
         <!-- bootstrap v5.3.3 -->
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -30,8 +28,8 @@
 
 		    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="../views/style/style.scss">
-        <link rel="icon" href="../views/assets/schaatsbingo-logo.svg" sizes="any" type="image/svg">
+        <link rel="stylesheet" href="style/style.scss">
+        <link rel="icon" href="assets/schaatsbingo-logo.svg" sizes="any" type="image/svg">
     </head>
     <body style="display: block !important;">
           <section class="container" id="logincontainer">
@@ -40,7 +38,7 @@
                 <section class="card border border-light-subtle rounded-3 shadow-sm">
                   <section class="card-body p-3 p-md-4 p-xl-5">
                     <section class="text-center mb-3">
-                        <img src="../views/assets/schaatsbingo-logo.svg" class="website-logo-image" alt="Schaatsbingo.nl Logo" width="200" height="190">
+                        <img src="assets/schaatsbingo-logo.svg" class="website-logo-image" alt="Schaatsbingo.nl Logo" width="200" height="190">
                     </section>
                     <h1 class="website-logo-text">Schaatsbingo.nl</h1>
                     <h2 class="text-center text-secondary mb-4 website-logo-text">CMS - login</h2>
@@ -67,6 +65,7 @@
                             echo '</section class="col-12">';
                             
                             unset($_SESSION['loginError']);
+                            unset($_SESSION[ 'userIsAdmin']);
                           }
                         ?>
 						

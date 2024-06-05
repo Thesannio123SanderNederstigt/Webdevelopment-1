@@ -244,7 +244,7 @@ class userController extends apiController
             //$user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
             $user = $this->userService->loginCheck($postedUser->getUsername(), $postedUser->getPassword());
 
-            if(!$user) {
+            if(!$user || $user == false) {
                 $this->respondWithError(401, "Onjuiste gebruikersnaam en/of wachtwoord ingevoerd");
                 return;
             }

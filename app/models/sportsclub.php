@@ -3,11 +3,11 @@ namespace Models;
 
 Class Sportsclub
 {
-    private string $id;
-    private string $clubname;
-    private string $description;
-    private string $foundedOn;
-    private int $membersAmount;
+    public string $id;
+    public string $clubname;
+    public string $description;
+    public string $foundedOn;
+    public int $membersAmount;
 
     public function __construct()
     {

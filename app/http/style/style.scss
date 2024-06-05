@@ -45,6 +45,7 @@ footer {
 {
     #offcanvas-bar-body {
         border-radius: var(--bs-border-radius-lg);
+        max-height: 2.35em;
     }
 }
 
@@ -185,7 +186,7 @@ footer {
     padding: 1rem 0.5rem !important;
 }
 
-#bingocard-table-section, #carditems-table-section, #sportsclubs-table-section {
+#bingocards-table-section, #carditems-table-section, #sportsclubs-table-section {
     display: none !important;
 }
 

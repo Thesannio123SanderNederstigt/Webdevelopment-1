@@ -3,13 +3,13 @@ namespace Models;
 
 Class Bingocard
 {
-    private string $id; //guid
-    private string $userId; //also guid
-    private int $score;
-    private int $size; //9, 16 or 25
-    private string $creationDate; //datetime
-    private string $lastAccessedOn; //datetime
-    private array $items; //carditem
+    public string $id; //guid
+    public string $userId; //also guid
+    public int $score;
+    public int $size; //9, 16 or 25
+    public string $creationDate; //datetime
+    public string $lastAccessedOn; //datetime
+    public array $items; //carditem
 
     //empty constructor
     public function __construct()

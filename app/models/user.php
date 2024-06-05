@@ -1,18 +1,19 @@
 <?php
 namespace Models;
+
 Class User 
 {
-    private string $id; //guids gebruikt voor alle vormen van id's in deze applicatie
-    private string $username;
-    private string $password;
-    private string $email;
-    private bool $isAdmin; //voor cms update van gegevens check (of check if userId gelijk aan eigen userId in token, dan mag userUpdate wel (update endpoint gebruikt straks direct dit object/setters van dit model?, en geen DTO?), maar andere cms updates van andere objecten natuurlijk niet!)
-    private bool $isPremium;
-    private int $cardsAmount;
-    private int $sharedCardsAmount;
+    public string $id; //guids gebruikt voor alle vormen van id's in deze applicatie
+    public string $username;
+    public string $password;
+    public string $email;
+    public bool $isAdmin; //voor cms update van gegevens check (of check if userId gelijk aan eigen userId in token, dan mag userUpdate wel (update endpoint gebruikt straks direct dit object/setters van dit model?, en geen DTO?), maar andere cms updates van andere objecten natuurlijk niet!)
+    public bool $isPremium;
+    public int $cardsAmount;
+    public int $sharedCardsAmount;
 
-    private array $bingocards; //bingocard array
-    private array $sportsclubs; //string array
+    public array $bingocards; //bingocard array
+    public array $sportsclubs; //string array
 
     //$this->$bingocards = array(new Bingocard(), 3);
 

@@ -3,11 +3,11 @@ namespace Models;
 
 Class cardItem
 {
-    private string $id; //guid
-    private string $content; //text
-    private int $category;
-    private int $points;
-    private bool $isPremiumItem;
+    public string $id; //guid
+    public string $content; //text
+    public int $category;
+    public int $points;
+    public bool $isPremiumItem;
 
     //empty constructor
     public function __construct()

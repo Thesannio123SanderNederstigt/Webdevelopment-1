@@ -3,6 +3,10 @@
     <head>
         <title>Schaatsbingo.nl | CMS</title>
 
+        <?php
+        //var_dump($_SESSION);
+        ?>
+
         <!-- metadata -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +37,7 @@
                                 <img src="../assets/schaatsbingo-logo.svg" class="website-logo-image" alt="Schaatsbingo.nl Logo">
                             </a>-->
                             <h2 class="headernavbar">Schaatsbingo.nl</h2>
-                            <h3 class="headernavbar" id="header-login-info">Welkom <?php $_SESSION['username'] = 'Sander'; echo $_SESSION['username']; ?></h3>
+                            <h3 class="headernavbar" id="header-login-info">Welkom <?php if(ISSET($_SESSION['user'])){ echo $_SESSION['user']['username']; }?></h3>
                             <button class="navbar-toggler border-0 headernavbar" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
@@ -63,7 +67,7 @@
                                         </li>
                                     </ul>
                                     <form name="logout-form" action="/home/logout/" method="POST">
-                                        <button type="submit" class="btn btn-danger bingo-danger-btn" id="logout-button">Uitloggen</button>
+                                        <button type="submit" class="btn btn-danger bingo-danger-btn" id="logout-button" name="logout">Uitloggen</button>
                                     </form>
                                 </section>
                             </section>

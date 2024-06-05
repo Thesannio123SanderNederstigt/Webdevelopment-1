@@ -5,16 +5,17 @@ class viewController
 {
     function checkMappingAndDisplayView($model) 
     {
-        if(session_status() !== PHP_SESSION_ACTIVE || !isset($_SERVER['HTTP_AUTHORIZATION'])) { //TODO: figure these checks for sessions out!
-            session_start();
+        /*if(session_status() !== PHP_SESSION_ACTIVE || !isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            //session_start();
             $directory = 'login';
         } else {
-            $directory = substr(get_class($this), 0, -10); //$this === $model?
-        }
+            $directory = substr(get_class($this), 16, -10); //$this === $model?
+        }*/
 
-        $viewName = debug_backtrace()[1]['function']; //index
+        //$viewName = debug_backtrace()[1]['function']; //index
 
-        require __DIR__ . "/../views/$directory/$viewName.php"; //voeg de view toe
+        $directory = substr(get_class($this), 16, -10);
+        require __DIR__ . "/../views/$directory/index.php"; //voeg de view toe
     }
 }
 ?>

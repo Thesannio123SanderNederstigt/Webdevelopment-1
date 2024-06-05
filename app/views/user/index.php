@@ -57,10 +57,10 @@
 								<textarea class="bingo-table-columns">0</textarea>
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $_SESSION['user_id']; ?>" onclick="showUserBingocards(this.value)">Toon bingokaarten</button>
+								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $_SESSION['user_id']; ?>" onclick="showSubtableSection(this.value, 'bingocard')">Toon bingokaarten</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary bingo-table-buttons" id="sportclubs-btn" value="<?php echo $_SESSION['user_id']?>" onclick="showUserSportsclubs(this.value)">Toon sportclubs</button>
+								<button type="button" class="btn btn-primary bingo-table-buttons" id="sportclubs-btn" value="<?php echo $_SESSION['user_id']?>" onclick="showSubtableSection(this.value, 'sportsclub')">Toon sportclubs</button>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen">Wijzigen</button><!--bewerken met value="$user->getId();" want dan in de alter function van controller: $_POST["wijzigen"] heeft de waarde van de desbetreffende user id!-->
@@ -111,7 +111,7 @@
 			
 			<!-- Bingokaarten van gebruiker (wederom, JS want sub-tabel en ook zorgen bij aanmaak van nieuwe kaart, dat dit gebeurd voor deze gebruiker!) -->
 			
-			<section class="row justify-content-md-center" id="bingocard-table-section">
+			<section class="row justify-content-md-center" id="bingocards-table-section">
 				<section class="container bingo-subtable-text">
 					<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text" id="bingocards-table-title-text">Bingokaarten voor gebruiker: </h2>
 					<h2 class="text-center mb-4 mt-4 mr-4 website-logo-text table-title-text" id="bingocards-table-title-id-text"></h2>
@@ -156,7 +156,7 @@
 							<textarea class="bingo-table-columns">2024-04-15 18:40:07</textarea>
 						</td>
 						<td>
-							<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $_SESSION['bingocard_id']; ?>" onclick="showBingocardItems(this.value)">Toon bingokaart-items</button>
+							<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $_SESSION['bingocard_id']; ?>" onclick="showSubtableSection(this.value, 'carditem')">Toon bingokaart-items</button>
 						</td>
 						<td>
 							<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $_SESSION['bingocard_id']; ?>" onclick="">Wijzigen</button>
@@ -374,9 +374,9 @@
 		</section>
 		
 		<script>
-			function showUserBingocards(user_id) 
+			/*function showUserBingocards(user_id)
 			{				
-				var bingocards_table_section = document.getElementById("bingocard-table-section");
+				var bingocards_table_section = document.getElementById("bingocards-table-section");
 				bingocards_table_section.style.cssText = 'display: flex !important';
 
 				
@@ -403,6 +403,42 @@
 				var sportsclub_title_id_text = document.getElementById("sportsclubs-table-title-id-text");
 				sportsclub_title_id_text.innerText = sportsclub_id;
 				sportsclub_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
+			}*/
+
+            function showSubtableSection(item_id, item_name)
+			{
+                var item_table_section;
+                var item_title_id_text;
+
+				switch(item_name)
+                {
+                    case item_name === "bingocard":
+                        item_table_section = document.getElementById("bingocards-table-section");
+                        item_title_id_text = document.getElementById("bingocards-table-title-id-text");
+
+                        /*getUserBingocards(item_id);
+                        return;*/
+
+                    case item_name === "carditem":
+                        item_table_section = document.getElementById("carditems-table-section");
+                        item_title_id_text = document.getElementById("carditems-table-title-id-text");
+                        
+                        /*getBingocardItems(item_id);
+                        return;*/
+
+                    case item_name === "sportsclub":
+                        item_table_section = document.getElementById("sportsclubs-table-section");
+                        item_title_id_text = document.getElementById("sportsclubs-table-title-id-text");
+
+                        /*getUserSportsclubs(item_id);
+                        return;*/
+                }
+
+                item_title_id_text.innerText = item_id;
+                item_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
+
+                item_table_section.style.cssText = 'display: flex !important';
+
 			}
 		</script>
 		

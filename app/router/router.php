@@ -39,7 +39,7 @@ class Router
         $methodName = $explodedUri[1];
         
         //load the controller file
-        $filename = __DIR__ . '../../controllers' .$controllerName . '.php';
+        $filename = __DIR__ . '../../controllers/' . $controllerName . '.php';
 
         $controllerName = "viewControllers\\" . $controllerName;
         
@@ -50,20 +50,20 @@ class Router
         }
         
         if (file_exists($filename) || method_exists($controllerName, $methodName)) {
-            require $filename;
+            require_once $filename;
         } else {
             http_response_code(404);
             return;
         }
         
-        
         try {
             $controllerObj = new $controllerName();
             $controllerObj->{$methodName}();
         } catch(Error $e) {
+            echo $e;
             //$_SESSION['ERROR'] = $e;
             //var_dump($_SESSION);
-            http_response_code(500);
+            //http_response_code(500);
         }
     }
 }

@@ -6,7 +6,7 @@ header("Access-Control-Allow-Methods: *");
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 //require_once __DIR__ . '../../router/router.php';
 
 use Routers\Router;
