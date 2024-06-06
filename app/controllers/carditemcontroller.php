@@ -12,13 +12,13 @@ class carditemController extends viewController
 
     function __construct()
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) {session_start();}
         $this->service = new cardItemService();
     }
 
     public function index()
     {
         $carditems = $this->service->getAll(NULL, NULL);
-
         $this->checkMappingAndDisplayView($carditems);
     }
 

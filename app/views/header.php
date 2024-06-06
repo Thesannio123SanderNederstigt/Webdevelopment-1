@@ -3,10 +3,6 @@
     <head>
         <title>Schaatsbingo.nl | CMS</title>
 
-        <?php
-        //var_dump($_SESSION);
-        ?>
-
         <!-- metadata -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +11,8 @@
         <meta name="keywords" content="bingo, bingokaarten, gebeurtenissen, Haarlem, Haarlem-Noord, Hogeschool, ijsverenigingen, Inholland Hogeschool, kaarten, Nederland, persoonlijke ervaringen, schaatsen, sport, sportclubs, winter, wintersport, woorden" />
 
         <!-- scripts & links -->
+        <script src="../js/functions.js"></script>
+
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 		
@@ -23,10 +21,10 @@
 
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="../style/style.scss">
-        <link rel="icon" href="../assets/schaatsbingo-logo.svg" sizes="any" type="image/svg">
+        <link rel="stylesheet" href="style/style.scss">
+        <link rel="icon" href="assets/schaatsbingo-logo.svg" sizes="any" type="image/svg">
     </head>
-	<body onload="highlight_active_page()">
+	<body onload="highlightActivePage()">
 
         <section class="container headerfooter">
             <section class="row">
@@ -76,17 +74,3 @@
                 </section>
             </section>
         </section>
-	
-        <script>
-            function highlight_active_page()
-            {
-            var view_page_element = document.getElementById("nav-current-page");
-            var current_page = view_page_element.getAttribute("name");
-            
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            
-            var current_nav_page = document.getElementById(current_page);
-            current_nav_page.className += " active";
-            }
-        </script>

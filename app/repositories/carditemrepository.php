@@ -11,7 +11,7 @@ class cardItemRepository extends Repository
     function getAll($offset, $limit)
     {
         try {
-            $query = "SELECT * FROM cardItem";
+            $query = "SELECT * FROM carditem";
 
             if(isset($offset) && isset($limit))
             {
@@ -28,7 +28,7 @@ class cardItemRepository extends Repository
 
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'CardItem');
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Models\cardItem');
             $cardItems = $stmt->fetchAll();
 
             return $cardItems;
@@ -40,7 +40,7 @@ class cardItemRepository extends Repository
     function getOne($id)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM cardItem WHERE id = :id");
+            $stmt = $this->connection->prepare("SELECT * FROM carditem WHERE id = :id");
             $stmt->bindParam(':id', $id);
 
             $stmt->execute();
@@ -55,7 +55,7 @@ class cardItemRepository extends Repository
     function create($cardItem)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO cardItem (id, content, category, points, isPremiumItem) VALUES (?,?,?,?,?)");
+            $stmt = $this->connection->prepare("INSERT INTO carditem (id, content, category, points, isPremiumItem) VALUES (?,?,?,?,?)");
 
             $stmt->execute([$cardItem->id, $cardItem->content, $cardItem->category, $cardItem->points, $cardItem->isPremiumItem]);
 
@@ -68,7 +68,7 @@ class cardItemRepository extends Repository
     function update($cardItem, $id)
     {
         try {
-            $stmt = $this->connection->prepare("UPDATE cardItem SET content = ?, category = ?, points = ?, isPremiumItem = ? WHERE id = ?");
+            $stmt = $this->connection->prepare("UPDATE carditem SET content = ?, category = ?, points = ?, isPremiumItem = ? WHERE id = ?");
 
             $stmt->execute([$cardItem->content, $cardItem->category, $cardItem->points, $cardItem->isPremiumItem, $id]);
 
@@ -81,7 +81,7 @@ class cardItemRepository extends Repository
     function delete($id)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM cardItem WHERE id = :id");
+            $stmt = $this->connection->prepare("DELETE FROM carditem WHERE id = :id");
             $stmt->bindParam(':id', $id);
 
             $stmt->execute();

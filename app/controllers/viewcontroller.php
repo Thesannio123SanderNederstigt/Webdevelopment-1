@@ -3,7 +3,7 @@ namespace viewControllers;
 
 class viewController
 {
-    function checkMappingAndDisplayView($model) 
+    function checkMappingAndDisplayView($models)
     {
         /*if(session_status() !== PHP_SESSION_ACTIVE || !isset($_SERVER['HTTP_AUTHORIZATION'])) {
             //session_start();

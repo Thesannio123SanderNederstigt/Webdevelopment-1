@@ -150,9 +150,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `isAdmin`, `isPremium`, `cardsAmount`, `sharedCardsAmount`) VALUES
-('2D2DF76D-2F3C-4BA0-A3DF-9730D7A8F909', 'SanderN', '$2y$10$hAgKLte7S8KLFllWp/j3EuT.o0kHDvbSfsK9NdDSfwDRkAr217l4W', 'sandernederstigt@gmail.com', 1, 1, 0, 0),
+('2D2DF76D-2F3C-4BA0-A3DF-9730D7A8F909', 'SanderN', '$2y$10$DiSHmizwmggIUYEtmhBKl.Po.bjLPHWmT84VlY9d2cPOJKCXWJEnq', 'sandernederstigt@gmail.com', 1, 1, 0, 0),
 ('CF3FA866-72A4-476A-9935-7B69AB7DA056', 'JohnnyD#1', '$2y$10$iygYvRom20HJ4BzsSkauX.rieniB1Dhnb8.Vmykzh92Td3Gg2PGHG', 'Johndoe@hotmail.com', 0, 1, 0, 0),
-('EBF49A86-657B-4E3C-AE79-DD431681ED3B', 'MarySue22', '$2y$10$cUyeCO3om7MBiy7LCNSIVuExLdp6vXSYd2XkLwfCrax9ttB7dH62S', 'MarySue@hotmail.com', 1, 0, 0, 0);
+('EBF49A86-657B-4E3C-AE79-DD431681ED3B', 'MarySue22', '$2y$10$B0rHlznJTtYFU/h1Y2YHiecfeh9mzUjHrFlHFLh41n8QBLOODbw1q', 'MarySue@hotmail.com', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 

@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-include_once '../bingocard.php';
+include_once 'bingocard.php';
 include_once 'guid.php';
 
 Class bingocardDTO

@@ -1,7 +1,7 @@
 <?php
     include_once __DIR__ . '/../header.php';
 ?>
-		
+
 		<!-- HOMEPAGE_VIEW -->
 		
 		<p hidden id="nav-current-page" name="bingo-nav-home"></p>

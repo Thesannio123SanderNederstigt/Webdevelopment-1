@@ -15,6 +15,7 @@ class bingocardController extends viewController
 
     function __construct()
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) {session_start();}
         $this->bingocardService = new bingocardService();
         $this->cardItemService = new cardItemService();
     }

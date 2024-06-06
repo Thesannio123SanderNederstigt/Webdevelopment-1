@@ -1,10 +1,10 @@
 <?php
 namespace Models;
 
-include_once '../sportsclub.php';
+include_once 'sportsclub.php';
 include_once 'guid.php';
 
-class sportsclubDTO 
+class sportsclubDTO
 {
     public string $clubname;
     public string $description;

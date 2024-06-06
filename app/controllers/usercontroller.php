@@ -21,6 +21,7 @@ class UserController extends viewController
 
     function __construct()
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) {session_start();}
         $this->userService = new userService();
         $this->sportsclubService = new sportsclubService();
         $this->bingocardService = new bingocardService();

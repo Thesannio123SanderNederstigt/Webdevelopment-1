@@ -26,6 +26,7 @@ class sportsclubRepository extends Repository
                 $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             }
 
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Models\Sportsclub');
             $stmt->execute();
 
             $sportsclubs = $stmt->fetchAll();

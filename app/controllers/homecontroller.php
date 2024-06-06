@@ -87,6 +87,7 @@ class HomeController extends viewController
                 header("Location: {$_SERVER['HTTP_REFERER']}");
                 exit;
             } else {
+                
                 if($user->getIsAdmin() == true)
                 {
                     //session_start();
@@ -105,12 +106,15 @@ class HomeController extends viewController
     
                     /*$this->viewName = 'home';
                     $this->index();*/
-
-                    header("Location: {$_SERVER['HTTP_REFERER']}");
                     
                     //header("Location: /home");
     
+                } else {
+                    $_SESSION['userIsAdmin'] = false;
+                    $_SESSION['loginError'] = 'Onjuiste inloggegevens ingevoerd!';
                 }
+
+                header("Location: {$_SERVER['HTTP_REFERER']}");
             }
 
             /*

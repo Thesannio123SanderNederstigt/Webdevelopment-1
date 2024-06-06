@@ -1,8 +1,8 @@
 <?php
 namespace Models;
 
-include_once '../cardItem.php';
-include_once '../guid.php';
+include_once 'cardItem.php';
+include_once 'guid.php';
 
 class cardItemDTO
 {
