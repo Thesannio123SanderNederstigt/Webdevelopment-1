@@ -237,13 +237,13 @@
 								<textarea class="bingo-table-columns bingo-content-column">Het juiste meetinstrument vergeten om nu eindelijk eens die 90 graden kniehoeken goed te kunnen opmeten (verdorie)</textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns">2</textarea>
+								<textarea class="bingo-table-columns">2</textarea> <!-- //js function schrijven met switch voor case = bepaalde string teruggeven (besloten om geen enum te gebruiken I guess)-->
 							</td>
 							<td>
 							  <textarea class="bingo-table-columns">15</textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns">Nee</textarea>
+								<textarea class="bingo-table-columns">Nee</textarea> <!-- //ook hier js functie voor weergeven 'Ja' of 'Nee' voor boolean waarden die hier worden teruggegeven -->
 							</td>
 							<td>
 								<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $_SESSION['bingocard-item_id']; ?>" onclick="">Wijzigen</button>

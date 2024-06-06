@@ -25,45 +25,46 @@
 					</thead>
 					<tbody>
 					<?php
-					//foreach($cardItems as $cardItem) {
+					    foreach($models as $cardItem)
+                        {
 					?>
 					  <tr>
 					  	<form name="alter-carditem-form" action="/carditem/alter/" method="POST">
 							<td>
 							  <section class="align-items-center">
-								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-item-id"><?php //echo $cardItem->getId(); ?>108F4D89-0D1D-4B99-93A9-F2532492ADC0</textarea>
+								<textarea class="bingo-table-columns bingo-id-column" id="table-bingocard-item-id" name="cardItem-id"><?php echo $cardItem->getId(); ?></textarea>
 							  </section>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns bingo-content-column"><?php //echo $cardItem->getContent(); ?>Het juiste meetinstrument vergeten om nu eindelijk eens die 90 graden kniehoeken goed te kunnen opmeten (verdorie)</textarea>
+								<textarea class="bingo-table-columns bingo-content-column" name="cardItem-content"><?php echo $cardItem->getContent(); ?></textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns"><?php //echo $cardItem->getCategory(); //js function schrijven met switch voor case = bepaalde string teruggeven (besloten om geen enum te gebruiken I guess) ?> 2</textarea>
+								<textarea class="bingo-table-columns" name="cardItem-category"><?php switch($cardItem->getCategory()){case(0): echo "standaard tekst"; break; case(1): echo "speciaal font of effect"; break; case(2): echo "afbeelding"; break; case(3): echo "geluidseffect"; break; case(4): echo "video"; break; case(5): echo "animatie"; break;};?></textarea>
 							</td>
 							<td>
-							  <textarea class="bingo-table-columns"><?php //echo $cardItem->getPoints(); ?>15</textarea>
+							  <textarea class="bingo-table-columns" name="cardItem-points"><?php echo $cardItem->getPoints(); ?></textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns"><?php //echo $cardItem->getIsPremiumItem(); //ook hier js functie voor weergeven 'Ja' of 'Nee' voor boolean waarden die hier worden teruggegeven ?>Nee</textarea>
+								<textarea class="bingo-table-columns" name="cardItem-isPremiumItem"><?php if($cardItem->getIsPremiumItem()){echo "Ja"; } else {echo "Nee"; }; ?></textarea>
 							</td>
 							<td>
-								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php //echo $cardItem->getId(); ?>">Wijzigen</button>
-								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php //echo $cardItem->getId(); ?>" name="verwijderen">Verwijderen</button>
+								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $cardItem->getId(); ?>">Wijzigen</button>
+								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" name="verwijderen" value="<?php echo $cardItem->getId(); ?>" onclick="return confirm(`Weet u zeker dat u kaart-item met id ${this.value} wilt verwijderen?`);">Verwijderen</button>
 							</td>
 						</form>
 					  </tr>
 					  
 					<?php
-					//}
-					 ?>
+					    }
+					?>
 					  <tr class="bingo-table-bottom-row">
 					  	<form name="create-carditem-form" action="/carditem/create/" method="POST">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuw bingokaart-item:</b></h6></td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="bingocard-item-content"></textarea>
+								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="nieuwe-cardItem-content"></textarea>
 							</td>
 							<td>
-								<select name="bingocard-content-categories">
+								<select name="nieuwe-cardItem-content-categories">
 									<option name="category_0" selected>standaard tekst</option>
 									<option name="category_1">speciaal font of effect</option>
 									<option name="category_2">afbeelding</option>
@@ -73,10 +74,10 @@
 								</select>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="10" name="bingocard-item-points"></textarea>
+								<textarea class="bingo-table-columns" placeholder="10" name="nieuwe-cardItem-points"></textarea>
 							</td>
 							<td>
-								<select name="premium-bingocard-items">
+								<select name="nieuwe-cardItem-premium-items">
 									<option name="true">Ja</option>
 									<option name="false" selected>Nee</option>
 								</select>

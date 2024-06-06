@@ -19,64 +19,191 @@ class carditemController extends viewController
     public function index()
     {
         $carditems = $this->service->getAll(NULL, NULL);
+
         $this->checkMappingAndDisplayView($carditems);
     }
 
     public function create() {        
         if($_SERVER['REQUEST_METHOD'] == "GET") 
         {
-            require '../views/cardItem/create.php';
+            header("Location: /carditem");
+            exit;
         }
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
-            
             //input sanitation
-            $content = htmlspecialchars($_POST['content']);
-            $category = htmlspecialchars($_POST['category']);
-            $points = htmlspecialchars($_POST['points']);
-            $isPremiumItem = htmlspecialchars($_POST['isPremiumItem']);
+            $content = htmlspecialchars($_POST['nieuwe-cardItem-content']);
+            $cleanCategory = htmlspecialchars($_POST['nieuwe-cardItem-content-categories']);
+            $points = htmlspecialchars($_POST['nieuwe-cardItem-points']);
+            $cleanIsPremiumItem = htmlspecialchars($_POST['nieuwe-cardItem-premium-items']);
 
-            $cardItemDTO = new cardItemDTO($content, $category, $points, $isPremiumItem);
+            $cardItemDTO = new cardItemDTO($content, $this->provideCategory($cleanCategory), $points, $this->providePremiumBool($cleanIsPremiumItem));
 
             $cardItem = $cardItemDTO->cardItemMapper();
 
+            
+            /*echo ' id: ' . $cardItem->id;
+            echo '<br> content: ' . $cardItem->content;
+            echo '<br> category: ' . $cardItem->category;
+            echo '<br> points: ' . $cardItem->points;
+
+
+            if($cardItem->isPremiumItem == true)
+            {
+                $boolVal = 1;
+            }
+            else {
+                $boolVal = 0;
+            }
+
+            echo '<br> is premium item?: ' . $boolVal;*/
+            
+
             $this->service->create($cardItem);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+        }
+    }
+
+    public function alter()
+    {
+        if($_SERVER['REQUEST_METHOD'] == "GET") 
+        {
+            header("Location: /carditem");
+            exit;
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            if(isset($_POST["wijzigen"])) 
+            {
+                $this->update();
+            }
+            else if(isset($_POST["verwijderen"]))
+            {
+                $this->delete();
+            }
         }
     }
 
     public function update()
     {
+        if($_SERVER['REQUEST_METHOD'] == "GET")
+        {
+            header("Location: /carditem");
+            exit;
+        }
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['id']); //cardItemId?
-            $content = htmlspecialchars($_POST['content']);
-            $category = htmlspecialchars($_POST['category']);
-            $points = htmlspecialchars($_POST['points']);
-            $isPremiumItem = htmlspecialchars($_POST['isPremiumItem']);
+            $id = htmlspecialchars($_POST['cardItem-id']);
+            $content = htmlspecialchars($_POST['cardItem-content']);
+            $cleanCategory = htmlspecialchars($_POST['cardItem-category']);
+            $points = htmlspecialchars($_POST['cardItem-points']);
+            $cleanIsPremiumItem = htmlspecialchars($_POST['cardItem-isPremiumItem']);
 
-            $cardItem = new cardItem($id, $content, $category, $points, $isPremiumItem);
+            $cardItem = new cardItem();
+            $cardItem->setId($id);
+            $cardItem->setContent($content);
+            $cardItem->setCategory($this->provideCategory($cleanCategory));
+            $cardItem->setPoints($points);
+            $cardItem->setIsPremiumItem($this->providePremiumBool($cleanIsPremiumItem));
 
             $this->service->update($cardItem, $id);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
     }
 
     public function delete()
     {
+        if($_SERVER['REQUEST_METHOD'] == "GET")
+        {
+            header("Location: /carditem");
+            exit;
+        }
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['id']); //cardItemId?
+            $id = htmlspecialchars($_POST['cardItem-id']);
 
             $this->service->delete($id);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
+    }
+
+    private function provideCategory($cleanCategory): int
+    {
+        switch($cleanCategory)
+        {
+            case("standaard tekst"):
+                $category = 0;
+                break;
+
+            case(0 || "0"):
+                $category = 0;
+                break;
+
+            case("speciaal font of effect"):
+                $category = 1;
+                break;
+
+            case(1 || "1"):
+                $category = 1;
+                break;
+            
+            case("afbeelding"):
+                $category = 2;
+                break;
+
+            case(2 || "2"):
+                $category = 2;
+                break;
+
+            case("geluidseffect"):
+                $category = 3;
+                break;
+
+            case(3 || "3"):
+                $category = 3;
+                break;
+            
+            case("video"):
+                $category = 4;
+                break;
+
+            case(4 || "4"):
+                $category = 4;
+                break;
+
+            case("animatie"):
+                $category = 5;
+                break;
+
+            case(5 || "5"):
+                $category = 5;
+                break;
+        }
+
+        return $category;
+    }
+
+    private function providePremiumBool($cleanIsPremiumItem): bool
+    {
+        if($cleanIsPremiumItem == "Ja" || $cleanIsPremiumItem == "ja" || $cleanIsPremiumItem == "Yes" || $cleanIsPremiumItem == "yes")
+        {
+            $isPremiumItem = true;
+        } 
+        else if($cleanIsPremiumItem == "Nee" || $cleanIsPremiumItem == "nee" || $cleanIsPremiumItem == "No" || $cleanIsPremiumItem == "no")
+        {
+            $isPremiumItem = false;
+        }
+
+        return $isPremiumItem;
     }
 }
 ?>

@@ -111,7 +111,6 @@ class sportsclubController extends viewController
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
-
             //input sanitation
             $id = htmlspecialchars($_POST['sportsclub-id']);
             $clubname = htmlspecialchars($_POST['sportsclub-clubname']);
@@ -140,7 +139,7 @@ class sportsclubController extends viewController
             header("Location: /sportsclub");
             exit;
         }
-        
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation

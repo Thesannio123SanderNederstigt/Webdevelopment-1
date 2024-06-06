@@ -57,7 +57,9 @@ class cardItemRepository extends Repository
         try {
             $stmt = $this->connection->prepare("INSERT INTO carditem (id, content, category, points, isPremiumItem) VALUES (?,?,?,?,?)");
 
-            $stmt->execute([$cardItem->id, $cardItem->content, $cardItem->category, $cardItem->points, $cardItem->isPremiumItem]);
+            $boolValue = $this->provideBooleanIntValue($cardItem->isPremiumItem);
+
+            $stmt->execute([$cardItem->id, $cardItem->content, $cardItem->category, $cardItem->points, $boolValue]);
 
             return $cardItem;
         } catch(PDOException $e) {
@@ -70,7 +72,7 @@ class cardItemRepository extends Repository
         try {
             $stmt = $this->connection->prepare("UPDATE carditem SET content = ?, category = ?, points = ?, isPremiumItem = ? WHERE id = ?");
 
-            $stmt->execute([$cardItem->content, $cardItem->category, $cardItem->points, $cardItem->isPremiumItem, $id]);
+            $stmt->execute([$cardItem->content, $cardItem->category, $cardItem->points, $this->provideBooleanIntValue($cardItem->isPremiumItem), $id]);
 
             return $cardItem;
         } catch(PDOException $e) {
@@ -91,6 +93,19 @@ class cardItemRepository extends Repository
             echo $e;
         }
         return true;
+    }
+
+    private function provideBooleanIntValue($isPremiumItem): int
+    {
+        if($isPremiumItem == true)
+        {
+            $boolVal = 1;
+        }
+        else {
+            $boolVal = 0;
+        }
+
+        return $boolVal;
     }
 }
 ?>
