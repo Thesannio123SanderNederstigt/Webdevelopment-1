@@ -18,7 +18,7 @@ class userService
 
         foreach($users as $user) {
             $userSportsclubIds = $this->getUserSportsclubIds($user->getId());
-            $$user->setSportsclubs($$userSportsclubIds);
+            $user->setSportsclubs($userSportsclubIds);
         }
 
         return $users;

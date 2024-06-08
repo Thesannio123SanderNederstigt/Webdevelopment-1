@@ -122,7 +122,7 @@ class bingocardController extends apiController
 
         foreach($cardItemIds as $cardItemId)
         {
-            $cardItem = $this->cardItemService->getOne($cardItemId);
+            $cardItem = $this->cardItemService->getOne($cardItemId[0]);
 
             array_push($cardItems,$cardItem);
         }

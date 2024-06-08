@@ -13,16 +13,22 @@ class userRepository extends Repository
     {
         try {
             $query = "SELECT * FROM user";
+
             if (isset($limit) && isset($offset)) {
                 $query .= " LIMIT :limit OFFSET :offset ";
             }
+
             $stmt = $this->connection->prepare($query);
+
             if (isset($limit) && isset($offset)) {
                 $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
                 $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             }
+
             $stmt->execute();
+
             $users = array();
+
             while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {               
                 $users[] = $this->rowToUser($row);
             }
@@ -94,8 +100,8 @@ class userRepository extends Repository
         try {
             $hashedPassword = $this->hashPassword($user->password);
 
-            $stmt = $this->connection->prepare("INSERT INTO user (id, username, [password], email, isAdmin, isPremium, cardsAmount, sharedCardsAmount) VALUES (?,?,?,?,?,?,?,?)");
-            $stmt->execute([$user->id, $user->username, $hashedPassword, $user->email, $user->isAdmin, $user->isPremium, $user->cardsAmount, $user->sharedCardsAmount]);
+            $stmt = $this->connection->prepare("INSERT INTO user (id, username, `password`, email, isAdmin, isPremium, cardsAmount, sharedCardsAmount) VALUES (?,?,?,?,?,?,?,?)");
+            $stmt->execute([$user->id, $user->username, $hashedPassword, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount]);
             
             return $user;
         } catch(PDOException $e) {
@@ -106,11 +112,19 @@ class userRepository extends Repository
     function update($user, $id)
     {
         try {
-            $hashedPassword = $this->hashPassword($user->password);
 
-            $stmt = $this->connection->prepare("UPDATE user SET userName = ?, [password] = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
-            $stmt->execute([$user->userId, $user->userName, $hashedPassword, $user->email, $user->isAdmin, $user->isPremium, $user->cardsAmount, $user->sharedCardsAmount, $id]);
-            
+            if(isset($user->password))
+            {
+                $hashedPassword = $this->hashPassword($user->password);
+
+                $stmt = $this->connection->prepare("UPDATE user SET userName = ?, `password` = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
+                $stmt->execute([$user->username, $hashedPassword, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount, $id]);
+                
+            } else {
+                $stmt = $this->connection->prepare("UPDATE user SET userName = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
+                $stmt->execute([$user->username, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount, $id]);
+            }
+
             return $user;
         } catch(PDOException $e) {
             echo $e;
@@ -182,7 +196,7 @@ class userRepository extends Repository
     function getUserSportsclubIds($userId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT sportsclubId FROM userSportsclub WHERE userId = :id");
+            $stmt = $this->connection->prepare("SELECT sportsclubId FROM usersportsclub WHERE userId = :id");
             $stmt->bindParam(':id', $userId);
 
             $stmt->execute();
@@ -197,7 +211,7 @@ class userRepository extends Repository
     function insertUserSportsclub($userId, $sportsclubId)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO userSportsclub (userId, sportsclubId) VALUES (?,?)");
+            $stmt = $this->connection->prepare("INSERT INTO usersportsclub (userId, sportsclubId) VALUES (?,?)");
 
             $stmt->execute([$userId, $sportsclubId]);
 
@@ -212,7 +226,7 @@ class userRepository extends Repository
     function deleteUserSportsclub($userId, $sportsclubId)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM userSportsclub WHERE userId = :userId AND sportsclubId = :sportsclubId");
+            $stmt = $this->connection->prepare("DELETE FROM usersportsclub WHERE userId = :userId AND sportsclubId = :sportsclubId");
             $stmt->bindParam(':userId', $userId);
             $stmt->bindParam(':sportsclubId', $sportsclubId);
 

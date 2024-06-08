@@ -45,7 +45,9 @@ class sportsclubRepository extends Repository
 
             $stmt->execute();
 
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Models\Sportsclub');
             $sportsclub = $stmt->fetch();
+            
             return $sportsclub;
         } catch(PDOException $e) {
             echo $e;

@@ -102,7 +102,7 @@ class userController extends apiController
 
             foreach($cardItemIds as $cardItemId)
             {
-                $cardItem = $this->cardItemService->getOne($cardItemId);
+                $cardItem = $this->cardItemService->getOne($cardItemId[0]);
 
                 array_push($cardItems, $cardItem);
             }
@@ -123,7 +123,7 @@ class userController extends apiController
 
         foreach($sportsclubIds as $sportsclubId)
         {
-            $sportsclub = $this->sportsclubService->getOne($sportsclubId);
+            $sportsclub = $this->sportsclubService->getOne($sportsclubId[0]);
             
             array_push($sportsclubs, $sportsclub);
         }

@@ -45,7 +45,9 @@ class cardItemRepository extends Repository
 
             $stmt->execute();
 
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Models\cardItem');
             $cardItem = $stmt->fetch();
+
             return $cardItem;
         } catch(PDOException $e) {
             echo $e;
@@ -93,19 +95,6 @@ class cardItemRepository extends Repository
             echo $e;
         }
         return true;
-    }
-
-    private function provideBooleanIntValue($isPremiumItem): int
-    {
-        if($isPremiumItem == true)
-        {
-            $boolVal = 1;
-        }
-        else {
-            $boolVal = 0;
-        }
-
-        return $boolVal;
     }
 }
 ?>

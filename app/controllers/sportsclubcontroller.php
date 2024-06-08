@@ -24,12 +24,8 @@ class sportsclubController extends viewController
     }
 
     public function create() 
-    {        
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-        {
-            header("Location: /sportsclub");
-            exit;
-        }
+    {
+        $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -69,11 +65,7 @@ class sportsclubController extends viewController
 
     public function alter()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            header("Location: /sportsclub");
-            exit;
-        }
+        $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -103,11 +95,7 @@ class sportsclubController extends viewController
 
     public function update()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-        {
-            header("Location: /sportsclub");
-            exit;
-        }
+        $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -134,11 +122,7 @@ class sportsclubController extends viewController
 
     public function delete()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-        {
-            header("Location: /sportsclub");
-            exit;
-        }
+        $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {

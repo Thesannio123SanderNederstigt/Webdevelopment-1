@@ -32,74 +32,144 @@ class bingocardController extends viewController
 
             foreach($cardItemIds as $cardItemId)
             {
-                $cardItem = $this->cardItemService->getOne($cardItemId);
+                $cardItem = $this->cardItemService->getOne($cardItemId[0]);
 
-                array_push($cardItems,$cardItem);
+                //var_dump($cardItem);
+
+                array_push($cardItems, $cardItem);
             }
 
             $bingocard->setItems($cardItems);
 
-            //Moet ik hier de $cardItems array weer legen of verwijderen?
-            //$cardItems = array();
+            //var_dump($cardItems);
         }
 
         $this->checkMappingAndDisplayView($bingocards);
     }
 
-    public function create() {        
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            require '../views/bingocard/create.php';
-        }
+    public function create() 
+    {        
+        $this->redirectViewGetRequest("bingocard");
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
             
             //input sanitation
-            $userId = htmlspecialchars($_POST['userId']);
-            $size = htmlspecialchars($_POST['size']);
+            $userId = htmlspecialchars($_POST['nieuwe-bingocard-userId']);
+            $cleanSize = htmlspecialchars($_POST['nieuwe-bingocard-size']);
 
-            $bingocardDTO = new bingocardDTO($userId, $size);
+            $bingocardDTO = new bingocardDTO($userId, $this->provideSize($cleanSize));
 
             $bingocard = $bingocardDTO->bingocardMapper();
 
             $this->bingocardService->create($bingocard);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+        }
+    }
+
+    public function alter()
+    {
+        $this->redirectViewGetRequest("bingocard");
+
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            if(isset($_POST["wijzigen"])) 
+            {
+                $this->update();
+            }
+            else if(isset($_POST["verwijderen"]))
+            {
+                $this->delete();
+            }
         }
     }
     
     public function update()
     {
+        $this->redirectViewGetRequest("bingocard");
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['id']); //bingocardId?
-            $userId = htmlspecialchars($_POST['userId']);
-            $score = htmlspecialchars($_POST['score']);
-            $size = htmlspecialchars($_POST['size']);
-            $creationDate = htmlspecialchars($_POST['creationDate']);
-            $lastAccessedOn = htmlspecialchars($_POST['lastAccessedOn']);
+            $id = htmlspecialchars($_POST['bingocard-id']);
+            $userId = htmlspecialchars($_POST['bingocard-userId']);
+            $score = htmlspecialchars($_POST['bingocard-score']);
+            $cleanSize = htmlspecialchars($_POST['bingocard-size']);
+            $creationDate = htmlspecialchars($_POST['bingocard-creationDate']);
+            $lastAccessedOn = htmlspecialchars($_POST['bingocard-lastAccessedOn']);
 
-            $bingocard = new Bingocard($id, $userId, $score, $size, $creationDate, $lastAccessedOn);
+            $bingocard = new Bingocard();
+            $bingocard->setId($id);
+            $bingocard->setUserId($userId);
+            $bingocard->setScore($score);
+            $bingocard->setSize($this->provideSize($cleanSize));
+            $bingocard->setCreationDate($creationDate);
+            $bingocard->setLastAccessedOn($lastAccessedOn);
 
             $this->bingocardService->update($bingocard, $id);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
     }
 
     public function delete()
     {
+        $this->redirectViewGetRequest("bingocard");
+
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['id']); //bingocardId?
+            $id = htmlspecialchars($_POST['bingocard-id']);
 
             $this->bingocardService->delete($id);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
+    }
+
+    private function provideSize($cleanSize): int
+    {
+        switch($cleanSize)
+        {
+            case("3x3"):
+                $size = 9;
+                break;
+
+            case("3 bij 3"):
+                $size = 9;
+                break;
+            
+            case("9"):
+                $size = 9;
+                break;
+
+            case("4x4"):
+                $size = 16;
+                break;
+
+            case("4 bij 4"):
+                $size = 9;
+                break;
+            
+            case("16"):
+                $size = 9;
+                break;
+            
+            case("5x5"):
+                $size = 25;
+                break;
+
+            case("5 bij 5"):
+                $size = 25;
+                break;
+            
+            case("25"):
+                $size = 25;
+                break;
+        }
+
+        return $size;
     }
 }
 ?>

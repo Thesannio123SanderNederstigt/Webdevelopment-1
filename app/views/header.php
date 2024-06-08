@@ -52,7 +52,7 @@
                                             <a class="nav-link navbar-linkitems active" aria-current="page" id="bingo-nav-home" href="/">Start</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link navbar-linkitems" id="bingo_nav_users" href="/user">Gebruikers</a>
+                                            <a class="nav-link navbar-linkitems" id="bingo-nav-users" href="/user">Gebruikers</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link navbar-linkitems" id="bingo-nav-sportsclubs" href="/sportsclub">Sportclubs</a>

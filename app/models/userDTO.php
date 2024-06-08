@@ -37,8 +37,6 @@ Class userDTO
         $user->setSharedCardsAmount(0);
         $user->setBingocards(array());
         $user->setSportsclubs(array());
-        //$user->setBingocards([]); //?
-        //$user->setSportsclubs([]); //? is initialization required/necessary/desired here? idk... (I'll have to find out in testing/trial & error I guess...)
 
         return $user;
     }

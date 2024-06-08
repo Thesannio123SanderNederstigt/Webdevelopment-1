@@ -23,12 +23,9 @@ class carditemController extends viewController
         $this->checkMappingAndDisplayView($carditems);
     }
 
-    public function create() {        
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            header("Location: /carditem");
-            exit;
-        }
+    public function create() 
+    {        
+        $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
@@ -38,7 +35,7 @@ class carditemController extends viewController
             $points = htmlspecialchars($_POST['nieuwe-cardItem-points']);
             $cleanIsPremiumItem = htmlspecialchars($_POST['nieuwe-cardItem-premium-items']);
 
-            $cardItemDTO = new cardItemDTO($content, $this->provideCategory($cleanCategory), $points, $this->providePremiumBool($cleanIsPremiumItem));
+            $cardItemDTO = new cardItemDTO($content, $this->provideCategory($cleanCategory), $points, $this->provideBoolValue($cleanIsPremiumItem));
 
             $cardItem = $cardItemDTO->cardItemMapper();
 
@@ -68,11 +65,7 @@ class carditemController extends viewController
 
     public function alter()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            header("Location: /carditem");
-            exit;
-        }
+        $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -89,11 +82,7 @@ class carditemController extends viewController
 
     public function update()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-        {
-            header("Location: /carditem");
-            exit;
-        }
+        $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -109,7 +98,7 @@ class carditemController extends viewController
             $cardItem->setContent($content);
             $cardItem->setCategory($this->provideCategory($cleanCategory));
             $cardItem->setPoints($points);
-            $cardItem->setIsPremiumItem($this->providePremiumBool($cleanIsPremiumItem));
+            $cardItem->setIsPremiumItem($this->provideBoolValue($cleanIsPremiumItem));
 
             $this->service->update($cardItem, $id);
 
@@ -119,11 +108,7 @@ class carditemController extends viewController
 
     public function delete()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-        {
-            header("Location: /carditem");
-            exit;
-        }
+        $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -144,7 +129,7 @@ class carditemController extends viewController
                 $category = 0;
                 break;
 
-            case(0 || "0"):
+            case("0"):
                 $category = 0;
                 break;
 
@@ -152,7 +137,7 @@ class carditemController extends viewController
                 $category = 1;
                 break;
 
-            case(1 || "1"):
+            case("1"):
                 $category = 1;
                 break;
             
@@ -160,7 +145,7 @@ class carditemController extends viewController
                 $category = 2;
                 break;
 
-            case(2 || "2"):
+            case("2"):
                 $category = 2;
                 break;
 
@@ -168,7 +153,7 @@ class carditemController extends viewController
                 $category = 3;
                 break;
 
-            case(3 || "3"):
+            case("3"):
                 $category = 3;
                 break;
             
@@ -176,7 +161,7 @@ class carditemController extends viewController
                 $category = 4;
                 break;
 
-            case(4 || "4"):
+            case("4"):
                 $category = 4;
                 break;
 
@@ -184,26 +169,12 @@ class carditemController extends viewController
                 $category = 5;
                 break;
 
-            case(5 || "5"):
+            case("5"):
                 $category = 5;
                 break;
         }
 
         return $category;
-    }
-
-    private function providePremiumBool($cleanIsPremiumItem): bool
-    {
-        if($cleanIsPremiumItem == "Ja" || $cleanIsPremiumItem == "ja" || $cleanIsPremiumItem == "Yes" || $cleanIsPremiumItem == "yes")
-        {
-            $isPremiumItem = true;
-        } 
-        else if($cleanIsPremiumItem == "Nee" || $cleanIsPremiumItem == "nee" || $cleanIsPremiumItem == "No" || $cleanIsPremiumItem == "no")
-        {
-            $isPremiumItem = false;
-        }
-
-        return $isPremiumItem;
     }
 }
 ?>

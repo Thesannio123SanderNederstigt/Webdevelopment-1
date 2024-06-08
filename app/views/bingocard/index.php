@@ -16,6 +16,7 @@
 					<thead class="bingo-table-header-row">
 					  <tr>
 						<th>Id</th>
+                        <th>Gebruikers Id</th>
 						<th>Score</th>
 						<th>Formaat</th>
 						<th>Aanmaakdatum</th>
@@ -26,52 +27,61 @@
 					</thead>
 					<tbody>
 					<?php
-					$_SESSION['bingocard_id'] = "212A4C3D-AC4B-4BA4-AC05-F68F4452AC84";
+					    foreach($models as $bingocard)
+                        {
 					?>
 					  <tr>
 						<form name="alter-bingocard-form" action="/bingocard/alter/" method="POST">
 							<td>
 							  <section class="align-items-center">
-								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-id">212A4C3D-AC4B-4BA4-AC05-F68F4452AC84</textarea>
+								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-id"><?php echo $bingocard->getId(); ?></textarea>
 							  </section>
 							</td>
+                            <td>
+                                <section class="align-items-center">
+                                    <textarea class="bingo-table-columns bingo-id-column" name="bingocard-userId" id="table-bingocard-userId"><?php echo $bingocard->getUserId(); ?></textarea>
+                                </section>
+                            </td>
 							<td>
-								<textarea class="bingo-table-columns">0</textarea>
+								<textarea class="bingo-table-columns" name="bingocard-score"><?php echo $bingocard->getScore(); ?></textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns">25</textarea>
+								<textarea class="bingo-table-columns" name="bingocard-size"><?php switch($bingocard->getSize()){case(9): echo "3x3"; break; case(16): echo "4x4"; break; case(25): echo "5x5"; break;};?></textarea>
 							</td>
 							<td>
-							  <textarea class="bingo-table-columns">2024-04-15 18:40:07</textarea>
+							  <textarea class="bingo-table-columns" name="bingocard-creationDate"><?php echo $bingocard->getCreationDate(); ?></textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns">2024-04-15 18:40:07</textarea>
+								<textarea class="bingo-table-columns" name="bingocard-lastAccessedOn"><?php echo $bingocard->GetLastAccessedOn(); ?></textarea>
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $_SESSION['bingocard_id']; ?>" onclick="showBingocardItems(this.value)">Toon bingokaart-items</button>
+								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $bingocard->getId(); ?>" onclick="showBingocardItems(this.value)">Toon bingokaart-items</button>
 							</td>
 
 							<td>
-								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $_SESSION['bingocard_id']; ?>">Wijzigen</button>
-								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php echo $_SESSION['bingocard_id']; ?>" name="verwijderen">Verwijderen</button>
+								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $bingocard->getId(); ?>">Wijzigen</button>
+								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" name="verwijderen" value="<?php echo $bingocard->getId(); ?>" onclick="return confirm(`Weet u zeker dat u deze bingokaart met id ${this.value} wilt verwijderen?`);">Verwijderen</button>
 							</td>
 						</form>
 					  </tr>
 					  
 					<?php
-					//}
-					 ?>
+					    }
+					?>
 					  <tr class="bingo-table-bottom-row">
 						<form name="create-bingocard-form" action="/bingocard/create/" method="POST">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuwe bingokaart:</b></h6></td>
+                            <td>
+                                <textarea class="bingo-table-columns" placeholder="<?php echo $_SESSION['user']['id']; ?>" name="nieuwe-bingocard-userId"></textarea>
+                            </td>
 							<td>
 								<h6 class="bingo-nieuw-header-text">0</h6>
 							</td>
 							<td>
-								<select name="bingocard-sizes">
-									<option name="drie_bij_drie" selected>9</option>
-									<option name="vier_bij_vier">16</option>
-									<option name="vijf_bij_vijf">25</option>
+								<select name="nieuwe-bingocard-size">
+									<option name="drie_bij_drie" selected>3x3</option>
+									<option name="vier_bij_vier">4x4</option>
+									<option name="vijf_bij_vijf">5x5</option>
 								</select>
 							</td>
 							<td>
@@ -80,9 +90,9 @@
 							<td>
 								<h6 class="bingo-nieuw-header-text"><?php echo date("Y-m-d H:i:s"); ?></h6>
 							</td>
-							<td>
+							<!--<td>
 								<h6 class="bingo-nieuw-header-text">0</h6>
-							</td>
+							</td>-->
 							<td>
 								<button type="submit" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn">Voeg toe</button>
 							</td>
@@ -118,13 +128,13 @@
 					</thead>
 					<tbody>
 					<?php
-					    $_SESSION['bingocard-item_id'] = "108F4D89-0D1D-4B99-93A9-F2532492ADC0";
+					    //$_SESSION['bingocard-item_id'] = "108F4D89-0D1D-4B99-93A9-F2532492ADC0";
 					//
 					?>
 					  <tr>
 							<td>
 							  <section class="align-items-center">
-								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-item-id"><?php echo $_SESSION['bingocard-item_id']; ?></textarea>
+								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-item-id"><?php //echo $_SESSION['bingocard-item_id']; ?></textarea>
 							  </section>
 							</td>
 							<td>
@@ -140,8 +150,8 @@
 								<textarea class="bingo-table-columns">Nee</textarea>
 							</td>
 							<td>
-								<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $_SESSION['bingocard-item_id']; ?>" onclick="">Wijzigen</button>
-								<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php echo $_SESSION['bingocard-item_id']; ?>" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
+								<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php //echo $_SESSION['bingocard-item_id']; ?>" onclick="">Wijzigen</button>
+								<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php //echo $_SESSION['bingocard-item_id']; ?>" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
 							</td>
 					  </tr>
 					  

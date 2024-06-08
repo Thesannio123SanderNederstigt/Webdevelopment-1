@@ -155,7 +155,7 @@ class bingocardRepository extends Repository
     function getBingocardItemIds($bingocardId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT cardItemId FROM bingocardItem WHERE bingocardId = :id");
+            $stmt = $this->connection->prepare("SELECT cardItemId FROM bingocarditem WHERE bingocardId = :id");
             $stmt->bindParam(':id', $bingocardId);
 
             $stmt->execute();
@@ -170,7 +170,7 @@ class bingocardRepository extends Repository
     function insertBingocardItem($bingocardId, $cardItemId)
     {
         try{
-            $stmt = $this->connection->prepare("INSERT INTO bingocardItem (bingocardId, cardItemId) VALUES (?,?)");
+            $stmt = $this->connection->prepare("INSERT INTO bingocarditem (bingocardId, cardItemId) VALUES (?,?)");
 
             $stmt->execute([$bingocardId, $cardItemId]);
 
@@ -185,7 +185,7 @@ class bingocardRepository extends Repository
     function deleteBingocardItem($bingocardId, $cardItemId)
     {
         try{
-            $stmt = $this->connection->prepare("DELETE FROM bingocardItem WHERE bingocardId = :bingocardId AND cardItemId = :cardItemId");
+            $stmt = $this->connection->prepare("DELETE FROM bingocarditem WHERE bingocardId = :bingocardId AND cardItemId = :cardItemId");
             $stmt->bindParam(':bingocardId', $bingocardId);
             $stmt->bindParam(':cardItemId', $cardItemId);
 

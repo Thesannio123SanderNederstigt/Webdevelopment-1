@@ -44,7 +44,7 @@ class UserController extends viewController
     
                 foreach($cardItemIds as $cardItemId)
                 {
-                    $cardItem = $this->cardItemService->getOne($cardItemId);
+                    $cardItem = $this->cardItemService->getOne($cardItemId[0]);
     
                     array_push($cardItems, $cardItem);
                 }
@@ -62,7 +62,7 @@ class UserController extends viewController
 
             foreach($sportsclubIds as $sportsclubId)
             {
-                $sportsclub = $this->sportsclubService->getOne($sportsclubId);
+                $sportsclub = $this->sportsclubService->getOne($sportsclubId[0]);
                 
                 array_push($sportsclubs, $sportsclub);
             }
@@ -73,18 +73,16 @@ class UserController extends viewController
         $this->checkMappingAndDisplayView($users);
     }
 
-    public function create() {        
-        /*if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            require '../views/user/create.php';
-        }*/
+    public function create() 
+    {
+        $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
         {
             //input sanitation
-            $username = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
-            $email = htmlspecialchars($_POST['email']);
+            $username = htmlspecialchars($_POST['nieuwe-user-username']);
+            $password = htmlspecialchars($_POST['nieuwe-user-password']);
+            $email = htmlspecialchars($_POST['nieuwe-user-email']);
 
             $userDTO = new UserDTO($username, $password, $email);
 
@@ -92,72 +90,70 @@ class UserController extends viewController
 
             $this->userService->create($user);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
     }
 
     public function alter()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            require '../views/user/index.php';
-        }
+        $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             if(isset($_POST["wijzigen"])) 
             {
-                //update();
+                $this->update();
             }
             else if(isset($_POST["verwijderen"]))
             {
-                //delete();
+                $this->delete();
             }
         }
     }
     
     public function update()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            require '../views/user/index.php'; //geen aparte view single, update of delete pagina's toch? (of wil ik dit hier helemaal verwijderen en gewoon de API gaan gebruiken?)
-        }
+        $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['id']); //userTableId?
-            $username = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
-            $email = htmlspecialchars($_POST['email']);
-            $isAdmin = htmlspecialchars($_POST['isAdmin']);
-            $isPremium = htmlspecialchars($_POST['isPremium']);
-            $cardsAmount = htmlspecialchars($_POST['cardsAmount']);
-            $sharedCardsAmount = htmlspecialchars($_POST['sharedCardsAmount']);
+            $id = htmlspecialchars($_POST['user-id']); //userTableId?
+            $username = htmlspecialchars($_POST['user-username']);
+            //$password = htmlspecialchars($_POST['user-password']);
+            $email = htmlspecialchars($_POST['user-email']);
+            $cleanIsAdmin = htmlspecialchars($_POST['user-isAdmin']);
+            $cleanIsPremium = htmlspecialchars($_POST['user-isPremium']);
+            $cardsAmount = htmlspecialchars($_POST['user-cardsAmount']);
+            $sharedCardsAmount = htmlspecialchars($_POST['user-sharedCardsAmount']);
 
-            $user = new User($id, $username, $password, $email, $isAdmin, $isPremium, $cardsAmount, $sharedCardsAmount);
+            $user = new User();
+            $user->setId($id);
+            $user->setUsername($username);
+            $user->setEmail($email);
+            $user->setIsAdmin($this->provideBoolValue($cleanIsAdmin));
+            $user->setIsPremium($this->provideBoolValue($cleanIsPremium));
+            $user->setCardsAmount($cardsAmount);
+            $user->setSharedCardsAmount($sharedCardsAmount);
 
             $this->userService->update($user, $id);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
     }
 
     public function delete()
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-        {
-            require '../views/user/index.php';
-        }
+        $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['id']); //userTableId?
+            $id = htmlspecialchars($_POST['user-id']); //userTableId?
 
             $this->userService->delete($id);
 
-            $this->index();
+            header("Location: {$_SERVER['HTTP_REFERER']}");
         }
     }
 }

@@ -89,7 +89,7 @@ Class Bingocard
 
     public function setLastAccessedOn(string $lastAccessedOn): self
     {
-        $this->lastAccessedOn = $$lastAccessedOn;
+        $this->lastAccessedOn = $lastAccessedOn;
         return $this;
     }
 

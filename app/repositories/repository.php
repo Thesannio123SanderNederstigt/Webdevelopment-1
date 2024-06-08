@@ -33,5 +33,18 @@ class Repository
             echo "failed to connect: " . $e->getMessage();
         }
     }
+
+    public function provideBooleanIntValue($boolItem): int
+    {
+        if($boolItem == true)
+        {
+            $boolVal = 1;
+        }
+        else {
+            $boolVal = 0;
+        }
+
+        return $boolVal;
+    }
 }
 ?>

@@ -49,7 +49,7 @@
 							</td>
 							<td>
 								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php echo $cardItem->getId(); ?>">Wijzigen</button>
-								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" name="verwijderen" value="<?php echo $cardItem->getId(); ?>" onclick="return confirm(`Weet u zeker dat u kaart-item met id ${this.value} wilt verwijderen?`);">Verwijderen</button>
+								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" name="verwijderen" value="<?php echo $cardItem->getId(); ?>" onclick="return confirm(`Weet u zeker dat u dit kaart-item met id ${this.value} wilt verwijderen?`);">Verwijderen</button>
 							</td>
 						</form>
 					  </tr>
