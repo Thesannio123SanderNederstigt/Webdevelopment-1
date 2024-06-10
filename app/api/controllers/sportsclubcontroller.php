@@ -39,8 +39,13 @@ class sportsclubController extends apiController
             }
     
             $sportsclubs = $this->service->getAll($offset, $limit);
-    
-            $this->respond($sportsclubs);
+
+            if(!$sportsclubs || $sportsclubs == false) {
+                $this->respondWithError(404, "Sportsclubs niet gevonden");
+                return;
+            } else {
+                $this->respond($sportsclubs);
+            }
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -58,13 +63,13 @@ class sportsclubController extends apiController
             $cleanId = htmlspecialchars($id);
             $sportsclub = $this->service->getOne($cleanId);
 
-            if(!$sportsclub)
+            if(!$sportsclub || $sportsclub == false)
             {
                 $this->respondWithError(404, "Sportsclub niet gevonden");
                 return;
+            } else {
+                $this->respond($sportsclub);
             }
-    
-            $this->respond($sportsclub);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -79,7 +84,7 @@ class sportsclubController extends apiController
         }
 
         try {
-            $sportsclubDTO = $this->createObjectFromPostedJson("Models\\SportsclubDTO");
+            $sportsclubDTO = $this->createObjectFromPostedJson("Models\\sportsclubDTO");
             $sportsclub = $sportsclubDTO->sportsclubMapper();
             $this->service->create($sportsclub);
         } catch (Exception $e) {

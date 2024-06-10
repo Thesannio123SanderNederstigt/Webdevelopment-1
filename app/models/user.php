@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-Class User 
+Class User
 {
     public string $id; //guids gebruikt voor alle vormen van id's in deze applicatie
     public string $username;

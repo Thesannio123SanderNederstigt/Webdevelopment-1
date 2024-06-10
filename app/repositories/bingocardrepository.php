@@ -49,7 +49,14 @@ class bingocardRepository extends Repository
 
             $stmt->execute();
 
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
             $row = $stmt->fetch();
+
+            if(!$row)
+            {
+                return false;
+            }
 
             $bingocard = $this->rowToBingocard($row);
 
@@ -95,7 +102,7 @@ class bingocardRepository extends Repository
     function create($bingocard)
     {
         try{
-            $stmt = $this->connection->prepare("INSERT INTO bingocard (id, userId, score, size, creationDate, lastAccessedOn) VALUES (?,?,?,?,?,?)");
+            $stmt = $this->connection->prepare("INSERT INTO bingocard (id, userId, score, `size`, creationDate, lastAccessedOn) VALUES (?,?,?,?,?,?)");
 
             $stmt->execute([$bingocard->id, $bingocard->userId, $bingocard->score, $bingocard->size, $bingocard->creationDate, $bingocard->lastAccessedOn]);
 
@@ -108,7 +115,7 @@ class bingocardRepository extends Repository
     function update($bingocard, $id)
     {
         try{
-            $stmt = $this->connection->prepare("UPDATE bingocard SET userId = ?,  score = ?, size = ?, creationDate = ?, lastAccessedOn = ? WHERE id = ?");
+            $stmt = $this->connection->prepare("UPDATE bingocard SET userId = ?,  score = ?, `size` = ?, creationDate = ?, lastAccessedOn = ? WHERE id = ?");
 
             $stmt->execute([$bingocard->userId, $bingocard->score, $bingocard->size, $bingocard->creationDate, $bingocard->lastAccessedOn, $id]);
             
@@ -121,14 +128,12 @@ class bingocardRepository extends Repository
     function updateLastAccessedOn($id)
     {
         try{
-            $stmt = $this->connection->prepare("UPDATE bingocard SET lastAccessedOn = now() WHERE id = ?");
+            $stmt = $this->connection->prepare("UPDATE bingocard SET lastAccessedOn = now() WHERE id = :id");
             $stmt->bindparam(':id', $id);
 
             $stmt->execute();
-
-            $bingocard = $stmt->fetch();
             
-            return $bingocard;
+            return true;
         } catch(PDOException $e) {
             echo $e;
         }

@@ -1,0 +1,905 @@
+{
+	"info": {
+		"_postman_id": "621782b6-dca4-4e4a-9c83-44b944f999d8",
+		"name": "apiEndpointRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15532229"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"JohnnyD#1\",\r\n    \"password\":\"5HU4lqH7vSP@hfin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOne",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/getOne/EBF49A86-657B-4E3C-AE79-DD431681ED3B",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"getOne",
+								"EBF49A86-657B-4E3C-AE79-DD431681ED3B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Sammie\",\r\n    \"password\":\"welkom123!\",\r\n    \"email\":\"sammie@mailserver.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Sam the Man\",\r\n    \"password\":\"watiseengoedwachtwoordnouprecies\",\r\n    \"email\":\"samG@outlook.com\",\r\n    \"isAdmin\":0,\r\n    \"isPremium\":1,\r\n    \"cardsAmount\":15,\r\n    \"sharedCardsAmount\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/update/8F6EECC4-5226-4FBA-A41D-BF05BC662548",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"update",
+								"8F6EECC4-5226-4FBA-A41D-BF05BC662548"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/delete/B74D8026-7825-433D-8DB9-AC9C5AB8CA27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"B74D8026-7825-433D-8DB9-AC9C5AB8CA27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUserSportsclub",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/addUserSportsclub/8F6EECC4-5226-4FBA-A41D-BF05BC662548/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"addUserSportsclub",
+								"8F6EECC4-5226-4FBA-A41D-BF05BC662548",
+								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserSportsclub",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/deleteUserSportsclub/8F6EECC4-5226-4FBA-A41D-BF05BC662548/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"deleteUserSportsclub",
+								"8F6EECC4-5226-4FBA-A41D-BF05BC662548",
+								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bingocard",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOne",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/getOne/3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"getOne",
+								"3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"EBF49A86-657B-4E3C-AE79-DD431681ED3B\",\r\n    \"size\":9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/bingocard/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"CF3FA866-72A4-476A-9935-7B69AB7DA056\",\r\n    \"score\":35,\r\n    \"size\":25,\r\n    \"creationDate\":\"2024-04-11 17:23:03\",\r\n    \"lastAccessedOn\":\"2024-05-10 23:15:50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/bingocard/update/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"update",
+								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLastAccessedOn",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/updateLastAccessedOn/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"updateLastAccessedOn",
+								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/delete/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"delete",
+								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBingocardItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/addBingocardItem/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28/A96B736F-F0E6-47E9-8C72-EA230535442D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"addBingocardItem",
+								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+								"A96B736F-F0E6-47E9-8C72-EA230535442D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBingocardItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/deleteBingocardItem/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28/A96B736F-F0E6-47E9-8C72-EA230535442D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"deleteBingocardItem",
+								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+								"A96B736F-F0E6-47E9-8C72-EA230535442D"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cardItem",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/carditem/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"carditem",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOne",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/carditem/getOne/7C5FB4C2-6C8B-4598-AF68-999136DA2AF7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"carditem",
+								"getOne",
+								"7C5FB4C2-6C8B-4598-AF68-999136DA2AF7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"Zo opgaan in het lekker rijden dat je bijna de jongere rijders over het hoofd ziet en van de baan af duwt... whoops...\",\r\n    \"category\":0,\r\n    \"points\":15,\r\n    \"isPremiumItem\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/carditem/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"carditem",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"Iets te lekker doorrijden dat je bijna de kleinere van de baan af duwt... whoopsie, alvast sorry daarvoor...\",\r\n    \"category\":4,\r\n    \"points\":20,\r\n    \"isPremiumItem\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/carditem/update/0D6DA7BC-1351-4237-8589-4418731BD0AE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"carditem",
+								"update",
+								"0D6DA7BC-1351-4237-8589-4418731BD0AE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/carditem/delete/0D6DA7BC-1351-4237-8589-4418731BD0AE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"carditem",
+								"delete",
+								"0D6DA7BC-1351-4237-8589-4418731BD0AE"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sportsclub",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/sportsclub/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"sportsclub",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOne",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/sportsclub/getOne/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"sportsclub",
+								"getOne",
+								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clubname\":\"IJsvereniging de gladde baan\",\r\n    \"description\":\"Een nieuwe schaatsvereniging om van dichtbij concurrentie te bieden aan de IJsclub Haarlem en de Meent in Alkmaar\",\r\n    \"foundedOn\":\"1879-10-10 12:00:00\",\r\n    \"membersAmount\":1223\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/sportsclub/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"sportsclub",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clubname\":\"IJsvereniging de doorglijders\",\r\n    \"description\":\"Een doorgewinterde nieuwe, leuke ijsvereniging om je in thuis te voelen\",\r\n    \"foundedOn\":\"1779-11-05 15:15:15\",\r\n    \"membersAmount\":2025\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/sportsclub/update/8BF4E48F-7120-4DDE-81B5-BFC16465D603",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"sportsclub",
+								"update",
+								"8BF4E48F-7120-4DDE-81B5-BFC16465D603"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/sportsclub/delete/8BF4E48F-7120-4DDE-81B5-BFC16465D603",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"sportsclub",
+								"delete",
+								"8BF4E48F-7120-4DDE-81B5-BFC16465D603"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

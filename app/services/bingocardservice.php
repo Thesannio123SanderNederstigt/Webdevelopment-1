@@ -28,7 +28,10 @@ class bingocardService
     {
         $bingocard = $this->repository->getOne($id);
 
-        $bingocard->setItems($this->getBingocardItemIds($id));
+        if($bingocard != false)
+        {
+            $bingocard->setItems($this->getBingocardItemIds($id));
+        }
 
         return $bingocard;
     }

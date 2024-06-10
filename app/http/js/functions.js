@@ -23,7 +23,7 @@ function apiLogin()
 
         console.log(loginCredentials);
 
-        fetch(getUrl('home/login'), {
+        fetch(getUrl('user/login'), {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(loginCredentials)
@@ -74,19 +74,19 @@ function showSubtableSection(item_id, item_name)
     var item_table_section;
     var item_title_id_text;
 
-    console.log(item_id);
-    console.log(item_name);
+    //console.log(item_id);
+    //console.log(item_name);
 
     switch(item_name)
     {
-        case('bingocard'):
+        case("bingocard"):
             item_table_section = document.getElementById("bingocards-table-section");
             item_title_id_text = document.getElementById("bingocards-table-title-id-text");
 
             //getUserBingocards(item_id);
             break;
 
-        case('carditem'):
+        case("carditem"):
             item_table_section = document.getElementById("carditems-table-section");
             item_title_id_text = document.getElementById("carditems-table-title-id-text");
 
@@ -110,7 +110,7 @@ function showSubtableSection(item_id, item_name)
 
 
 
-
+/*
 function showUserBingocards(user_id) 
 {
     //console.log(document.getElementById('tableUserId').value);
@@ -143,3 +143,4 @@ function showUserSportsclubs(sportsclub_id)
     sportsclub_title_id_text.innerText = sportsclub_id;
     sportsclub_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
 }
+*/

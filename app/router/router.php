@@ -39,26 +39,39 @@ class Router
         $methodName = $explodedUri[1];
         
         //load the controller file
-        $filename = __DIR__ . '../../controllers/' . $controllerName . '.php';
-
-        $controllerName = "viewControllers\\" . $controllerName;
-        
         if ($api) {
             $filename = __DIR__ . '../../api/controllers/' . $controllerName . '.php';
 
             $controllerName = "apiControllers\\" . $controllerName;
+        } else {
+
+            $filename = __DIR__ . '../../controllers/' . $controllerName . '.php';
+
+            $controllerName = "viewControllers\\" . $controllerName;
         }
         
         if (file_exists($filename) || method_exists($controllerName, $methodName)) {
             require_once $filename;
         } else {
             http_response_code(404);
-            return;
+            //return;
         }
         
         try {
             $controllerObj = new $controllerName();
-            $controllerObj->{$methodName}();
+
+            //mocht er een derde (of zelfs een vierde) param zijn, gebruik deze dan als argument(s)/input voor de methode/functie (en anders niet)
+            if(isset($explodedUri[2]) && !empty($explodedUri[2]))
+            {
+                if(isset($explodedUri[3]) && !empty($explodedUri[3]))
+                {
+                    $controllerObj->{$methodName}($explodedUri[2], $explodedUri[3]);
+                } else {
+                    $controllerObj->{$methodName}($explodedUri[2]);
+                }
+            } else {
+                $controllerObj->{$methodName}();
+            }
         } catch(Error $e) {
             echo $e;
             //$_SESSION['ERROR'] = $e;

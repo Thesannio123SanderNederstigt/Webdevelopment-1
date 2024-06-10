@@ -1,7 +1,8 @@
 <?php
 namespace Models;
 
-include_once 'user.php';
+use Models\User;
+
 include_once 'guid.php';
 
 Class userDTO
@@ -10,17 +11,8 @@ Class userDTO
     public string $password;
     public string $email;
 
-    /*
-    public function userDTO()
+    public function __construct()
     {
-    }
-    */
-
-    public function __construct($_username, $_password, $_email)
-    {
-        $this->username = $_username;
-        $this->password = $_password;
-        $this->email = $_email;
     }
 
     public function userMapper(): User

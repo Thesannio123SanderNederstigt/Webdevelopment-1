@@ -46,7 +46,14 @@ class userRepository extends Repository
 
             $stmt->execute();
 
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $row = $stmt->fetch();
+            
+
+            if(!$row)
+            {
+                return false;
+            }
 
             $user = $this->rowToUser($row);
 
@@ -117,11 +124,15 @@ class userRepository extends Repository
             {
                 $hashedPassword = $this->hashPassword($user->password);
 
-                $stmt = $this->connection->prepare("UPDATE user SET userName = ?, `password` = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
+                $stmt = $this->connection->prepare("UPDATE user SET username = ?, `password` = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
                 $stmt->execute([$user->username, $hashedPassword, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount, $id]);
                 
+                //geeft versleuteld ww of loze string terug
+                
+                //$user->setPassword($hashedPassword);
+                $user->setPassword("Dat is geheim weet je wel ;)");
             } else {
-                $stmt = $this->connection->prepare("UPDATE user SET userName = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
+                $stmt = $this->connection->prepare("UPDATE user SET username = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
                 $stmt->execute([$user->username, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount, $id]);
             }
 
@@ -139,7 +150,7 @@ class userRepository extends Repository
 
             $stmt->execute();
 
-            return;
+            return true;
         } catch(PDOException $e) {
             echo $e;
         }
@@ -170,10 +181,17 @@ class userRepository extends Repository
                 $result = $this->verifyPassword($password, $user->getPassword());
             }
 
-            // wachtwoord hash wordt hier niet teruggeven
-            $user->password = "";
+            if($result == true)
+            {
+                // wachtwoord hash wordt hier niet teruggeven
+                $user->password = "";
 
-            return $user;
+                return $user;
+            }
+            else {
+                return false;
+            }
+
         } catch (PDOException $e) {
             echo $e;
         }

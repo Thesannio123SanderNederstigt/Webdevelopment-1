@@ -1,7 +1,8 @@
 <?php
 namespace Models;
 
-include_once 'cardItem.php';
+use Models\cardItem;
+
 include_once 'guid.php';
 
 class cardItemDTO
@@ -11,12 +12,8 @@ class cardItemDTO
     public int $points;
     public bool $isPremiumItem;
 
-    public function __construct($_content, $_category, $_points, $_isPremiumItem)
+    public function __construct()
     {
-        $this->content = $_content;
-        $this->category = $_category;
-        $this->points = $_points;
-        $this->isPremiumItem = $_isPremiumItem;
     }
 
     public function cardItemMapper(): cardItem

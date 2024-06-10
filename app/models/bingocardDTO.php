@@ -1,7 +1,8 @@
 <?php
 namespace Models;
 
-include_once 'bingocard.php';
+use Models\Bingocard;
+
 include_once 'guid.php';
 
 Class bingocardDTO
@@ -9,10 +10,8 @@ Class bingocardDTO
     public string $userId;
     public int $size;
 
-    public function __construct($_userId, $_size)
+    public function __construct()
     {
-        $this->userId = $_userId;
-        $this->size = $_size;
     }
 
     public function bingocardMapper(): Bingocard

@@ -1,7 +1,8 @@
 <?php
 namespace Models;
 
-include_once 'sportsclub.php';
+use Models\Sportsclub;
+
 include_once 'guid.php';
 
 class sportsclubDTO
@@ -11,12 +12,8 @@ class sportsclubDTO
     public string $foundedOn;
     public int $membersAmount;
 
-    public function __construct($_clubname, $_description, $_foundedOn, $_membersAmount)
+    public function __construct()
     {
-        $this->clubname = $_clubname;
-        $this->description = $_description;
-        $this->foundedOn = $_foundedOn;
-        $this->membersAmount = $_membersAmount;
     }
 
     public function sportsclubMapper(): Sportsclub

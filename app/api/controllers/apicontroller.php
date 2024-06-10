@@ -15,6 +15,7 @@ class apiController
         $data = json_decode($json);
 
         $object = new $className();
+
         foreach ($data as $key => $value) {
             htmlspecialchars($value); //TODO: check of dit een goed idee is als filter om te doen of niet...
             if(is_object($value)) {
@@ -22,6 +23,7 @@ class apiController
             }
             $object->{$key} = $value;
         }
+        //var_dump($object);
         return $object;
     }
 
@@ -102,9 +104,9 @@ class apiController
        $jwt = $arr[1];
 
         // phpdotenv utilization
-       $dotenv = Dotenv::createImmutable(__DIR__);
-       $dotenv->required(['SECRET_KEY', 'ISSUER', 'AUDIENCE']);
+       $dotenv = Dotenv::createImmutable(__DIR__ . '../../..');
        $dotenv->load();
+       $dotenv->required(['SECRET_KEY', 'ISSUER', 'AUDIENCE']);
 
        // Decode JWT
        $secret_key = $_SERVER['SECRET_KEY'];
@@ -113,7 +115,7 @@ class apiController
            try {
                $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
                // username is now found in
-               // echo $decoded->data->username;
+               //echo $decoded->data->username;
                if($this->JwtValidation($decoded))
                {
                     return $decoded;
@@ -137,7 +139,7 @@ class apiController
         }
 
         $userService = new UserService();
-        $user = $this->$userService->getOne($decodedJWT->data->id);
+        $user = $userService->getOne($decodedJWT->data->id);
 
         if(!$user) {
             return false;

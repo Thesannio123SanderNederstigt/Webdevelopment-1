@@ -4,6 +4,7 @@ namespace viewControllers;
 use viewControllers\viewController;
 use Services\bingocardService;
 use Services\cardItemService;
+use Services\userService;
 use Models\bingocardDTO;
 use Models\bingocard;
 use Models\cardItem;
@@ -12,12 +13,14 @@ class bingocardController extends viewController
 {
     private $bingocardService;
     private $cardItemService;
+    private $userService;
 
     function __construct()
     {
         if(session_status() !== PHP_SESSION_ACTIVE) {session_start();}
         $this->bingocardService = new bingocardService();
         $this->cardItemService = new cardItemService();
+        $this->userService = new userService();
     }
 
     public function index()
@@ -62,9 +65,17 @@ class bingocardController extends viewController
 
             $bingocard = $bingocardDTO->bingocardMapper();
 
-            $this->bingocardService->create($bingocard);
+            $user = $this->userService->getOne($bingocard->getUserId());
 
-            header("Location: {$_SERVER['HTTP_REFERER']}");
+            if(!$user || $user == false) {
+                //de gebruiker kon niet worden gevonden hier (incorrect meegegeven userId voor deze bingokaart)
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+                return;
+            } else {
+                $this->bingocardService->create($bingocard);
+
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+            }
         }
     }
 
@@ -107,9 +118,17 @@ class bingocardController extends viewController
             $bingocard->setCreationDate($creationDate);
             $bingocard->setLastAccessedOn($lastAccessedOn);
 
-            $this->bingocardService->update($bingocard, $id);
+            $user = $this->userService->getOne($bingocard->getUserId());
 
-            header("Location: {$_SERVER['HTTP_REFERER']}");
+            if(!$user || $user == false) {
+                //de gebruiker kon niet worden gevonden hier (incorrect meegegeven userId voor deze bingokaart)
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+                return;
+            } else {
+                $this->bingocardService->update($bingocard, $id);
+
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+            }
         }
     }
 

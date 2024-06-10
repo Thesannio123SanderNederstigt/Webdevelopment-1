@@ -38,8 +38,14 @@ class cardItemController extends apiController
             }
     
             $cardItems = $this->service->getAll($offset, $limit);
-    
-            $this->respond($cardItems);
+
+            if(!$cardItems || $cardItems == false)
+            {
+                $this->respondWithError(404, "kaart-items niet gevonden");
+                return;
+            } else {
+                $this->respond($cardItems);
+            }
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -59,13 +65,13 @@ class cardItemController extends apiController
 
             $cardItem = $this->service->getOne($cleanId);
 
-            if(!$cardItem)
+            if(!$cardItem || $cardItem == false)
             {
                 $this->respondWithError(404, "bingokaart-item niet gevonden");
                 return;
+            } else {
+                $this->respond($cardItem);
             }
-
-            $this->respond($cardItem);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }

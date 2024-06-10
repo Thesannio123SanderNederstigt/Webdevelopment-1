@@ -6,7 +6,7 @@ use Services\userService;
 use Services\sportsclubService;
 use Services\bingocardService;
 use Services\cardItemService;
-use Models\UserDTO;
+use Models\userDTO;
 use Models\User;
 
 //require __DIR__ . '/controller.php';
@@ -84,7 +84,7 @@ class UserController extends viewController
             $password = htmlspecialchars($_POST['nieuwe-user-password']);
             $email = htmlspecialchars($_POST['nieuwe-user-email']);
 
-            $userDTO = new UserDTO($username, $password, $email);
+            $userDTO = new userDTO($username, $password, $email);
 
             $user = $userDTO->userMapper();
 

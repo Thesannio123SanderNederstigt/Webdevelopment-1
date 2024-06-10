@@ -28,7 +28,10 @@ class userService
     {
         $user = $this->repository->getOne($id);
 
-        $user->setSportsclubs($this->getUserSportsclubIds($id));
+        if($user != false)
+        {
+            $user->setSportsclubs($this->getUserSportsclubIds($id));
+        }
 
         return $user;
     }

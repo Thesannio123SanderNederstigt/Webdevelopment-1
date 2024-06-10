@@ -56,10 +56,10 @@
 								<textarea class="bingo-table-columns" name="user-sharedCardsAmount"><?php echo $user->getSharedCardsAmount(); ?></textarea>
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $user->getId(); ?>" onclick="showUserBingocards(this.value)">Toon bingokaarten</button>
+								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $user->getId(); ?>" onclick="showSubtableSection(this.value, 'bingocard')">Toon bingokaarten</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary bingo-table-buttons" id="sportclubs-btn" value="<?php echo $user->getId(); ?>" onclick="showUserSportsclubs(this.value)">Toon sportclubs</button>
+								<button type="button" class="btn btn-primary bingo-table-buttons" id="sportclubs-btn" value="<?php echo $user->getId(); ?>" onclick="showSubtableSection(this.value, 'sportsclub')">Toon sportclubs</button>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen">Wijzigen</button><!--bewerken met value="$user->getId();" want dan in de alter function van controller: $_POST["wijzigen"] heeft de waarde van de desbetreffende user id!-->
@@ -380,76 +380,7 @@
 			</section>
 			
 		</section>
-		
-		<script>
-			/*function showUserBingocards(user_id)
-			{				
-				var bingocards_table_section = document.getElementById("bingocards-table-section");
-				bingocards_table_section.style.cssText = 'display: flex !important';
 
-				
-				var bingocards_title_id_text = document.getElementById("bingocards-table-title-id-text");
-				bingocards_title_id_text.innerText = user_id;
-				bingocards_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-			}
-			
-			function showBingocardItems(bingocard_id)
-			{
-				var cardditems_table_section = document.getElementById("carditems-table-section");
-				cardditems_table_section.style.cssText = 'display: flex !important';
-
-				var carditems_title_id_text = document.getElementById("carditems-table-title-id-text");
-				carditems_title_id_text.innerText = bingocard_id;
-				carditems_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-			}
-			
-			function showUserSportsclubs(sportsclub_id)
-			{
-				var sportsclub_table_section = document.getElementById("sportsclubs-table-section");
-				sportsclub_table_section.style.cssText = 'display: flex !important';
-
-				var sportsclub_title_id_text = document.getElementById("sportsclubs-table-title-id-text");
-				sportsclub_title_id_text.innerText = sportsclub_id;
-				sportsclub_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-			}*/
-
-            function showSubtableSection(item_id, item_name)
-			{
-                var item_table_section;
-                var item_title_id_text;
-
-				switch(item_name)
-                {
-                    case item_name === "bingocard":
-                        item_table_section = document.getElementById("bingocards-table-section");
-                        item_title_id_text = document.getElementById("bingocards-table-title-id-text");
-
-                        /*getUserBingocards(item_id);
-                        return;*/
-
-                    case item_name === "carditem":
-                        item_table_section = document.getElementById("carditems-table-section");
-                        item_title_id_text = document.getElementById("carditems-table-title-id-text");
-                        
-                        /*getBingocardItems(item_id);
-                        return;*/
-
-                    case item_name === "sportsclub":
-                        item_table_section = document.getElementById("sportsclubs-table-section");
-                        item_title_id_text = document.getElementById("sportsclubs-table-title-id-text");
-
-                        /*getUserSportsclubs(item_id);
-                        return;*/
-                }
-
-                item_title_id_text.innerText = item_id;
-                item_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-
-                item_table_section.style.cssText = 'display: flex !important';
-
-			}
-		</script>
-		
 <?php
 	include_once __DIR__ . '/../footer.php';
 ?>

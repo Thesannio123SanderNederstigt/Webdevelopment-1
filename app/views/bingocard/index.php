@@ -55,7 +55,7 @@
 								<textarea class="bingo-table-columns" name="bingocard-lastAccessedOn"><?php echo $bingocard->GetLastAccessedOn(); ?></textarea>
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $bingocard->getId(); ?>" onclick="showBingocardItems(this.value)">Toon bingokaart-items</button>
+								<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php echo $bingocard->getId(); ?>" onclick="showSubtableSection(this.value, 'carditem')">Toon bingokaart-items</button>
 							</td>
 
 							<td>

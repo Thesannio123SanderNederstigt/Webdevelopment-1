@@ -9,8 +9,8 @@ use Services\cardItemService;
 use Exception;
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
-use Models\userDTO;
-use Models\User;
+//use Models\userDTO;
+//use Models\User;
 
 class userController extends apiController
 {
@@ -42,19 +42,27 @@ class userController extends apiController
             if (isset($_GET["offset"]) && is_numeric($_GET["offset"])) {
                 $offset = $_GET["offset"];
             }
+            
             if (isset($_GET["limit"]) && is_numeric($_GET["limit"])) {
                 $limit = $_GET["limit"];
             }
     
             $users = $this->userService->getAll($offset, $limit);
-    
-            foreach($users as $user)
+
+            if(!$users || $users == false)
             {
-                $this->setUserBingocardsAndItems($user);
-                $this->setUserSportsclubs($user);
+                $this->respondWithError(404, "gebruikers niet gevonden");
+                return;
+            } else {
+
+                foreach($users as $user)
+                {
+                    $this->setUserBingocardsAndItems($user);
+                    $this->setUserSportsclubs($user);
+                }
+        
+                $this->respond($users);
             }
-    
-            $this->respond($users);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -73,17 +81,17 @@ class userController extends apiController
             $cleanId = htmlspecialchars($id);
 
             $user = $this->userService->getOne($cleanId);
-    
-            $this->setUserBingocardsAndItems($user);
-            $this->setUserSportsclubs($user);
-    
-            if(!$user)
+
+            if(!$user || $user == false)
             {
                 $this->respondWithError(404, "gebruiker niet gevonden");
                 return;
+            } else {
+                $this->setUserBingocardsAndItems($user);
+                $this->setUserSportsclubs($user);
+        
+                $this->respond($user);
             }
-    
-            $this->respond($user);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -134,7 +142,7 @@ class userController extends apiController
     }
 
 
-    public function create($user)
+    public function create()
     {
         $token = $this->checkForJwt();
         if (!$token)
@@ -143,7 +151,7 @@ class userController extends apiController
         }
 
         try {
-            $userDTO = $this->createObjectFromPostedJson("Models\\UserDTO");
+            $userDTO = $this->createObjectFromPostedJson("Models\\userDTO");
             $user = $userDTO->userMapper();
             $this->userService->create($user);
         } catch (Exception $e) {
@@ -153,7 +161,7 @@ class userController extends apiController
         $this->respond($user);
     }
 
-    public function update($user, $id)
+    public function update($id)
     {
         $token = $this->checkForJwt();
         if (!$token)
@@ -188,6 +196,7 @@ class userController extends apiController
         }
 
         $this->respond(true);
+        //$this->respond("De gebruiker is verwijderd");
     }
 
     //TODO: maak nog een get user sportsclub (waar inhoud sportclubs wordt opgehaald, bij updaten voor gebruiker wordt verwijderd uit DB en opnieuw wordt aangemaakt (allemaal in loops)?)
@@ -240,9 +249,13 @@ class userController extends apiController
             // gebruiker lezen vanuit request body data
             $postedUser = $this->createObjectFromPostedJson("Models\\User");
 
+            //$postedUser = new User();
+            //$postedUser->setUsername($postedUser->username);
+            //$postedUser->setPassword($postedUser->password);
+
             // gebruiker ophalen
-            //$user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
-            $user = $this->userService->loginCheck($postedUser->getUsername(), $postedUser->getPassword());
+            $user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
+            //$user = $this->userService->loginCheck($postedUser->getUsername(), $postedUser->getPassword());
 
             if(!$user || $user == false) {
                 $this->respondWithError(401, "Onjuiste gebruikersnaam en/of wachtwoord ingevoerd");
