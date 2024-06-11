@@ -30,6 +30,8 @@ class UserController extends viewController
 
     public function index()
     {
+        $this->viewGetRequestSessionUserCheck();
+        
         $users = $this->userService->getAll(NULL, NULL);
 
         foreach($users as $user)

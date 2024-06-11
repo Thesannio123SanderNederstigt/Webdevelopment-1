@@ -24,17 +24,6 @@ class HomeController extends viewController
         {
             $this->viewName = 'home';
         }
-
-        /*
-        if((session_status() !== PHP_SESSION_ACTIVE) //&& !(isset($_SESSION['user']))){
-            session_start();
-            //var_dump($_SESSION);
-            //echo 'test: wordt dit nu altijd uitgevoerd, of alleen wanneer een PHP SESSION ECHT niet actief is???';
-            $this->viewName = 'login';
-        } else if(isset($_SESSION['user'])) {
-            echo 'what? hoe kom je hier NOOIT???';
-            $this->viewName = 'home';
-        }*/
     }
 
     public function index()
@@ -87,7 +76,7 @@ class HomeController extends viewController
                 header("Location: {$_SERVER['HTTP_REFERER']}");
                 exit;
             } else {
-                
+
                 if($user->getIsAdmin() == true)
                 {
                     //session_start();

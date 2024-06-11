@@ -205,6 +205,35 @@ class bingocardController extends apiController
         //$this->respond("De bingokaart is verwijderd");
     }
 
+    public function getBingocardItems($bingocardId)
+    {
+        $token = $this->checkForJwt();
+        if (!$token)
+        {
+            return;
+        }
+
+        try {
+            $cleanBingocardId = htmlspecialchars($bingocardId);
+
+            $bingocardItems = array();
+
+            $cardItemIds = $this->bingocardService->getBingocardItemIds($cleanBingocardId);
+
+            foreach($cardItemIds as $cardItemId)
+            {
+                $cardItem = $this->cardItemService->getOne($cardItemId[0]);
+
+                array_push($bingocardItems, $cardItem);
+            }
+
+            $this->respond($bingocardItems);
+
+        } catch(Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
+        }
+    }
+
     //Endpoint voor het toevoegen van card-items voor een bingokaart (in de koppeltabel)
     public function addBingocardItem($bingocardId, $cardItemId)
     {

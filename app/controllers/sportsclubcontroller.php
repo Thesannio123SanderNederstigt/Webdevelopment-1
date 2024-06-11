@@ -18,6 +18,8 @@ class sportsclubController extends viewController
 
     public function index()
     {
+        $this->viewGetRequestSessionUserCheck();
+
         $sportsclubs = $this->service->getAll(NULL, NULL);
 
         $this->checkMappingAndDisplayView($sportsclubs);

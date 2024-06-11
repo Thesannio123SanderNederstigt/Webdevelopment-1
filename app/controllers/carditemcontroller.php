@@ -18,6 +18,8 @@ class carditemController extends viewController
 
     public function index()
     {
+        $this->viewGetRequestSessionUserCheck();
+
         $carditems = $this->service->getAll(NULL, NULL);
 
         $this->checkMappingAndDisplayView($carditems);

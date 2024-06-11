@@ -25,6 +25,8 @@ class bingocardController extends viewController
 
     public function index()
     {
+        $this->viewGetRequestSessionUserCheck();
+
         $bingocards = $this->bingocardService->getAll(NULL, NULL);
 
         foreach($bingocards as $bingocard)

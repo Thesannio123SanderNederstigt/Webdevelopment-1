@@ -27,6 +27,15 @@ class viewController
         }
     }
 
+    function viewGetRequestSessionUserCheck()
+    {
+        if(isset($_SESSION['user']) == false)
+        {
+            header("Location: /");
+            exit;
+        }
+    }
+
     function provideBoolValue($cleanIsBoolItem): bool
     {
         if($cleanIsBoolItem == "Ja" || $cleanIsBoolItem == "ja" || $cleanIsBoolItem == "Yes" || $cleanIsBoolItem == "yes")
