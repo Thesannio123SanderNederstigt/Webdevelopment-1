@@ -3,7 +3,6 @@ namespace Repositories;
 
 use PDO;
 use PDOException;
-use Models\cardItem;
 use Repositories\Repository;
 
 class cardItemRepository extends Repository

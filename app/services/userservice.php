@@ -20,7 +20,6 @@ class userService
             $userSportsclubIds = $this->getUserSportsclubIds($user->getId());
             $user->setSportsclubs($userSportsclubIds);
         }
-
         return $users;
     }
 
@@ -63,7 +62,6 @@ class userService
     {
         return $this->repository->loginCredentialsCheck($username, $password);
     }
-
 
     //koppeltabel (users-sportsclubs) functies zijn hieronder uitgewerkt
 

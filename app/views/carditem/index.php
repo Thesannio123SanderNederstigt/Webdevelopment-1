@@ -1,15 +1,15 @@
 <?php
     include_once __DIR__ . '/../header.php';
 ?>
-		
 		<!-- BINGOCARD_ITEM_VIEW -->
 		
 		<p hidden id="nav-current-page" name="bingo-nav-carditems"></p>
+        
 		<section class="container mt-5 mb-5" id="table-container">
 			<section class="row justify-content-md-center">				
 				<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text">Bingokaart-items</h2>
 		
-				<!-- tabel (php forms hier gebruikt)-->
+				<!-- tabel -->
 				
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">

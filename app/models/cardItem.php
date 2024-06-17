@@ -3,25 +3,16 @@ namespace Models;
 
 Class cardItem
 {
-    public string $id; //guid
-    public string $content; //text
+    public string $id;
+    public string $content;
     public int $category;
     public int $points;
     public bool $isPremiumItem;
 
-    //empty constructor
+    //lege constructor
     public function __construct()
     {
     }
-
-    /*public function __construct($_id, $_content, $_category, $_points, $_isPremiumItem)
-    {
-        $this->id = $_id;
-        $this->content = $_content;
-        $this->category = $_category;
-        $this->points = $_points;
-        $this->isPremiumItem = $_isPremiumItem;
-    }*/
 
     public function getId(): string
     {

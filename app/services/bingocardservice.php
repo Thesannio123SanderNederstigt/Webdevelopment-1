@@ -1,6 +1,6 @@
 <?php
 namespace Services;
-use Models\Bingocard;
+
 use Repositories\bingocardRepository;
 
 class bingocardService
@@ -12,7 +12,8 @@ class bingocardService
         $this->repository = new bingocardRepository();
     }
 
-    public function getAll($offset, $limit) {
+    public function getAll($offset, $limit) 
+    {
 
         $bingocards = $this->repository->getAll($offset, $limit);
 
@@ -36,7 +37,7 @@ class bingocardService
         return $bingocard;
     }
 
-    public function getUserBingocards($userId) //Deze service wordt voor deze methode/functie toegevoegd aan de usercontroller om bingokaarten van een user op te kunnen halen
+    public function getUserBingocards($userId)
     {
         $userBingocards = $this->repository->getUserBingocards($userId);
 
@@ -76,7 +77,6 @@ class bingocardService
     {       
         return $this->repository->delete($id);        
     }
-
 
     //koppeltabel (bingocard-carditem) functies zijn hieronder uitgewerkt
 

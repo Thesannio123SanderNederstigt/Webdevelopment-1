@@ -10,9 +10,7 @@ Class bingocardDTO
     public string $userId;
     public int $size;
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     public function bingocardMapper(): Bingocard
     {

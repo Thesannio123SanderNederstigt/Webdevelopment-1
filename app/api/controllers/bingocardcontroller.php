@@ -6,10 +6,6 @@ use Services\bingocardService;
 use Services\cardItemService;
 use Services\userService;
 use Exception;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
-use Models\BingocardDTO;
-use Models\Bingocard;
 
 class bingocardController extends apiController
 {
@@ -33,7 +29,6 @@ class bingocardController extends apiController
         }
 
         try {
-
             $offset = NULL;
             $limit = NULL;
     
@@ -178,7 +173,7 @@ class bingocardController extends apiController
 
         try {
             $cleanId = htmlspecialchars($id);
-            $bingocard = $this->bingocardService->updateLastAccessedOn($cleanId);
+            $this->bingocardService->updateLastAccessedOn($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
@@ -202,7 +197,6 @@ class bingocardController extends apiController
         }
 
         $this->respond(true);
-        //$this->respond("De bingokaart is verwijderd");
     }
 
     public function getBingocardItems($bingocardId)

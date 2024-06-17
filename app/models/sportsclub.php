@@ -9,6 +9,7 @@ Class Sportsclub
     public string $foundedOn;
     public int $membersAmount;
 
+    //lege constructor
     public function __construct()
     {
     }

@@ -7,7 +7,6 @@ use Services\cardItemService;
 use Services\userService;
 use Models\bingocardDTO;
 use Models\bingocard;
-use Models\cardItem;
 
 class bingocardController extends viewController
 {
@@ -39,14 +38,10 @@ class bingocardController extends viewController
             {
                 $cardItem = $this->cardItemService->getOne($cardItemId[0]);
 
-                //var_dump($cardItem);
-
                 array_push($cardItems, $cardItem);
             }
 
             $bingocard->setItems($cardItems);
-
-            //var_dump($cardItems);
         }
 
         $this->checkMappingAndDisplayView($bingocards);

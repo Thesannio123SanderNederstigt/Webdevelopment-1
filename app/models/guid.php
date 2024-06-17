@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-//code sourced from: https://www.php.net/manual/en/function.com-create-guid.php
+//code sourced from/functie afkomstig van: https://www.php.net/manual/en/function.com-create-guid.php
 function createGuid()
 {
     if (function_exists('com_create_guid') === true)

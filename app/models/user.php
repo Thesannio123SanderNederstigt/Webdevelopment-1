@@ -3,45 +3,22 @@ namespace Models;
 
 Class User
 {
-    public string $id; //guids gebruikt voor alle vormen van id's in deze applicatie
+    public string $id;
     public string $username;
     public string $password;
     public string $email;
-    public bool $isAdmin; //voor cms update van gegevens check (of check if userId gelijk aan eigen userId in token, dan mag userUpdate wel (update endpoint gebruikt straks direct dit object/setters van dit model?, en geen DTO?), maar andere cms updates van andere objecten natuurlijk niet!)
+    public bool $isAdmin;
     public bool $isPremium;
     public int $cardsAmount;
     public int $sharedCardsAmount;
 
-    public array $bingocards; //bingocard array
-    public array $sportsclubs; //string array
+    public array $bingocards;
+    public array $sportsclubs;
 
-    //$this->$bingocards = array(new Bingocard(), 3);
-
-    //dto ==> no userid, isAdmin == default false, isPremium == default false, cardsAmount = 0, sharedCardsAmount = 0, 
-    //bingocards (not allowed to send through api in user endpoint? or create empty array?), sportsclubs = also not allowed (except through the updateUser endpoint)
-    //respone => geen password, array van card id's?
-    //empty constructor
+    //lege constructor
     public function __construct()
     {
     }
-
-    /*public function User()
-    {
-
-    }*/
-
-    /*public function __construct($_id, $_username, $_password, $_email, $_isPremium, $_cardsAmount, $_sharedCardsAmount, $_bingocards, $_sportsclubs)
-    {
-        $this->id = $_id;
-        $this->username = $_username;
-        $this->password = $_password;
-        $this->email = $_email;
-        $this->isPremium = $_isPremium;
-        $this->cardsAmount = $_cardsAmount;
-        $this->sharedCardsAmount = $_sharedCardsAmount;
-        $this->bingocards = $_bingocards;
-        $this->sportsclubs = $_sportsclubs;
-    }*/
 
     public function getId(): string
     {
@@ -53,11 +30,6 @@ Class User
         $this->id = $id;
         return $this;
     }
-
-    /*public function setId(): void
-    {
-        $this->id = com_create_guid();
-    }*/
 
     public function getUsername(): string
     {

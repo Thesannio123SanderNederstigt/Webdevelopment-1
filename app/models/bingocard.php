@@ -3,29 +3,18 @@ namespace Models;
 
 Class Bingocard
 {
-    public string $id; //guid
-    public string $userId; //also guid
+    public string $id;
+    public string $userId;
     public int $score;
-    public int $size; //9, 16 or 25
-    public string $creationDate; //datetime
-    public string $lastAccessedOn; //datetime
-    public array $items; //carditem
+    public int $size;
+    public string $creationDate;
+    public string $lastAccessedOn;
+    public array $items;
 
-    //empty constructor
+    //lege constructor
     public function __construct()
     {
     }
-
-    /*public function __construct($_id, $_userId, $_score, $_size, $_creationDate, $_lastAccessedOn, $_items){
-        //$_id = com_create_guid(); //put this in the service?
-        $this->id = $_id;
-        $this->userId = $_userId;
-        $this->score = $_score;
-        $this->size = $_size;
-        $this->creationDate = $_creationDate;
-        $this->lastAccessedOn = $_lastAccessedOn;
-        $this->items = $_items;
-    }*/
 
     public function getId(): string
     {

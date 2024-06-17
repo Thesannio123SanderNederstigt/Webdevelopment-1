@@ -3,7 +3,6 @@ namespace Repositories;
 
 use PDO;
 use PDOException;
-use Models\Sportsclub;
 use Repositories\Repository;
 
 class sportsclubRepository extends Repository

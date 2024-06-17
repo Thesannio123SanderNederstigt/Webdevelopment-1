@@ -10,7 +10,6 @@
 											<img src="../assets/schaatsbingo-ball.svg" class="mt-3" width="100" height="100">
 										</section>
 									</section>
-
 									<section class="col-xs-12 col-lg-4 order-2 order-lg-1">
 										<section class="colophon-wrapper">
 											<section class="text-center footer-text">

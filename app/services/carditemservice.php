@@ -12,12 +12,13 @@ class cardItemService
         $this->repository = new cardItemRepository();
     }
 
-    public function getAll($offset = NULL, $limit = NULL) 
+    public function getAll($offset, $limit) 
     {
         return $this->repository->getAll($offset, $limit);
     }
 
-    public function getOne($id) {
+    public function getOne($id) 
+    {
         return $this->repository->getOne($id);
     }
 

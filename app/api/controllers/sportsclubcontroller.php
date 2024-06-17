@@ -4,10 +4,6 @@ namespace apiControllers;
 use apiControllers\apiController;
 use Services\sportsclubService;
 use Exception;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
-use Models\sportsclubDTO;
-use Models\Sportsclub;
 
 class sportsclubController extends apiController
 {
@@ -20,7 +16,6 @@ class sportsclubController extends apiController
 
     public function getAll()
     {
-        // controleren op jwt, geeft 401 terug zonder token
         $token = $this->checkForJwt();
         if (!$token)
         {

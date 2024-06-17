@@ -17,13 +17,12 @@ class apiController
         $object = new $className();
 
         foreach ($data as $key => $value) {
-            htmlspecialchars($value); //TODO: check of dit een goed idee is als filter om te doen of niet...
+            htmlspecialchars($value);
             if(is_object($value)) {
                 continue;
             }
             $object->{$key} = $value;
         }
-        //var_dump($object);
         return $object;
     }
 
@@ -61,7 +60,6 @@ class apiController
         $expire = $issuedAt + 900; // expiration time is set at +900 seconds (15 minutes)
 
         // JWT expiration times should be kept short (10-30 minutes)
-        // A refresh token system should be implemented if we want clients to stay logged in for longer periods
 
         // note how these claims are 3 characters long to keep the JWT as small as possible
         $payload = array(
@@ -114,8 +112,6 @@ class apiController
        if ($jwt) {
            try {
                $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
-               // username is now found in
-               //echo $decoded->data->username;
                if($this->JwtValidation($decoded))
                {
                     return $decoded;

@@ -1,10 +1,10 @@
 <?php
     include_once __DIR__ . '/../header.php';
 ?>
-		
 		<!-- USER_VIEW -->
 		
 		<p hidden id="nav-current-page" name="bingo-nav-users"></p>
+
 		<section class="container mt-5 mb-5" id="table-container">
 			<section class="row justify-content-md-center">				
 				<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text">Gebruikers</h2>
@@ -95,7 +95,7 @@
 								<h6 class="bingo-nieuw-header-text">nieuw wachtwoord:</h6>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="WelkomBing0123" name="nieuwe-user-password"></textarea>
+								<textarea class="bingo-table-columns" placeholder="WelkomBingo123!" name="nieuwe-user-password"></textarea>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn">Voeg toe</button>
@@ -107,7 +107,7 @@
 				</section>
 			</section>
 			
-			<!-- Bingokaarten van gebruiker (wederom, JS want sub-tabel en ook zorgen bij aanmaak van nieuwe kaart, dat dit gebeurd voor deze gebruiker!) -->
+			<!-- Bingokaarten van gebruiker -->
 			
 			<section class="row justify-content-md-center" id="bingocards-table-section">
 				<section class="container bingo-subtable-text">
@@ -201,13 +201,16 @@
 			</section>
 				
 
-			<!-- Bingokaart items van kaarten van een specifieke gebruiker (subtabel, dus Javascript shenanigans met call naar api controller endpoint wat dit item niet alleen nieuw aanmaakt, maar ook toevoegd aan deze bingokaart van de gebruiker!!!)-->
+			<!-- Bingokaart items van kaarten van een specifieke gebruiker -->
 				
             <section class="row justify-content-md-center" id="carditems-table-section">
 				<section class="container bingo-subtable-text">			
 					<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text" id="carditems-table-title-text">Kaart-items van bingokaart: </h2>
 					<h2 class="text-center mb-4 mt-4 mr-4 website-logo-text table-title-text" id="carditems-table-title-id-text"></h2>
 				</section>
+
+                <!-- tabel -->
+
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
 					<thead class="bingo-table-header-row">
@@ -285,6 +288,8 @@
 					<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text" id="sportsclubs-table-title-text">Sportclubs van gebruiker: </h2>
 					<h2 class="text-center mb-4 mt-4 mr-4 website-logo-text table-title-text" id="sportsclubs-table-title-id-text"></h2>
 				</section>
+
+                <!-- tabel -->
 				
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">

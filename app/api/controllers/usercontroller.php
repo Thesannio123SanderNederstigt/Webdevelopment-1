@@ -7,10 +7,6 @@ use Services\sportsclubService;
 use Services\bingocardService;
 use Services\cardItemService;
 use Exception;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
-//use Models\userDTO;
-//use Models\User;
 
 class userController extends apiController
 {
@@ -196,7 +192,6 @@ class userController extends apiController
         }
 
         $this->respond(true);
-        //$this->respond("De gebruiker is verwijderd");
     }
 
     public function getUserBingocards($userId)
@@ -256,10 +251,6 @@ class userController extends apiController
                 
                 array_push($userSportsclubs, $sportsclub);
             }
-    
-            //$user->setSportsclubs($sportsclubs);
-    
-            //return $user;
 
             $this->respond($userSportsclubs);
 
@@ -317,20 +308,15 @@ class userController extends apiController
             // gebruiker lezen vanuit request body data
             $postedUser = $this->createObjectFromPostedJson("Models\\User");
 
-            //$postedUser = new User();
-            //$postedUser->setUsername($postedUser->username);
-            //$postedUser->setPassword($postedUser->password);
-
             // gebruiker ophalen
             $user = $this->userService->loginCheck($postedUser->username, $postedUser->password);
-            //$user = $this->userService->loginCheck($postedUser->getUsername(), $postedUser->getPassword());
 
             if(!$user || $user == false) {
                 $this->respondWithError(401, "Onjuiste gebruikersnaam en/of wachtwoord ingevoerd");
                 return;
             }
 
-            //jwt generen en teruggeven als/in de response
+            //jwt generen en teruggeven in de response
             $tokenResponse = $this->generateJwt($user);
 
             $this->respond($tokenResponse);  

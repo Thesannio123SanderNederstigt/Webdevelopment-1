@@ -4,10 +4,6 @@ namespace apiControllers;
 use apiControllers\apiController;
 use Services\cardItemService;
 use Exception;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
-use Models\cardItemDTO;
-use Models\cardItem;
 
 class cardItemController extends apiController
 {

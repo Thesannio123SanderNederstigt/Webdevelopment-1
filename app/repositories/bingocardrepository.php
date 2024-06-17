@@ -4,7 +4,6 @@ namespace Repositories;
 use PDO;
 use PDOException;
 use Models\Bingocard;
-//use Models\BingocardResponse;
 use Repositories\Repository;
 
 class bingocardRepository extends Repository
@@ -68,7 +67,7 @@ class bingocardRepository extends Repository
 
     function getUserBingocards($userId)
     {
-        //ophalen van alle bingokaarten van een user (op basis van de userID van waarden in deze bingoCard tabel dus!)
+        //ophalen van alle bingokaarten van een user (op basis van de userID van waarden in deze bingoCard tabel)
         try {
             $stmt = $this->connection->prepare("SELECT * FROM bingocard WHERE userId = :id");
             $stmt->bindparam(':id', $userId);
@@ -96,6 +95,7 @@ class bingocardRepository extends Repository
         $bingocard->setCreationDate($row['creationDate']);
         $bingocard->setLastAccessedOn($row['lastAccessedOn']);
         $bingocard->setItems(array());
+        
         return $bingocard;
     }
 
@@ -153,9 +153,6 @@ class bingocardRepository extends Repository
         }
         return true;
     }
-
-    //connecting table/koppeltabel voor de n:n relatie tussen de kaart en kaart-item tabellen bewerkingen hieronder 
-    //(update functie is/was hier onnodig, ON UPDATE CASCADE is de bedoeling voor daadwerkelijke bingocard en cardItem tabel data bewerkingen; ook/zelfs bij id wijzigingen)
 
     function getBingocardItemIds($bingocardId)
     {

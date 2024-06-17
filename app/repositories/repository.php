@@ -25,7 +25,6 @@ class Repository
             $password = $_ENV['PASSWORD'];
 
             $this->connection = new PDO("$type:host=$servername;dbname=$database", $username, $password);
-            //$this->connection = new PDO("mysql:host=localhost;dbname=webdevelopmentdb", 'webdeveloper', 'sander123');
 
             //setting the PDO error mode to exception
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

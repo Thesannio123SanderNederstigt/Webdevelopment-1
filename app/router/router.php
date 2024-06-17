@@ -54,7 +54,6 @@ class Router
             require_once $filename;
         } else {
             http_response_code(404);
-            //return;
         }
         
         try {
@@ -74,9 +73,6 @@ class Router
             }
         } catch(Error $e) {
             echo $e;
-            //$_SESSION['ERROR'] = $e;
-            //var_dump($_SESSION);
-            //http_response_code(500);
         }
     }
 }

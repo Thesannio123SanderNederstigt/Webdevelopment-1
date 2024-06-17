@@ -12,16 +12,12 @@ function apiLogin()
         var username = document.getElementById("form-username").value;
         var password = document.getElementById("form-password").value;
 
-        //console.log( username + ' ' + password);
-
         if(username == "" || password == "") {
             alert('Vul a.u.b. zowel een gebruikersnaam als wachtwoord in');
             return;
         }
 
         let loginCredentials = { username: username, password: password };
-
-        //console.log(loginCredentials);
 
         fetch(getUrl('/user/login'), {
             method: 'POST',
@@ -30,23 +26,10 @@ function apiLogin()
          }).then(async res => { 
 
             var result = await res.json();
-
-            //console.log(result);
-
-            //var data = JSON.parse(result);
-
-            //console.log(`message data: ${result.message}`);
-
             var token = result.jwt;
+
             sessionStorage.setItem("auth", `Bearer ${token}`);
-
-            //$("#loginData").value(data); //voor een input-type=hidden op de homepage of in de header ofzo (of beter: dit niet doen en gewoon js session data gebruiken voor toekomtige api calls DAN HEB JE GEEN PHP $_SERVER VARS NODIG VOOR AUTH ZAKEN SANDER! BEGRIJP DAT DAN JIJ SUFFERD DIE JE BENT!!!!)
-        
-            sessionStorage.setItem("tokenAndUserData", JSON.stringify(result));
-
-            //console.log(sessionStorage.getItem("jwtAndUserData"));
-            //console.log(sessionStorage.getItem("jwt"));
-    
+            sessionStorage.setItem("tokenAndUserData", JSON.stringify(result));    
          });
 
          return;
@@ -75,9 +58,6 @@ function showSubtableSection(item_id, item_name)
 {
     var item_table_section;
     var item_title_id_text;
-
-    //console.log(item_id);
-    //console.log(item_name);
 
     switch(item_name)
     {
@@ -118,8 +98,6 @@ function getUserBingocards(item_id)
             headers: {'Content-Type': 'application/json', 'Authorization': `${sessionStorage.getItem("auth")}`},
             }).then(async res => {
                 var result = await res.json();
-                
-                //console.log(result);
 
                 const bingocardSubtableBodySection = document.getElementById("bingocard-subtable-body");
 
@@ -142,14 +120,14 @@ function getUserBingocards(item_id)
                     }
                 }
 
-                //klonen en verwijderen van de onderste rij (voor een nieuwe bingokaart) om deze iets later onderaan de neergezette rijen te kunnen plakken waar ik deze wil hebben
+                //klonen en verwijderen van de onderste rij (voor een nieuwe bingokaart) om deze iets later onderaan de neergezette rijen te kunnen plakken
                 const bingocardSubtableBottomRow = document.getElementsByClassName("bingocard-table-bottom-row");
 
                 const newBingocardRowClone = bingocardSubtableBottomRow[0].cloneNode(true);
 
                 bingocardSubtableBottomRow[0].remove();
             
-                //verwerken van de bingokaarten van een gebruiker (klonen van de tabel-rij en plakken/toevoegen aan de tabel met alle informatie per bingokaart op de pagina)
+                //verwerken van de bingokaarten van een gebruiker (klonen van de tabel-rij en toevoegen aan de tabel met alle informatie per bingokaart op de pagina)
                 result.forEach((bingocard) => {
 
                     const bingocardClone = bingocardSubtableRows[0].cloneNode(true);
@@ -158,12 +136,11 @@ function getUserBingocards(item_id)
                     bingocardClone.getElementsByClassName('table-bingocard-id')[0].value = bingocard.id;
 
                     bingocardClone.getElementsByClassName("table-bingocard-userId")[0].innerText = bingocard.userId;
-                    bingocardClone.getElementsByClassName("table-bingocard-score")[0].innerText = bingocard.score; //in edit: parseInt() over dit veld I guess.
-                    bingocardClone.getElementsByClassName("table-bingocard-size")[0].innerText = displaySize(bingocard.size); //en processSize(); gebruiken voor create en update
+                    bingocardClone.getElementsByClassName("table-bingocard-score")[0].innerText = bingocard.score;
+                    bingocardClone.getElementsByClassName("table-bingocard-size")[0].innerText = displaySize(bingocard.size);
 
                     bingocardClone.getElementsByClassName("table-bingocard-creationDate")[0].innerText = bingocard.creationDate;
                     bingocardClone.getElementsByClassName("table-bingocard-lastAccessedOn")[0].innerText = bingocard.lastAccessedOn;
-
 
                     bingocardClone.getElementsByClassName("table-bingocard-cardItems-button")[0].value = bingocard.id;
 
@@ -205,10 +182,6 @@ function editBingocard(bingocardId)
 
     let bingocardJson = { userId: userId, score: parseInt(score), size: size, creationDate: creationDate, lastAccessedOn: lastAccessedOn };
 
-    //console.log(`bewerkte bingokaart: ${JSON.stringify(bingocardJson)}`);
-
-    //console.log(`bingokaart met id: ${bingocardId}`);
-
     let gebruikersId = document.getElementById("bingocards-table-title-id-text").value;
 
     fetch(getUrl(`/bingocard/update/${bingocardId}`), {
@@ -237,7 +210,6 @@ function deleteBingocard(bingocardId)
         }).then(async res => {
             var result = await res.json();
 
-            //console.log(`delete resultaat: ${result}`);
             if(result == true)
             {
                 getUserBingocards(gebruikersId);
@@ -251,8 +223,6 @@ function createNewBingocard()
     var size = processSize(document.getElementsByName('new-bingocard-sizes')[0].value);
     
     let bingocardJson = { userId: userId, size: size };
-
-    //console.log(`json: ${JSON.stringify(bingocardJson)}`);
 
     fetch(getUrl(`/bingocard/create/`), {
         method: 'POST',
@@ -268,7 +238,6 @@ function createNewBingocard()
 
                 getUserBingocards(gebruikersId);
             }
-
         });
 }
 
@@ -276,7 +245,6 @@ function createNewBingocard()
 
 function getBingocardItems(item_id)
 {
-    //console.log(`test: ${sessionStorage.getItem("jwt")}`);
     try {
     fetch(getUrl(`/bingocard/getBingocardItems/${item_id}`), {
         method: 'GET',
@@ -285,110 +253,39 @@ function getBingocardItems(item_id)
     
             var result = await res.json();
 
-    
-            console.log(result);
-
-            //console.log(result[0].content);
-
             const bingocardItemSubtableBodySection = document.getElementById("bingocard-item-subtable-body");
-
             const bingocardItemSubtableRows = document.getElementsByClassName("bingocard-item-subtable-rows");
 
+            //oorspronkelijke rij leeg maken en behouden voor gebruik later
             if(bingocardItemSubtableRows[0].getElementsByClassName('table-bingocard-item-id')[0].innerText === "")
             {
-                //console.log('alleen eerste keer hier komen');
                 document.getElementsByClassName("bingocard-item-subtable-rows")[0].style.cssText = 'display: none !important';
                 bingocardItemSubtableRows[0].getElementsByClassName('table-bingocard-item-id')[0].innerText = 1;
-                //document.getElementsByClassName("bingocard-item-subtable-rows")[0].remove();
             }
 
+            //verwijderen van bestaande rijen (wanneer er eerder op een andere toon bingokaart-items knop is gedrukt)
             if(bingocardItemSubtableRows.length > 1)
-            {
+            {   
+                for (var i = 1; i < bingocardItemSubtableRows.length; i++) 
+                {
+                    bingocardItemSubtableBodySection.removeChild(bingocardItemSubtableRows[i]);
 
-                /*Array.from(document.getElementsByClassName("bingocard-item-subtable-rows")).forEach(element => {
-                    element.remove();
-                })*/
-
-                /*do{
-                    bingocardSubtableBodySection.removeChild(document.getElementsByClassName("bingocard-item-subtable-rows")[1]);
-                }while(bingocardSubtableBodySection.hasChildNodes());
-                */
-               
-                /*var j = 1;
-                do {
-                    console.log(`test: ${j}`);
-                    document.getElementById("bingocard-item-subtable-body").removeChild(document.getElementsByClassName("bingocard-item-subtable-rows")[j]);
-                    j += 1;
-                } while(document.getElementsByClassName("bingocard-item-subtable-rows").length > 1);
-                */
-
-
-                /*if(bingocardItemSubtableRows[1].getElementsByClassName('table-bingocard-item-id')[0].innerText != 1)
-                {*/
-                    
-                    console.log('test of we hier na de eerste keer komen');
-                    //const previousRows = document.getElementsByClassName("bingocard-item-subtable-rows");
-                    for (var i = 1; i < bingocardItemSubtableRows.length; i++) {
-
-                        //document.getElementsByClassName("bingocard-item-subtable-rows")[i].getElementsByClassName('table-bingocard-item-id')[0].innerText = '1000';
-
-                        //DIT WERKT
-                        //document.getElementsByClassName("bingocard-item-subtable-rows")[i].style.cssText = 'font-size: 20pt !important;'; //style.cssText = 'display: none !important';
-
-                        //document.getElementsByClassName("bingocard-item-subtable-rows")[i].style.cssText = 'display: none !important';
-
-                        console.log(`test dit hier: ${i}: ${bingocardItemSubtableRows[i].getElementsByClassName('table-bingocard-item-id')[0].value}`);
-
-                        //document.getElementsByClassName("bingocard-item-subtable-rows")[i].remove();
-
-                        //MAAR DIT VERWIJDERD ALLEEN ELKE ANDERE CHILD ELEMENT...HOW? WHY? CAUSE IM AN IDIOT THATS WHY!!!
-                        //document.getElementById("bingocard-item-subtable-body").removeChild(document.getElementsByClassName("bingocard-item-subtable-rows")[i]);
-
-
-                        bingocardItemSubtableBodySection.removeChild(bingocardItemSubtableRows[i]);
-
-                        i = i-1;
-
-
-                        //const element = document.getElementsByClassName("bingocard-item-subtable-rows")[i];
-                        //element.remove();
-
-                        //previousRows[i].remove();
-                        //document.getElementsByClassName("bingocard-item-subtable-rows")[i].remove();
-                    }
-                    //document.getElementById("bingocard-item-subtable-body").removeChild(document.getElementsByClassName("bingocard-item-subtable-rows")[1]);
-                    
-                    //document.getElementsByClassName("bingocard-item-subtable-rows")[0].remove();
-                    //document.getElementsByClassName("bingocard-item-subtable-rows")[0].style.cssText = 'display: none !important';
-
-
-                /*}*/
+                    i = i-1;
+                }
             }
 
-
+            //klonen en verwijderen van de onderste rij (voor een nieuw bingokaart-item) om deze iets later onderaan de neergezette rijen te kunnen plakken
             const bingocardItemSubtableBottomRow = document.getElementsByClassName("bingocard-item-table-bottom-row");
 
             const newCardItemRowClone = bingocardItemSubtableBottomRow[0].cloneNode(true);
 
             bingocardItemSubtableBottomRow[0].remove();
             
+            //verwerken van de bingokaart=items van een gebruiker (klonen van de tabel-rij en toevoegen aan de tabel met alle informatie per bingokaart-item op de pagina)
             result.forEach((cardItem) => {
-                /*console.log('ID: ' + cardItem.id);
-                console.log(`content: ${cardItem.content}`);
-                console.log(`categorie: ${cardItem.category}`);
-                console.log(`punten: ${cardItem.points}`);
-                console.log(`premium item?: ${cardItem.isPremiumItem}`);
-                */
-
-                //bingocard_item_id = document.getElementById('table-bingocard-item-id');
-                //bingocard_item_id.innerText = result[0].id;
 
                 const cardItemClone = bingocardItemSubtableRows[0].cloneNode(true);
-                
-                /*bingocard_item_id = clone.getElementsByClassName('table-bingocard-item-id');
-                bingocard_item_id.innerText = cardItem.id;*/
-
-                
+               
                 cardItemClone.getElementsByClassName('table-bingocard-item-id')[0].innerText = cardItem.id;
                 cardItemClone.getElementsByClassName('table-bingocard-item-id')[0].value = cardItem.id;
 
@@ -400,75 +297,24 @@ function getBingocardItems(item_id)
                 cardItemClone.getElementsByClassName('table-bingocard-item-edit-button')[0].value = cardItem.id;
                 cardItemClone.getElementsByClassName('table-bingocard-item-remove-button')[0].value = cardItem.id;
 
+                //maak de rij zichtbaar (weghalen van eerder toegevoegde cssText)
                 cardItemClone.style.cssText = '';
 
+                //voeg name attribuut toe aan element (wordt gebruikt om de inhoud van de rij aan te spreken in de edit/bewerk functie later)
                 cardItemClone.setAttribute("name", cardItem.id);
-
-                //clone.value = cardItem;
                 
+                //voeg rij(en) toe aan de tabel
                 bingocardItemSubtableBodySection.appendChild(cardItemClone);
             });
 
-            bingocardItemSubtableBodySection.appendChild(newCardItemRowClone);
-
-
-            /*const bingocardSubtableBody = document.getElementById('bingocard-item-subtable-body');
-
-            document.body.insertBefore(bingocardSubtableBody, bingocardSubtableBodySection);*/
-
-            //document.removeElement(document.getElementsByClassName("bingocard-item-subtable-rows")[0]);
-
-            //verwijder alleen het eerste element wanneer deze nog geen waarde heeft gekregen
-            /*if(bingocardItemSubtableRows[0].getElementsByClassName('table-bingocard-item-id')[0].innerText === "")
-            {
-                //console.log('alleen eerste keer hier komen');
-                document.getElementsByClassName("bingocard-item-subtable-rows")[0].style.cssText = 'display: none !important';
-                bingocardItemSubtableRows[0].getElementsByClassName('table-bingocard-item-id')[0].innerText = 1;
-                //document.getElementsByClassName("bingocard-item-subtable-rows")[0].remove();
-            }*/
-
-            //document.getElementsByClassName("bingocard-item-subtable-rows")[0].style.display = 'none';
-
-
-
-            //dit?
-            //document.removeChild(bingocardSubtableRow);
-            //OF dit: (testen wat wel en wat niet werkt hier)
-            //document.removeChild(tableRows[0]);
-    
+            //voeg onderste rij toe aan de tabel
+            bingocardItemSubtableBodySection.appendChild(newCardItemRowClone);    
          });
     }
     catch(error) {
             console.log('An error occurred: ' + error.message());
             return;
     }
-
-    /*fetch(getUrl(`/bingocard/getBingocardItems/${item_id}`), {
-    method: 'GET',
-    headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`},
-    }).then(async res => { 
-
-        var result = await res.json();
-
-        foreach(result.json)
-        {
-
-        }
-
-        console.log(result);
-
-        //var data = JSON.parse(result);
-
-        //console.log(`message data: ${result.message}`);
-
-        //var token = result.jwt;
-        //sessionStorage.setItem("jwt", token);
-        //sessionStorage.setItem("jwtAndUserData", JSON.stringify(result));
-
-        //console.log(sessionStorage.getItem("jwtAndUserData"));
-        //console.log(sessionStorage.getItem("jwt"));
-
-     });*/
 }
 
 function editBingocardItem(cardItemId)
@@ -482,12 +328,6 @@ function editBingocardItem(cardItemId)
 
     let cardItemJson = { content: content, category: category, points: parseInt(points), isPremiumItem: isPremiumItem };
 
-    //console.log(`het id: ${bingocardItemRow.getElementsByClassName('table-bingocard-item-id')[0].value}`);
-
-    //console.log(`bewerkte bingokaart item: ${JSON.stringify(cardItemJson)}`);
-
-    //console.log(`bingokaart-item met id: ${cardItemId}`);
-
     let bingocardId = document.getElementById("carditems-table-title-id-text").value;
 
     fetch(getUrl(`/carditem/update/${cardItemId}`), {
@@ -498,25 +338,11 @@ function editBingocardItem(cardItemId)
 
         var result = await res.json();
 
-        //if(result)
-        //{
-
-        //}
-
-        //console.log(`wijzigen resultaat: ${result}`);
-
         if(result.id != '')
         {
             getBingocardItems(bingocardId);
         }
-
-        //var token = result.jwt;
-
      });
-
-    //let bingocardId = document.getElementById("carditems-table-title-id-text").value;
-
-    //console.log(`en straks bv een item toevoegen aan een kaart met bingokaart id: ${bingocardId}`);
 }
 
 function deleteBingocardItem(cardItemId)
@@ -529,7 +355,6 @@ function deleteBingocardItem(cardItemId)
         }).then(async res => {
             var result = await res.json();
 
-            //console.log(`delete resultaat: ${result}`);
             if(result == true)
             {
                 getBingocardItems(bingocardId);
@@ -539,18 +364,12 @@ function deleteBingocardItem(cardItemId)
 
 function createBingocardItem()
 {
-    //const bingocardSubtableBottomRow = document.getElementsByClassName("bingocard-item-table-bottom-row")[0];
-
     const content = document.getElementsByName('new-bingocard-item-content')[0].value;
     const category = processCategory(document.getElementsByName('new-bingocard-item-content-categories')[0].value);
     const points = document.getElementsByName('new-bingocard-item-points')[0].value;
     const isPremiumItem = processBool(document.getElementsByName('new-premium-bingocard-items')[0].value);
 
     let cardItemJson = { content: content, category: category, points: parseInt(points), isPremiumItem: isPremiumItem };
-
-    //console.log(`nieuw bingokaart item: ${JSON.stringify(cardItemJson)}`);
-
-    //fetch naar create nieuw bingocard item, en dan naar addbingocard item (en in die tweede response wederom naar getBingocarditems als er resultaat (true) is van die functie)
 
     fetch(getUrl(`/carditem/create/`), {
         method: 'POST',
@@ -560,13 +379,9 @@ function createBingocardItem()
 
         var result = await res.json();
 
-        //console.log(`aanmaken nieuw bingokaart-item resultaat: ${result}`);
-
         if(result.id != '')
         {
-
             let bingocardId = document.getElementById("carditems-table-title-id-text").value;
-            //console.log(`item toevoegen aan een kaart met bingokaart id: ${bingocardId}`);
 
             fetch(getUrl(`/bingocard/addBingocardItem/${bingocardId}/${result.id}`), {
                 method: 'POST',
@@ -574,10 +389,8 @@ function createBingocardItem()
                 }).then(async res => {
                     var resultaat = await res.json();
         
-                    //console.log(`addBingocardItem resultaat: ${resultaat}`);
                     if(resultaat == true)
                     {
-
                         document.getElementsByName('new-bingocard-item-content')[0].value = '';
                         document.getElementsByName('new-bingocard-item-content-categories')[0].value = '0';
                         document.getElementsByName('new-bingocard-item-points')[0].value = '';
@@ -587,29 +400,7 @@ function createBingocardItem()
                     }
                 });
         }
-     });
-
-    /* 
-    let bingocardId = document.getElementById("carditems-table-title-id-text").value;
-
-    console.log(`en straks bv een item toevoegen aan een kaart met bingokaart id: ${bingocardId}`);
-
-    //console.log(`category content: ${document.getElementsByName('new-bingocard-item-content-categories')[0].value}`);
-
-    document.getElementsByName('new-bingocard-item-points')[0].value = '' //NaN // null;
-    */
-
-    //document.getElementById('new-bingocard-item-content-select').value = 'zero';
-    //document.getElementsByName('new-bingocard-item-content-categories')[0].value = '0';
-    //document.getElementsByName('new-premium-bingocard-items')[0].value = '0';
-    //points = '';
-
-    //points.value = '';
-    //points.innerText = '';
-    //document.getElementsByName('new-bingocard-item-content')[0].value = '';
-
-    //category.innerText = displayCategory(0);
-    
+     });    
 }
 
 
@@ -643,14 +434,14 @@ function getUserSportsclubs(item_id)
                     }
                 }
 
-                //klonen en verwijderen van de onderste rij (voor een nieuwe sportclub) om deze iets later onderaan de neergezette rijen te kunnen plakken waar ik deze wil hebben
+                //klonen en verwijderen van de onderste rij (voor een nieuwe sportclub) om deze iets later onderaan de neergezette rijen te kunnen plakken
                 const sportsclubSubtableBottomRow = document.getElementsByClassName("sportsclub-table-bottom-row");
 
                 const newSportsclubRowClone = sportsclubSubtableBottomRow[0].cloneNode(true);
 
                 sportsclubSubtableBottomRow[0].remove();
             
-                //verwerken van de sportclubs van een gebruiker (klonen van de tabel-rij en plakken/toevoegen aan de tabel met alle informatie per sportclub op de pagina)
+                //verwerken van de sportclubs van een gebruiker (klonen van de tabel-rij en toevoegen aan de tabel met alle informatie per sportclub op de pagina)
                 result.forEach((sportsclub) => {
 
                     const sportsclubClone = sportsclubSubtableRows[0].cloneNode(true);
@@ -697,8 +488,6 @@ function editSportsclub(sportsclubId)
 
     let sportsclubJson = { clubname: clubname, description: description, foundedOn: foundedOn, membersAmount: parseInt(membersAmount) };
 
-    //console.log(`bewerkte sportclub: ${JSON.stringify(sportsclubJson)}`);
-
     let gebruikersId = document.getElementById("sportsclubs-table-title-id-text").value;
 
     fetch(getUrl(`/sportsclub/update/${sportsclubId}`), {
@@ -743,8 +532,6 @@ function createUserSportsclub()
 
     let sportsclubJson = { clubname: clubname, description: description, foundedOn: foundedOn, membersAmount: parseInt(membersAmount) };
 
-    //console.log(`json: ${JSON.stringify(sportsclubJson)}`);
-
     fetch(getUrl(`/sportsclub/create/`), {
         method: 'POST',
         headers: {'Content-Type': 'application/json', 'Authorization': `${sessionStorage.getItem("auth")}`},
@@ -775,7 +562,6 @@ function createUserSportsclub()
         });
 }
 
-
 function displaySize(bingocardSize)
 {
     var sizeText = bingocardSize;
@@ -796,7 +582,6 @@ function displaySize(bingocardSize)
     }
     return sizeText;
 }
-
 
 function displayCategory(cardItemCategory)
 {
@@ -890,7 +675,6 @@ function processSize(textSize)
     return size;
 }
 
-
 function processCategory(textCategory) 
 {
     var category = 0;
@@ -962,39 +746,3 @@ function processBool(boolText)
 
     return boolValue;
 }
-
-
-/*
-function showUserBingocards(user_id) 
-{
-    //console.log(document.getElementById('tableUserId').value);
-    
-    var bingocards_table_section = document.getElementById("bingocards-table-section");
-    bingocards_table_section.style.cssText = 'display: flex !important';
-
-    
-    var bingocards_title_id_text = document.getElementById("bingocards-table-title-id-text");
-    bingocards_title_id_text.innerText = user_id;
-    bingocards_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-}
-
-function showBingocardItems(bingocard_id)
-{
-    var cardditems_table_section = document.getElementById("carditems-table-section");
-    cardditems_table_section.style.cssText = 'display: flex !important';
-
-    var carditems_title_id_text = document.getElementById("carditems-table-title-id-text");
-    carditems_title_id_text.innerText = bingocard_id;
-    carditems_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-}
-
-function showUserSportsclubs(sportsclub_id)
-{
-    var sportsclub_table_section = document.getElementById("sportsclubs-table-section");
-    sportsclub_table_section.style.cssText = 'display: flex !important';
-
-    var sportsclub_title_id_text = document.getElementById("sportsclubs-table-title-id-text");
-    sportsclub_title_id_text.innerText = sportsclub_id;
-    sportsclub_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-}
-*/

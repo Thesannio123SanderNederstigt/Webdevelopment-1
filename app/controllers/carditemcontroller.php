@@ -39,25 +39,7 @@ class carditemController extends viewController
 
             $cardItemDTO = new cardItemDTO($content, $this->provideCategory($cleanCategory), $points, $this->provideBoolValue($cleanIsPremiumItem));
 
-            $cardItem = $cardItemDTO->cardItemMapper();
-
-            
-            /*echo ' id: ' . $cardItem->id;
-            echo '<br> content: ' . $cardItem->content;
-            echo '<br> category: ' . $cardItem->category;
-            echo '<br> points: ' . $cardItem->points;
-
-
-            if($cardItem->isPremiumItem == true)
-            {
-                $boolVal = 1;
-            }
-            else {
-                $boolVal = 0;
-            }
-
-            echo '<br> is premium item?: ' . $boolVal;*/
-            
+            $cardItem = $cardItemDTO->cardItemMapper();         
 
             $this->service->create($cardItem);
 

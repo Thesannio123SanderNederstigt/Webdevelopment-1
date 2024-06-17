@@ -12,9 +12,7 @@ class cardItemDTO
     public int $points;
     public bool $isPremiumItem;
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     public function cardItemMapper(): cardItem
     {

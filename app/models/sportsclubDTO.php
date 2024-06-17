@@ -12,9 +12,7 @@ class sportsclubDTO
     public string $foundedOn;
     public int $membersAmount;
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     public function sportsclubMapper(): Sportsclub
     {

@@ -1,16 +1,16 @@
 <?php
     include_once __DIR__ . '/../header.php';
 ?>
-
 		<!-- BINGOCARD_VIEW -->
 
 		<p hidden id="nav-current-page" name="bingo-nav-bingocards"></p>
+        
 		<section class="container mt-5 mb-5" id="table-container">
 			<section class="row justify-content-md-center">				
 				<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text">Bingokaarten</h2>
 
-				<!-- tabel (php forms met refresh in gedachten voor de hoofd-items van deze views)-->
-				
+				<!-- tabel -->
+
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
 					<thead class="bingo-table-header-row">
@@ -101,7 +101,7 @@
 			
 			</section>
 		
-			<!-- Bingokaart items van kaarten van een specifieke bingokaart (subtabel, dus Javascript shenanigans met call naar api controller endpoint, etc.) -->
+			<!-- Bingokaart items van kaarten van een specifieke bingokaart -->
 				
 			<section class="row justify-content-md-center" id="carditems-table-section">
 				<section class="container bingo-subtable-text">			
@@ -109,7 +109,7 @@
 					<h2 class="text-center mb-4 mt-4 mr-4 website-logo-text table-title-text" id="carditems-table-title-id-text"></h2>
 				</section>
 				
-				<!-- tabel (js functie aanroepingen voor het sturen en ophalen van data naar en van api endpoints en weergegeven hier zonder refresh, net als op de sub-tabellen van de user pagina (voor bingokaarten, kaart-items en sportclubs daar))-->
+				<!-- tabel -->
 				
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
@@ -124,33 +124,31 @@
 					  </tr>
 					</thead>
 					<tbody id="bingocard-item-subtable-body">
-                        <!--<section id="bingocard-items-subtable-section">-->
-					      <tr class="bingocard-item-subtable-rows">
-					    		<td>
-					    		  <section class="align-items-center">
-					    			<textarea class="bingo-table-columns bingo-id-column table-bingocard-item-id"></textarea>
-					    		  </section>
-					    		</td>
-					    		<td>
-					    			<textarea class="bingo-table-columns bingo-content-column table-bingocard-item-content"></textarea>
-					    		</td>
-					    		<td>
-					    			<textarea class="bingo-table-columns table-bingocard-item-category"></textarea>
-					    		</td>
-					    		<td>
-					    		  <textarea class="bingo-table-columns table-bingocard-item-points"></textarea>
-					    		</td>
-					    		<td>
-					    			<textarea class="bingo-table-columns table-bingocard-item-isPremiumItem"></textarea>
-					    		</td>
-					    		<td>
-					    			<button type="button" class="btn btn-warning bingo-table-buttons table-bingocard-item-edit-button" name="wijzigen" onclick="editBingocardItem(this.value)">Wijzigen</button>
-					    			<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons table-bingocard-item-remove-button" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} van deze bingokaart wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
-					    		</td>
-					      </tr>
-                        <!--</section>-->
+					    <tr class="bingocard-item-subtable-rows">
+					        <td>
+					    	  <section class="align-items-center">
+					    		<textarea class="bingo-table-columns bingo-id-column table-bingocard-item-id"></textarea>
+					    	  </section>
+					    	</td>
+					    	<td>
+					    		<textarea class="bingo-table-columns bingo-content-column table-bingocard-item-content"></textarea>
+					    	</td>
+					    	<td>
+					    		<textarea class="bingo-table-columns table-bingocard-item-category"></textarea>
+					    	</td>
+					    	<td>
+					    	  <textarea class="bingo-table-columns table-bingocard-item-points"></textarea>
+					    	</td>
+					    	<td>
+					    		<textarea class="bingo-table-columns table-bingocard-item-isPremiumItem"></textarea>
+					    	</td>
+					    	<td>
+					    		<button type="button" class="btn btn-warning bingo-table-buttons table-bingocard-item-edit-button" name="wijzigen" onclick="editBingocardItem(this.value)">Wijzigen</button>
+					    		<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons table-bingocard-item-remove-button" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} van deze bingokaart wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
+					        </td>
+					    </tr>
 					  
-					  <tr class="bingocard-item-table-bottom-row">
+					    <tr class="bingocard-item-table-bottom-row">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuw bingokaart-item:</b></h6></td>
 							<td>
 								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="new-bingocard-item-content"></textarea>
@@ -177,8 +175,8 @@
 							<td>
 								<button type="button" class="btn btn-success bingo-table-add-button" onclick="createBingocardItem()">Voeg toe</button>
 							</td>
-					  </tr>
-					</tbody>
+					    </tr>
+				    </tbody>
 				  </table>
 				</section>
 				

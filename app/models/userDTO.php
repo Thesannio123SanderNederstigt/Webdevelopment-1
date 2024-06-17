@@ -11,9 +11,7 @@ Class userDTO
     public string $password;
     public string $email;
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     public function userMapper(): User
     {

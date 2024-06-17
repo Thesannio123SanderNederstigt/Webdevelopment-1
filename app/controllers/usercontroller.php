@@ -9,9 +9,6 @@ use Services\cardItemService;
 use Models\userDTO;
 use Models\User;
 
-//require __DIR__ . '/controller.php';
-//require __DIR__ . '/services/userservice.php';
-
 class UserController extends viewController 
 {
     private $userService;
@@ -31,7 +28,7 @@ class UserController extends viewController
     public function index()
     {
         $this->viewGetRequestSessionUserCheck();
-        
+
         $users = $this->userService->getAll(NULL, NULL);
 
         foreach($users as $user)
@@ -52,11 +49,9 @@ class UserController extends viewController
                 }
     
                 $bingocard->setItems($cardItems);
-                //$cardItems = array();
             }
 
             $user->setBingocards($bingocards);
-
 
             $sportsclubs = array();
 
@@ -120,9 +115,8 @@ class UserController extends viewController
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['user-id']); //userTableId?
+            $id = htmlspecialchars($_POST['user-id']);
             $username = htmlspecialchars($_POST['user-username']);
-            //$password = htmlspecialchars($_POST['user-password']);
             $email = htmlspecialchars($_POST['user-email']);
             $cleanIsAdmin = htmlspecialchars($_POST['user-isAdmin']);
             $cleanIsPremium = htmlspecialchars($_POST['user-isPremium']);
@@ -151,7 +145,7 @@ class UserController extends viewController
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             //input sanitation
-            $id = htmlspecialchars($_POST['user-id']); //userTableId?
+            $id = htmlspecialchars($_POST['user-id']);
 
             $this->userService->delete($id);
 

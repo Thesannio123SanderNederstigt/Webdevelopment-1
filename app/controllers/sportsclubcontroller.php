@@ -30,12 +30,7 @@ class sportsclubController extends viewController
         $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
-        {
-
-            //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); //deprecated vanaf PHP versie 8.1 (helaas dus)
-
-            //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-            
+        {           
             //input sanitation
             $clubname = htmlspecialchars($_POST['nieuwe-sportsclub-clubname']);
             $description = htmlspecialchars($_POST['nieuwe-sportsclub-description']);
@@ -46,22 +41,9 @@ class sportsclubController extends viewController
             
             $sportsclub = $sportsclubDTO->sportsclubMapper();
 
-            /*
-            echo ' id: ' . $sportsclub->id;
-            echo '<br> name: ' . $sportsclub->clubname;
-            echo '<br> description: ' . $sportsclub->description;
-            echo '<br> founded on: ' . $sportsclub->foundedOn;
-            echo '<br> aantal leden: ' . $sportsclub->membersAmount;
-            */
-
             $this->service->create($sportsclub);
 
             header("Location: {$_SERVER['HTTP_REFERER']}");
-
-            //header("Location: /sportsclub");
-            //exit;
-
-            //$this->index();
         }
     }
 
@@ -81,19 +63,6 @@ class sportsclubController extends viewController
             }
         }
     }
-
-    /*public function displayOne()
-    {
-        if($_SERVER['REQUEST_METHOD'] == "GET") 
-        {
-            $id = htmlspecialchars($_GET['id']);
-
-            $sportsclub = $this->service->getOne($id);
-
-            require __DIR__ . '../views/sportsclub/viewClub.php';
-        }
-
-    }*/
 
     public function update()
     {
