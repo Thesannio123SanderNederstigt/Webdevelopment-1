@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"JohnnyD#1\",\r\n    \"password\":\"5HU4lqH7vSP@hfin\"\r\n}",
+							"raw": "{\r\n    \"username\":\"MarySue22\",\r\n    \"password\":\"yiZgPcaLMVGRIOnf\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +49,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODExMjE4NSwibmJmIjoxNzE4MTEyMTg1LCJleHAiOjE3MTgyMDIxODUsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.VkM7sxO5uqjqyQUVvLMNUPwL449zkGO0VS4nViEYrjM",
 									"type": "string"
 								}
 							]
@@ -166,7 +166,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/user/update/8F6EECC4-5226-4FBA-A41D-BF05BC662548",
+							"raw": "http://localhost/api/user/update/CF3FA866-72A4-476A-9935-7B69AB7DA056",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -175,7 +175,7 @@
 								"api",
 								"user",
 								"update",
-								"8F6EECC4-5226-4FBA-A41D-BF05BC662548"
+								"CF3FA866-72A4-476A-9935-7B69AB7DA056"
 							]
 						}
 					},
@@ -197,7 +197,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/user/delete/B74D8026-7825-433D-8DB9-AC9C5AB8CA27",
+							"raw": "http://localhost/api/user/delete/CF3FA866-72A4-476A-9935-7B69AB7DA056",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -206,7 +206,38 @@
 								"api",
 								"user",
 								"delete",
-								"B74D8026-7825-433D-8DB9-AC9C5AB8CA27"
+								"CF3FA866-72A4-476A-9935-7B69AB7DA056"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserSportsclubs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODExMjE4NSwibmJmIjoxNzE4MTEyMTg1LCJleHAiOjE3MTgyMDIxODUsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.VkM7sxO5uqjqyQUVvLMNUPwL449zkGO0VS4nViEYrjM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/getUserSportsclubs/2D2DF76D-2F3C-4BA0-A3DF-9730D7A8F909",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"getUserSportsclubs",
+								"2D2DF76D-2F3C-4BA0-A3DF-9730D7A8F909"
 							]
 						}
 					},
@@ -228,7 +259,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/user/addUserSportsclub/8F6EECC4-5226-4FBA-A41D-BF05BC662548/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
+							"raw": "http://localhost/api/user/addUserSportsclub/CF3FA866-72A4-476A-9935-7B69AB7DA056/7657F130-41E6-4228-94DA-BECDE110198D",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -237,8 +268,8 @@
 								"api",
 								"user",
 								"addUserSportsclub",
-								"8F6EECC4-5226-4FBA-A41D-BF05BC662548",
-								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
+								"CF3FA866-72A4-476A-9935-7B69AB7DA056",
+								"7657F130-41E6-4228-94DA-BECDE110198D"
 							]
 						}
 					},
@@ -260,7 +291,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/user/deleteUserSportsclub/8F6EECC4-5226-4FBA-A41D-BF05BC662548/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
+							"raw": "http://localhost/api/user/deleteUserSportsclub/CF3FA866-72A4-476A-9935-7B69AB7DA056/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -269,8 +300,39 @@
 								"api",
 								"user",
 								"deleteUserSportsclub",
-								"8F6EECC4-5226-4FBA-A41D-BF05BC662548",
+								"CF3FA866-72A4-476A-9935-7B69AB7DA056",
 								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserBingocards",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODI4Njg3NSwibmJmIjoxNzE4Mjg2ODc1LCJleHAiOjE3MTgzNzY4NzUsImRhdGEiOnsiaWQiOiJFQkY0OUE4Ni02NTdCLTRFM0MtQUU3OS1ERDQzMTY4MUVEM0IiLCJ1c2VybmFtZSI6Ik1hcnlTdWUyMiIsImVtYWlsIjoiTWFyeVN1ZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOnRydWV9fQ.Dhu8rewmN63-B493lpKM1g06A231IL8jq_872Pn4hyI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/user/getUserBingocards/2D2DF76D-2F3C-4BA0-A3DF-9730D7A8F909",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"getUserBingocards",
+								"2D2DF76D-2F3C-4BA0-A3DF-9730D7A8F909"
 							]
 						}
 					},
@@ -406,7 +468,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/bingocard/update/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+							"raw": "http://localhost/api/bingocard/update/3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -415,7 +477,7 @@
 								"api",
 								"bingocard",
 								"update",
-								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28"
+								"3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2"
 							]
 						}
 					},
@@ -437,7 +499,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/bingocard/updateLastAccessedOn/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+							"raw": "http://localhost/api/bingocard/updateLastAccessedOn/3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -446,7 +508,7 @@
 								"api",
 								"bingocard",
 								"updateLastAccessedOn",
-								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28"
+								"3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2"
 							]
 						}
 					},
@@ -468,7 +530,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/bingocard/delete/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+							"raw": "http://localhost/api/bingocard/delete/3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -477,7 +539,38 @@
 								"api",
 								"bingocard",
 								"delete",
-								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28"
+								"3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBingocardItems",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODExMjE4NSwibmJmIjoxNzE4MTEyMTg1LCJleHAiOjE3MTgyMDIxODUsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.VkM7sxO5uqjqyQUVvLMNUPwL449zkGO0VS4nViEYrjM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/bingocard/getBingocardItems/80C9E26B-AFE9-41D8-A1AA-67132AE67D22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"bingocard",
+								"getBingocardItems",
+								"80C9E26B-AFE9-41D8-A1AA-67132AE67D22"
 							]
 						}
 					},
@@ -499,7 +592,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/bingocard/addBingocardItem/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28/A96B736F-F0E6-47E9-8C72-EA230535442D",
+							"raw": "http://localhost/api/bingocard/addBingocardItem/3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2/A96B736F-F0E6-47E9-8C72-EA230535442D",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -508,7 +601,7 @@
 								"api",
 								"bingocard",
 								"addBingocardItem",
-								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+								"3D7EFEEB-11F9-4E37-91D1-DFF5AA39B7C2",
 								"A96B736F-F0E6-47E9-8C72-EA230535442D"
 							]
 						}
@@ -531,7 +624,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/bingocard/deleteBingocardItem/C15A6BF9-141D-44B8-A4BC-3BFA759FEB28/A96B736F-F0E6-47E9-8C72-EA230535442D",
+							"raw": "http://localhost/api/bingocard/deleteBingocardItem/80C9E26B-AFE9-41D8-A1AA-67132AE67D22/A96B736F-F0E6-47E9-8C72-EA230535442D",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -540,7 +633,7 @@
 								"api",
 								"bingocard",
 								"deleteBingocardItem",
-								"C15A6BF9-141D-44B8-A4BC-3BFA759FEB28",
+								"80C9E26B-AFE9-41D8-A1AA-67132AE67D22",
 								"A96B736F-F0E6-47E9-8C72-EA230535442D"
 							]
 						}
@@ -677,7 +770,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/carditem/update/0D6DA7BC-1351-4237-8589-4418731BD0AE",
+							"raw": "http://localhost/api/carditem/update/A96B736F-F0E6-47E9-8C72-EA230535442D",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -686,7 +779,7 @@
 								"api",
 								"carditem",
 								"update",
-								"0D6DA7BC-1351-4237-8589-4418731BD0AE"
+								"A96B736F-F0E6-47E9-8C72-EA230535442D"
 							]
 						}
 					},
@@ -708,7 +801,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/carditem/delete/0D6DA7BC-1351-4237-8589-4418731BD0AE",
+							"raw": "http://localhost/api/carditem/delete/A96B736F-F0E6-47E9-8C72-EA230535442D",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -717,7 +810,7 @@
 								"api",
 								"carditem",
 								"delete",
-								"0D6DA7BC-1351-4237-8589-4418731BD0AE"
+								"A96B736F-F0E6-47E9-8C72-EA230535442D"
 							]
 						}
 					},
@@ -853,7 +946,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/sportsclub/update/8BF4E48F-7120-4DDE-81B5-BFC16465D603",
+							"raw": "http://localhost/api/sportsclub/update/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -862,7 +955,7 @@
 								"api",
 								"sportsclub",
 								"update",
-								"8BF4E48F-7120-4DDE-81B5-BFC16465D603"
+								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
 							]
 						}
 					},
@@ -884,7 +977,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/sportsclub/delete/8BF4E48F-7120-4DDE-81B5-BFC16465D603",
+							"raw": "http://localhost/api/sportsclub/delete/8F8BDDCF-D8FB-4FAB-B305-B82D149569AD",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -893,7 +986,7 @@
 								"api",
 								"sportsclub",
 								"delete",
-								"8BF4E48F-7120-4DDE-81B5-BFC16465D603"
+								"8F8BDDCF-D8FB-4FAB-B305-B82D149569AD"
 							]
 						}
 					},

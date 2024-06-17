@@ -10,7 +10,7 @@
 				<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text">Gebruikers</h2>
 
 				<section class="table-responsive mb-5">
-				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0"> <!-- style? border: 1px solid black !important; border-radius: 2em !important; -->
+				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
 					<thead class="bingo-table-header-row">
 					  <tr>
 						<th>Id</th>
@@ -30,7 +30,7 @@
 					    foreach($models as $user)
                         {
 					?>
-					  <tr> <!--<tr value="<php echo $user->getId();>">-->
+					  <tr>
 						<form name="alter-user-form" action="/user/alter/" method="POST">
 							<td>
 							  <section class="align-items-center">
@@ -62,7 +62,7 @@
 								<button type="button" class="btn btn-primary bingo-table-buttons" id="sportclubs-btn" value="<?php echo $user->getId(); ?>" onclick="showSubtableSection(this.value, 'sportsclub')">Toon sportclubs</button>
 							</td>
 							<td>
-								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen">Wijzigen</button><!--bewerken met value="$user->getId();" want dan in de alter function van controller: $_POST["wijzigen"] heeft de waarde van de desbetreffende user id!-->
+								<button type="submit" class="btn btn-warning bingo-table-buttons" name="wijzigen">Wijzigen</button>
 								<button type="submit" class="btn btn-danger bingo-danger-btn bingo-table-buttons" name="verwijderen" value="<?php echo $user->getId(); ?>" onclick="return confirm(`Weet u zeker dat u deze gebruiker met id ${this.value} wilt verwijderen?`);">Verwijderen</button>
 							</td>
 						</form>
@@ -102,7 +102,6 @@
 							</td>
 						</form>
 					  </tr>
-
 					</tbody>
 				  </table>
 				</section>
@@ -132,62 +131,54 @@
 						<th></th>
 					  </tr>
 					</thead>
-					<tbody>
-					<?php
-					//$_SESSION['bingocard_id'] = "212A4C3D-AC4B-4BA4-AC05-F68F4452AC84";
-					//VOOR SUB-TABELLEN GAAN WE LOOPEN IN JAVASCRIPT DUS GEEN PHP ARRAYS OF FORMS IN DE TABEL HIER (WANT OOK NAAR API VERSTUREN!!!! NIET DIRECT NAAR DE NORMALE CONTROLLERS?
-					?>
-					  <tr>
+					<tbody id="bingocard-subtable-body">
+					  <tr class="bingocard-subtable-rows">
 						<td>
 						  <section class="align-items-center">
-							<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-id">212A4C3D-AC4B-4BA4-AC05-F68F4452AC84</textarea>
+							<textarea class="bingo-table-columns bingo-id-column table-bingocard-id"></textarea>
 						  </section>
 						</td>
                         <td>
                             <section class="align-items-center">
-                                <textarea class="bingo-table-columns bingo-id-column" name="bingocard-userId" id="table-bingocard-userId"><?php //echo $bingocard->getUserId(); ?></textarea>
+                                <textarea class="bingo-table-columns bingo-id-column table-bingocard-userId"></textarea>
                             </section>
                         </td>
 						<td>
-							<textarea class="bingo-table-columns">0</textarea>
+							<textarea class="bingo-table-columns table-bingocard-score"></textarea>
 						</td>
 						<td>
-							<textarea class="bingo-table-columns">25</textarea>
+							<textarea class="bingo-table-columns table-bingocard-size"></textarea>
 						</td>
 						<td>
-						  <textarea class="bingo-table-columns">2024-04-15 18:40:07</textarea>
+						  <textarea class="bingo-table-columns table-bingocard-creationDate"></textarea>
 						</td>
 						<td>
-							<textarea class="bingo-table-columns">2024-04-15 18:40:07</textarea>
+							<textarea class="bingo-table-columns table-bingocard-lastAccessedOn"></textarea>
 						</td>
 						<td>
-							<button type="button" class="btn btn-primary bingo-table-buttons" id="bingokaarten-btn" value="<?php //echo $_SESSION['bingocard_id']; ?>" onclick="showSubtableSection(this.value, 'carditem')">Toon bingokaart-items</button>
+							<button type="button" class="btn btn-primary bingo-table-buttons table-bingocard-cardItems-button" onclick="showSubtableSection(this.value, 'carditem')">Toon bingokaart-items</button>
 						</td>
 						<td>
-							<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php //echo $_SESSION['bingocard_id']; ?>" onclick="">Wijzigen</button>
-							<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php //echo $_SESSION['bingocard_id']; ?>" name="verwijderen" onclick="return confirm(`Weet u zeker dat u bingokaart ${this.value} wilt verwijderen?`);">Verwijderen</button>
+							<button type="button" class="btn btn-warning bingo-table-buttons table-bingocard-edit-button" name="wijzigen" onclick="editBingocard(this.value)">Wijzigen</button>
+							<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons table-bingocard-remove-button" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart ${this.value} wilt verwijderen?`)){deleteBingocard(this.value)};">Verwijderen</button>
 						</td>
 					  </tr>
-
 					  
-					<?php
-					//}
-					 ?>
-					  <tr class="bingo-table-bottom-row">
+					  <tr class="bingocard-table-bottom-row">
 						<td>
                             <h6 class="bingo-nieuw-header-text"><b>Nieuwe bingokaart:</b></h6>
                         </td>
                         <td>
-                                <textarea class="bingo-table-columns" placeholder="<?php echo $_SESSION['user']['id']; ?>" name="nieuwe-bingocard-userId"></textarea>
+                            <textarea class="bingo-table-columns new-bingocard-user-id" name="new-bingocard-userId"></textarea>
                         </td>
 						<td>
 							<h6 class="bingo-nieuw-header-text">0</h6>
 						</td>
 						<td>
-							<select name="bingocard-sizes">
-								<option name="drie_bij_drie" selected>9</option>
-								<option name="vier_bij_vier">16</option>
-								<option name="vijf_bij_vijf">25</option>
+							<select name="new-bingocard-sizes">
+								<option name="drie_bij_drie" value="9" selected>9</option>
+								<option name="vier_bij_vier" value="16">16</option>
+								<option name="vijf_bij_vijf" value="25">25</option>
 							</select>
 						</td>
 						<td>
@@ -200,24 +191,23 @@
 							<h6 class="bingo-nieuw-header-text">0</h6>
 						</td>
 						<td>
-							<button type="button" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn" onclick="">Voeg toe</button>
+							<button type="button" class="btn btn-success bingo-table-add-button" onclick="createNewBingocard()">Voeg toe</button>
 						</td>
 					  </tr>
 					</tbody>
 				  </table>
 				</section>
 				
-				
 			</section>
 				
-			<!-- Bingokaart items van kaarten van een specifieke gebruiker (subtabel, dus Javascript shenanigans met call naar api controller endpoint wat dit item niet alleen nieuw aanmaakt, maar ook toevoegd aan deze bingokaart van de gebruiker!!!-->
+
+			<!-- Bingokaart items van kaarten van een specifieke gebruiker (subtabel, dus Javascript shenanigans met call naar api controller endpoint wat dit item niet alleen nieuw aanmaakt, maar ook toevoegd aan deze bingokaart van de gebruiker!!!)-->
 				
-			<section class="row justify-content-md-center" id="carditems-table-section">
+            <section class="row justify-content-md-center" id="carditems-table-section">
 				<section class="container bingo-subtable-text">			
 					<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text" id="carditems-table-title-text">Kaart-items van bingokaart: </h2>
 					<h2 class="text-center mb-4 mt-4 mr-4 website-logo-text table-title-text" id="carditems-table-title-id-text"></h2>
 				</section>
-				
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
 					<thead class="bingo-table-header-row">
@@ -230,86 +220,71 @@
 						<th></th>
 					  </tr>
 					</thead>
-					<tbody>
-					<?php
-					//$_SESSION['bingocard-item_id'] = "108F4D89-0D1D-4B99-93A9-F2532492ADC0";
-					//
-					?>
-					  <tr>
+					<tbody id="bingocard-item-subtable-body">
+					     <tr class="bingocard-item-subtable-rows">
+					    	<td>
+					    	  <section class="align-items-center">
+					    		<textarea class="bingo-table-columns bingo-id-column table-bingocard-item-id"></textarea>
+					    	  </section>
+					    	</td>
+					    	<td>
+					    		<textarea class="bingo-table-columns bingo-content-column table-bingocard-item-content"></textarea>
+					    	</td>
+					    	<td>
+					    		<textarea class="bingo-table-columns table-bingocard-item-category"></textarea>
+					    	</td>
+					    	<td>
+					    	  <textarea class="bingo-table-columns table-bingocard-item-points"></textarea>
+					    	</td>
+					    	<td>
+					    		<textarea class="bingo-table-columns table-bingocard-item-isPremiumItem"></textarea>
+					    	</td>
+					    	<td>
+					    		<button type="button" class="btn btn-warning bingo-table-buttons table-bingocard-item-edit-button" name="wijzigen" onclick="editBingocardItem(this.value)">Wijzigen</button>
+					    		<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons table-bingocard-item-remove-button" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} van deze bingokaart wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
+					    	</td>
+					     </tr>
+
+					    <tr class="bingocard-item-table-bottom-row">
+					        <td><h6 class="bingo-nieuw-header-text"><b>Nieuw bingokaart-item:</b></h6></td>
 							<td>
-							  <section class="align-items-center">
-								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-item-id"><?php //echo $_SESSION['bingocard-item_id']; ?></textarea>
-							  </section>
+								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="new-bingocard-item-content"></textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns bingo-content-column">Het juiste meetinstrument vergeten om nu eindelijk eens die 90 graden kniehoeken goed te kunnen opmeten (verdorie)</textarea>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns">2</textarea> <!-- //js function schrijven met switch voor case = bepaalde string teruggeven (besloten om geen enum te gebruiken I guess)-->
-							</td>
-							<td>
-							  <textarea class="bingo-table-columns">15</textarea>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns">Nee</textarea> <!-- //ook hier js functie voor weergeven 'Ja' of 'Nee' voor boolean waarden die hier worden teruggegeven -->
-							</td>
-							<td>
-								<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php //echo $_SESSION['bingocard-item_id']; ?>" onclick="">Wijzigen</button>
-								<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php //echo $_SESSION['bingocard-item_id']; ?>" name="verwijderen" onclick="return confirm(`Weet u zeker dat u bingokaart-item ${this.value} wilt verwijderen?`);">Verwijderen</button>
-							</td>
-					  </tr>
-					  
-					<?php
-					//}
-					 ?>
-					  <tr class="bingo-table-bottom-row">
-							<td><h6 class="bingo-nieuw-header-text"><b>Nieuw bingokaart-item:</b></h6></td>
-							<td>
-								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="bingocard-item-content"></textarea>
-							</td>
-							<td>
-								<select name="bingocard-content-categories">
-									<option name="category_0" selected>standaard tekst</option>
-									<option name="category_1">speciaal font of effect</option>
-									<option name="category_2">afbeelding</option>
-									<option name="category_3">geluidseffect</option>
-									<option name="category_4">video</option>
-									<option name="category_5">animatie</option>
+								<select name="new-bingocard-item-content-categories" id="new-bingocard-item-content-select">
+									<option name="category_0" value="0" selected>standaard tekst</option>
+									<option name="category_1" value="1">speciaal font of effect</option>
+									<option name="category_2" value="2">afbeelding</option>
+									<option name="category_3" value="3">geluidseffect</option>
+									<option name="category_4" value="4">video</option>
+									<option name="category_5" value="5">animatie</option>
 								</select>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="10" name="bingocard-item-points"></textarea>
+								<textarea class="bingo-table-columns" placeholder="10" name="new-bingocard-item-points"></textarea>
 							</td>
 							<td>
-								<select name="premium-bingocard-items">
-									<option name="true">Ja</option>
-									<option name="false" selected>Nee</option>
+								<select name="new-premium-bingocard-items" id="new-bingocard-item-premium-select">
+									<option name="true" value="1">Ja</option>
+									<option name="false" value="0" selected>Nee</option>
 								</select>
 							</td>
 							<td>
-								<button type="button" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn">Voeg toe</button>
+								<button type="button" class="btn btn-success bingo-table-add-button" onclick="createBingocardItem()">Voeg toe</button>
 							</td>
-					  </tr>
+					    </tr>
 					</tbody>
 				  </table>
 				</section>
-				
 			</section>
 			
-			<!-- Sportclubs van de gebruiker! -->
-			
-			<!--(deze subtabel doet via javascript functions calls (apart voor invullen innertext of values van td elements binnen table-row met specifieke id 
-			en elementen met specifieke namen naar de api voor ophalen, updaten, verwijderen en toevoegen, in hoofd/eigen pagina hoofdtabel = weer php via forms doen! -->
-			
-			<!-- ALSO SEE REGEL 40 HIERBOVEN VOOR BEGIN VAN HET STOPPEN/PLAATSEN VAN ID'S IN TABLE ROW ELEMENTS? 
-			(OF WAAR IK DIT DAN HET BESTE GEBRUIK VAN KAN MAKEN VOOR DE JAVAVSCRIPT FUNCTIES STRAKS NADAT DE ANDERE PAGINA'S ZIJN UITGEWERKT -->
+			<!-- Sportclubs van de gebruiker -->
 			
 			<section class="row justify-content-md-center" id="sportsclubs-table-section">	
 				<section class="container bingo-subtable-text">
 					<h2 class="text-center mb-4 mt-4 website-logo-text table-title-text" id="sportsclubs-table-title-text">Sportclubs van gebruiker: </h2>
 					<h2 class="text-center mb-4 mt-4 mr-4 website-logo-text table-title-text" id="sportsclubs-table-title-id-text"></h2>
 				</section>
-				
 				
 				<section class="table-responsive mb-5">
 				  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
@@ -323,54 +298,47 @@
 						<th></th>
 					  </tr>
 					</thead>
-					<tbody>
-					<?php
-						//$_SESSION['sportsclub_id'] = "8F8BDDCF-D8FB-4FAB-B305-B82D149569AD";
-					?>
-					  <tr>
-							<td>
-							  <section class="align-items-center">
-								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-item-id"><?php //echo $_SESSION['sportsclub_id']; ?></textarea>
-							  </section>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns bingo-clubname-column">IJsclub voor Haarlem en omstreken</textarea>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns bingo-club-description-column">De IJsclub voor Haarlem en Omstreken is een schaatsvereniging in Haarlem-Noord. Deze club organiseert schaatstrainingen, wedstrijden, marathons en meer van September tot Maart van elk jaar.</textarea>
-							</td>
-							<td>
-							  <textarea class="bingo-table-columns">1869-01-22 00:00:00</textarea>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns">3500</textarea>
-							</td>
-							<td>
-								<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php //echo $_SESSION['sportsclub_id']; ?>" onclick="">Wijzigen</button>
-								<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php //echo $_SESSION['sportsclub_id']; ?>" name="verwijderen" onclick="return confirm(`Weet u zeker dat u de sportclub ${this.value} wilt verwijderen?`);">Verwijderen</button>
-							</td>
+					<tbody id="sportsclub-subtable-body">
+					  <tr class="sportsclub-subtable-rows">
+						<td>
+						  <section class="align-items-center">
+							<textarea class="bingo-table-columns bingo-id-column table-sportsclub-id"></textarea>
+						  </section>
+						</td>
+						<td>
+							<textarea class="bingo-table-columns bingo-clubname-column table-sportsclub-clubname"></textarea>
+						</td>
+						<td>
+							<textarea class="bingo-table-columns bingo-club-description-column table-sportsclub-description"></textarea>
+						</td>
+						<td>
+						  <textarea class="bingo-table-columns table-sportsclub-foundedOn"></textarea>
+						</td>
+						<td>
+							<textarea class="bingo-table-columns table-sportsclub-membersAmount"></textarea>
+						</td>
+						<td>
+							<button type="button" class="btn btn-warning bingo-table-buttons table-sportsclub-edit-button" name="wijzigen" onclick="editSportsclub(this.value)">Wijzigen</button>
+							<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons table-sportsclub-remove-button" name="verwijderen" onclick="if (confirm(`Weet u zeker dat u de sportclub ${this.value} van deze gebruiker wilt verwijderen?`)){deleteUserSportsclub(this.value);}">Verwijderen</button>
+						</td>
 					  </tr>
 					  
-					  
-					<?php
-					//}
-					 ?>
-					  <tr class="bingo-table-bottom-row">
+					  <tr class="sportsclub-table-bottom-row">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuwe sportclub:</b></h6></td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="Naam van mijn sportclub" name="sportsclub-clubname"></textarea>
+								<textarea class="bingo-table-columns" placeholder="Naam van mijn sportclub" name="new-sportsclub-clubname"></textarea>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="Omschrijving van mijn eigen sportclub" name="sportsclub-description"></textarea>
+								<textarea class="bingo-table-columns" placeholder="Omschrijving van mijn eigen sportclub" name="new-sportsclub-description"></textarea>
 							</td>
 							<td>
-								<input type="date" value="1970-01-01" name="sportsclub-foundedOn">
+								<input type="date" value="1970-01-01" name="new-sportsclub-foundedOn">
 							</td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="1000" name="sportsclub-membersAmount"></textarea>
+								<textarea class="bingo-table-columns" placeholder="1000" name="new-sportsclub-membersAmount"></textarea>
 							</td>
 							<td>
-								<button type="button" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn">Voeg toe</button>
+								<button type="button" class="btn btn-success bingo-table-add-button" onclick="createUserSportsclub()">Voeg toe</button>
 							</td>
 					  </tr>
 					</tbody>

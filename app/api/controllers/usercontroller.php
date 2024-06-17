@@ -199,6 +199,42 @@ class userController extends apiController
         //$this->respond("De gebruiker is verwijderd");
     }
 
+    public function getUserBingocards($userId)
+    {
+        $token = $this->checkForJwt();
+        if (!$token)
+        {
+            return;
+        }
+
+        try {
+            $cleanUserId = htmlspecialchars($userId);
+
+            $userBingocards = $this->bingocardService->getUserBingocards($cleanUserId);
+    
+            foreach($userBingocards as $bingocard)
+            {
+                $cardItems = array();
+    
+                $cardItemIds = $this->bingocardService->getBingocardItemIds($bingocard->getId());
+    
+                foreach($cardItemIds as $cardItemId)
+                {
+                    $cardItem = $this->cardItemService->getOne($cardItemId[0]);
+    
+                    array_push($cardItems, $cardItem);
+                }
+    
+                $bingocard->setItems($cardItems);
+            }
+
+            $this->respond($userBingocards);
+
+        } catch(Exception $e) {
+            $this->respondWithError(500, $e->getMessage());
+        }
+    }
+
     public function getUserSportsclubs($userId)
     {
         $token = $this->checkForJwt();

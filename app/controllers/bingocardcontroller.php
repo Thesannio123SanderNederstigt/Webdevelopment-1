@@ -170,11 +170,11 @@ class bingocardController extends viewController
                 break;
 
             case("4 bij 4"):
-                $size = 9;
+                $size = 16;
                 break;
             
             case("16"):
-                $size = 9;
+                $size = 16;
                 break;
             
             case("5x5"):

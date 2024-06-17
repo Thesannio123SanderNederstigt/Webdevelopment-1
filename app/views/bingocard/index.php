@@ -72,7 +72,7 @@
 						<form name="create-bingocard-form" action="/bingocard/create/" method="POST">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuwe bingokaart:</b></h6></td>
                             <td>
-                                <textarea class="bingo-table-columns" placeholder="<?php echo $_SESSION['user']['id']; ?>" name="nieuwe-bingocard-userId"></textarea>
+                                <textarea class="bingo-table-columns" placeholder="<?php if(isset($_SESSION['user'])){ echo $_SESSION['user']['id'];}?>" name="nieuwe-bingocard-userId"></textarea>
                             </td>
 							<td>
 								<h6 class="bingo-nieuw-header-text">0</h6>
@@ -90,9 +90,6 @@
 							<td>
 								<h6 class="bingo-nieuw-header-text"><?php echo date("Y-m-d H:i:s"); ?></h6>
 							</td>
-							<!--<td>
-								<h6 class="bingo-nieuw-header-text">0</h6>
-							</td>-->
 							<td>
 								<button type="submit" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn">Voeg toe</button>
 							</td>
@@ -126,64 +123,59 @@
 						<th></th>
 					  </tr>
 					</thead>
-					<tbody>
-					<?php
-					    //$_SESSION['bingocard-item_id'] = "108F4D89-0D1D-4B99-93A9-F2532492ADC0";
-					//
-					?>
-					  <tr>
-							<td>
-							  <section class="align-items-center">
-								<textarea class="bingo-table-columns bingo-id-column" name="bingocard-id" id="table-bingocard-item-id"><?php //echo $_SESSION['bingocard-item_id']; ?></textarea>
-							  </section>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns bingo-content-column">Het juiste meetinstrument vergeten om nu eindelijk eens die 90 graden kniehoeken goed te kunnen opmeten (verdorie)</textarea>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns">2</textarea>
-							</td>
-							<td>
-							  <textarea class="bingo-table-columns">15</textarea>
-							</td>
-							<td>
-								<textarea class="bingo-table-columns">Nee</textarea>
-							</td>
-							<td>
-								<button type="button" class="btn btn-warning bingo-table-buttons" name="wijzigen" value="<?php //echo $_SESSION['bingocard-item_id']; ?>" onclick="">Wijzigen</button>
-								<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons" value="<?php //echo $_SESSION['bingocard-item_id']; ?>" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
-							</td>
-					  </tr>
+					<tbody id="bingocard-item-subtable-body">
+                        <!--<section id="bingocard-items-subtable-section">-->
+					      <tr class="bingocard-item-subtable-rows">
+					    		<td>
+					    		  <section class="align-items-center">
+					    			<textarea class="bingo-table-columns bingo-id-column table-bingocard-item-id"></textarea>
+					    		  </section>
+					    		</td>
+					    		<td>
+					    			<textarea class="bingo-table-columns bingo-content-column table-bingocard-item-content"></textarea>
+					    		</td>
+					    		<td>
+					    			<textarea class="bingo-table-columns table-bingocard-item-category"></textarea>
+					    		</td>
+					    		<td>
+					    		  <textarea class="bingo-table-columns table-bingocard-item-points"></textarea>
+					    		</td>
+					    		<td>
+					    			<textarea class="bingo-table-columns table-bingocard-item-isPremiumItem"></textarea>
+					    		</td>
+					    		<td>
+					    			<button type="button" class="btn btn-warning bingo-table-buttons table-bingocard-item-edit-button" name="wijzigen" onclick="editBingocardItem(this.value)">Wijzigen</button>
+					    			<button type="button" class="btn btn-danger bingo-danger-btn bingo-table-buttons table-bingocard-item-remove-button" name="verwijderen" onclick="if(confirm(`Weet u zeker dat u bingokaart-item ${this.value} van deze bingokaart wilt verwijderen?`)){deleteBingocardItem(this.value);}">Verwijderen</button>
+					    		</td>
+					      </tr>
+                        <!--</section>-->
 					  
-					<?php
-					//}
-					 ?>
-					  <tr class="bingo-table-bottom-row">
+					  <tr class="bingocard-item-table-bottom-row">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuw bingokaart-item:</b></h6></td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="bingocard-item-content"></textarea>
+								<textarea class="bingo-table-columns" placeholder="Iets leuks, grappigs of opmerkelijks gerelateerd aan sport wat op een bingokaart kan worden gezet" name="new-bingocard-item-content"></textarea>
 							</td>
 							<td>
-								<select name="bingocard-content-categories">
-									<option name="category_0" selected>standaard tekst</option>
-									<option name="category_1">speciaal font of effect</option>
-									<option name="category_2">afbeelding</option>
-									<option name="category_3">geluidseffect</option>
-									<option name="category_4">video</option>
-									<option name="category_5">animatie</option>
+								<select name="new-bingocard-item-content-categories" id="new-bingocard-item-content-select">
+									<option name="category_0" value="0" selected>standaard tekst</option>
+									<option name="category_1" value="1">speciaal font of effect</option>
+									<option name="category_2" value="2">afbeelding</option>
+									<option name="category_3" value="3">geluidseffect</option>
+									<option name="category_4" value="4">video</option>
+									<option name="category_5" value="5">animatie</option>
 								</select>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns" placeholder="10" name="bingocard-item-points"></textarea>
+								<textarea class="bingo-table-columns" placeholder="10" name="new-bingocard-item-points"></textarea>
 							</td>
 							<td>
-								<select name="premium-bingocard-items">
-									<option name="true">Ja</option>
-									<option name="false" selected>Nee</option>
+								<select name="new-premium-bingocard-items" id="new-bingocard-item-premium-select">
+									<option name="true" value="1">Ja</option>
+									<option name="false" value="0" selected>Nee</option>
 								</select>
 							</td>
 							<td>
-								<button type="button" class="btn btn-success bingo-table-add-button" id="nieuwe-gebruiker-btn" onclick="">Voeg toe</button>
+								<button type="button" class="btn btn-success bingo-table-add-button" onclick="createBingocardItem()">Voeg toe</button>
 							</td>
 					  </tr>
 					</tbody>
@@ -192,25 +184,7 @@
 				
 			</section>
 
-
 		</section>
-		
-		<script>
-			function showBingocardItems(bingocard_id)
-			{
-				var cardditems_table_section = document.getElementById("carditems-table-section");
-				cardditems_table_section.style.cssText = 'display: flex !important';
-
-				var carditems_title_id_text = document.getElementById("carditems-table-title-id-text");
-				carditems_title_id_text.innerText = bingocard_id;
-				carditems_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
-			}
-			
-			function deleteBingocardItem(bingocard_item_id)
-			{
-				alert(`hallo wereld: ${bingocard_item_id}`);
-			}
-		</script>
 
 <?php
 	include_once __DIR__ . '/../footer.php';

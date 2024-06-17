@@ -75,7 +75,7 @@
                         </section>
                         <section class="col-12">
                           <section class="d-grid my-3">
-                            <button class="btn btn-primary btn-lg" type="submit" onclick="apiLogin()">Log in</button> <a></a>
+                            <button class="btn btn-primary btn-lg" type="submit">Log in</button> <a></a>
                           </section>
                         </section>
                       </section>
