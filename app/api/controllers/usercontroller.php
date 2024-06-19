@@ -280,7 +280,6 @@ class userController extends apiController
         $this->respond(true);
     }
 
-
     //Endpoint voor het verwijderen van een gebruiker van een sportsclub (zonder de user of de sportclub zelf te verwijderen)
     public function deleteUserSportsclub($userId, $sportsclubId)
     {

@@ -84,6 +84,7 @@ class apiController
                 "userId" => $user->getId(),
                 "username" => $user->getUsername(),
                 "userIsPremium" => $user->getIsPremium(),
+                "userIsAdmin" => $user->getIsAdmin(),
                 "expiresAt" => $expire
             );
     } 
