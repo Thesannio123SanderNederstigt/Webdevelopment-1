@@ -13,11 +13,11 @@
 			</section>
 			
 			<h1 class="website-logo-text">Schaatsbingo.nl</h1>
-               <h2 class="text-center text-secondary mb-4 website-logo-text">Content Management Systeem</h2>
-			
+            <h2 class="text-center text-secondary mb-4 website-logo-text">Content Management Systeem</h2>
 			<h2 class="text-center text-secondary mb-4 mt-4 website-logo-text">Kies een onderstaande categorie om inhoud te beheren</h2>
 			
 			<section class="row gy-2 gy-xxl-2 mt-2 mb-5 flex-categories-container">
+
 			  <section class="col-12 col-md-6 col-lg-4 col-xxl-6 mb-3">
 				<a href="/user" class="anchor-tag">
 					<section class="card text-center border-dark overflow-hidden">

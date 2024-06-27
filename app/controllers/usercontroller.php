@@ -27,7 +27,7 @@ class UserController extends viewController
 
     public function index()
     {
-        $this->viewGetRequestSessionUserCheck();
+        $this->viewRequestSessionUserCheck();
 
         $users = $this->userService->getAll(NULL, NULL);
 
@@ -72,6 +72,7 @@ class UserController extends viewController
 
     public function create() 
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
@@ -93,6 +94,7 @@ class UserController extends viewController
 
     public function alter()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -110,6 +112,7 @@ class UserController extends viewController
     
     public function update()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -140,6 +143,7 @@ class UserController extends viewController
 
     public function delete()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("user");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")

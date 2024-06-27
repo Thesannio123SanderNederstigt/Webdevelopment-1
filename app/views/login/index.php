@@ -42,13 +42,13 @@
                   <section class="col-12">
                     <section class="form-floating mb-3">
                       <input type="text" class="form-control" name="form-username" id="form-username" placeholder="John Doe" required <?php if (isset($_SESSION["loginError"]) == true){ echo 'style="border-color: #E80F0F;"';} ?>>
-                      <label for="form-username" class="form-label">Username</label>
+                      <label for="form-username" class="form-label">Gebruikersnaam</label>
                     </section>
                   </section>
                   <section class="col-12">
                     <section class="form-floating mb-3">
-                      <input type="password" class="form-control" name="form-password" id="form-password" value="" placeholder="Password" required <?php if (isset($_SESSION["loginError"]) == true){ echo 'style="border-color: #E80F0F;"';} ?>>
-                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" name="form-password" id="form-password" value="" placeholder="Bingo123!" required <?php if (isset($_SESSION["loginError"]) == true){ echo 'style="border-color: #E80F0F;"';} ?>>
+                      <label for="password" class="form-label">Wachtwoord</label>
                     </section>
                   </section>
 
@@ -73,7 +73,6 @@
                       <button class="btn btn-primary btn-lg" type="submit">Log in</button> <a></a>
                     </section>
                   </section>
-                </section>
               </form>
             </section>
           </section>

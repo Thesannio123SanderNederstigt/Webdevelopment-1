@@ -18,7 +18,7 @@ class viewController
         }
     }
 
-    function viewGetRequestSessionUserCheck()
+    function viewRequestSessionUserCheck()
     {
         if(isset($_SESSION['user']) == false)
         {

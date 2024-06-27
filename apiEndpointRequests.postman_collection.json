@@ -79,7 +79,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODExMjE4NSwibmJmIjoxNzE4MTEyMTg1LCJleHAiOjE3MTgyMDIxODUsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.VkM7sxO5uqjqyQUVvLMNUPwL449zkGO0VS4nViEYrjM",
 									"type": "string"
 								}
 							]
@@ -106,11 +106,21 @@
 					"name": "create",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
+							"type": "apikey",
+							"apikey": [
 								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzY2hhYXRzYmluZ29fd2ViZGV2ZWxvcG1lbnQiLCJhdWQiOiJ3ZWJkZXZlbG9wbWVudF9zY2hhYXRzYmluZ29fYXBwbGljYXRpZSIsImlhdCI6MTcxODAzMDMzMSwibmJmIjoxNzE4MDMwMzMxLCJleHAiOjE3MTgxMjAzMzEsImRhdGEiOnsiaWQiOiJDRjNGQTg2Ni03MkE0LTQ3NkEtOTkzNS03QjY5QUI3REEwNTYiLCJ1c2VybmFtZSI6IkpvaG5ueUQjMSIsImVtYWlsIjoiSm9obmRvZUBob3RtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlfX0.cXGpxlttepqYZWe65Egpe1Yo5eqABteVnb92FyD8iuY",
+									"key": "value",
+									"value": "API#Str1ngL4st1GKr4k3nPr0gr4m1n9Int3rF4c3sR1ght",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "X-API-KEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
 									"type": "string"
 								}
 							]
@@ -119,7 +129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"Sammie\",\r\n    \"password\":\"welkom123!\",\r\n    \"email\":\"sammie@mailserver.com\"\r\n}",
+							"raw": "{\r\n    \"username\":\"Sammie\",\r\n    \"password\":\"welkom123!\",\r\n    \"email\":\"sam@mailserver.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

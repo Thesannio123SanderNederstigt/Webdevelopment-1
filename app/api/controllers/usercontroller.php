@@ -140,11 +140,21 @@ class userController extends apiController
 
     public function create()
     {
-        $token = $this->checkForJwt();
-        if (!$token)
+        $apiKey = $this->checkApiKey();
+        if (!$apiKey)
         {
             return;
         }
+
+        //De onderstaande JWT/token check routine is hier bewust vervangen door een api key check methode (zie bovenstaande routine)
+        //om zo de mogelijkheid zonder een token te hebben een gebruiker van buitenaf door de nuxt app te kunnen laten aanmaken te verwezenlijken.
+        //Dit is de enige reden dat hier niet op een JWT, maar op een API-key in de authorization header van requests wordt gecheckt.
+
+        /*$token = $this->checkForJwt();
+        if (!$token)
+        {
+            return;
+        }*/
 
         try {
             $userDTO = $this->createObjectFromPostedJson("Models\\userDTO");

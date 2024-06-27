@@ -18,7 +18,7 @@ class carditemController extends viewController
 
     public function index()
     {
-        $this->viewGetRequestSessionUserCheck();
+        $this->viewRequestSessionUserCheck();
 
         $carditems = $this->service->getAll(NULL, NULL);
 
@@ -26,7 +26,8 @@ class carditemController extends viewController
     }
 
     public function create() 
-    {        
+    {   
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
@@ -49,6 +50,7 @@ class carditemController extends viewController
 
     public function alter()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -66,6 +68,7 @@ class carditemController extends viewController
 
     public function update()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -92,6 +95,7 @@ class carditemController extends viewController
 
     public function delete()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("carditem");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")

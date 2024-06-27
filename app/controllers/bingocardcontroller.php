@@ -24,7 +24,7 @@ class bingocardController extends viewController
 
     public function index()
     {
-        $this->viewGetRequestSessionUserCheck();
+        $this->viewRequestSessionUserCheck();
 
         $bingocards = $this->bingocardService->getAll(NULL, NULL);
 
@@ -49,6 +49,7 @@ class bingocardController extends viewController
 
     public function create() 
     {        
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("bingocard");
 
         if($_SERVER['REQUEST_METHOD'] == "POST") 
@@ -78,6 +79,7 @@ class bingocardController extends viewController
 
     public function alter()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("bingocard");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -95,6 +97,7 @@ class bingocardController extends viewController
     
     public function update()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("bingocard");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -131,6 +134,7 @@ class bingocardController extends viewController
 
     public function delete()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("bingocard");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")

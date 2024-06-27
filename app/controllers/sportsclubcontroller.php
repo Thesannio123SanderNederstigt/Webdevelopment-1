@@ -18,7 +18,7 @@ class sportsclubController extends viewController
 
     public function index()
     {
-        $this->viewGetRequestSessionUserCheck();
+        $this->viewRequestSessionUserCheck();
 
         $sportsclubs = $this->service->getAll(NULL, NULL);
 
@@ -27,6 +27,7 @@ class sportsclubController extends viewController
 
     public function create() 
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -49,6 +50,7 @@ class sportsclubController extends viewController
 
     public function alter()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -66,6 +68,7 @@ class sportsclubController extends viewController
 
     public function update()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -93,6 +96,7 @@ class sportsclubController extends viewController
 
     public function delete()
     {
+        $this->viewRequestSessionUserCheck();
         $this->redirectViewGetRequest("sportsclub");
 
         if($_SERVER['REQUEST_METHOD'] == "POST")

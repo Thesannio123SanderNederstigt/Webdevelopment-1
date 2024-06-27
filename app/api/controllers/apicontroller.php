@@ -144,5 +144,41 @@ class apiController
 
         return true;
    }
+
+   function checkApiKey()
+   {
+        try {
+            //check api key header
+            if(!isset($_SERVER['HTTP_X_API_KEY'])) {
+                $this->respondWithError(401, "No api key provided");
+                return;
+            }
+
+            //API key inlezen
+            $apiKey = $_SERVER['HTTP_X_API_KEY'];
+            
+            // phpdotenv utilization
+            $dotenv = Dotenv::createImmutable(__DIR__ . '../../..');
+            $dotenv->load();
+            $dotenv->required(['API_KEY']);
+
+            if(!$apiKey)
+            {
+                return false;
+            }
+
+            if($apiKey !== $_SERVER['API_KEY'])
+            {
+                $this->respondWithError(401, "Incorrect api key provided");
+                return;
+            } 
+
+            return true;
+            
+        } catch (Exception $e) {
+            $this->respondWithError(401, $e->getMessage());
+        return;
+        }
+    }
 }
 ?>
