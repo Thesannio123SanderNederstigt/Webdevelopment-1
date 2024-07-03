@@ -77,6 +77,20 @@ class userRepository extends Repository
         return $user;
     }
 
+    function addMissingFields($existingUser, $user)
+    {
+        $fullUser = new User();
+
+        !isset($user->username) ? $fullUser->setUsername($existingUser->getUsername()) : $fullUser->setUsername($user->username);
+        !isset($user->email) ? $fullUser->setEmail($existingUser->getEmail()) : $fullUser->setEmail($user->email);
+        !isset($user->isAdmin) ? $fullUser->setIsAdmin($existingUser->getIsAdmin()) : $fullUser->setIsAdmin($user->isAdmin);
+        !isset($user->isPremium) ? $fullUser->setIsPremium($existingUser->getIsPremium()) : $fullUser->setIsPremium($user->isPremium);
+        !isset($user->cardsAmount) ? $fullUser->setCardsAmount($existingUser->getCardsAmount()) : $fullUser->setCardsAmount($user->cardsAmount);
+        !isset($user->sharedCardsAmount) ? $fullUser->setSharedCardsAmount($existingUser->getSharedCardsAmount()) : $fullUser->setSharedCardsAmount($user->sharedCardsAmount);
+
+        return $fullUser;
+    }
+
     function create($user)
     {
         try {
@@ -94,22 +108,24 @@ class userRepository extends Repository
     function update($user, $id)
     {
         try {
+            $existingUser = $this->getOne($id);
+            $fullUser = $this->addMissingFields($existingUser, $user);
 
             if(isset($user->password))
             {
                 $hashedPassword = $this->hashPassword($user->password);
 
                 $stmt = $this->connection->prepare("UPDATE user SET username = ?, `password` = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
-                $stmt->execute([$user->username, $hashedPassword, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount, $id]);
+                $stmt->execute([$fullUser->username, $hashedPassword, $fullUser->email, $this->provideBooleanIntValue($fullUser->isAdmin), $this->provideBooleanIntValue($fullUser->isPremium), $fullUser->cardsAmount, $fullUser->sharedCardsAmount, $id]);
                 
                 //geeft geen versleuteld ww, maar loze string terug
                 $user->setPassword("Dat is geheim weet je wel ;)");
             } else {
                 $stmt = $this->connection->prepare("UPDATE user SET username = ?, email = ?, isAdmin = ?, isPremium = ?, cardsAmount = ?, sharedCardsAmount = ? WHERE id = ?");
-                $stmt->execute([$user->username, $user->email, $this->provideBooleanIntValue($user->isAdmin), $this->provideBooleanIntValue($user->isPremium), $user->cardsAmount, $user->sharedCardsAmount, $id]);
+                $stmt->execute([$fullUser->username, $fullUser->email, $this->provideBooleanIntValue($fullUser->isAdmin), $this->provideBooleanIntValue($fullUser->isPremium), $fullUser->cardsAmount, $fullUser->sharedCardsAmount, $id]);
             }
-
-            return $user;
+            
+            return $fullUser;
         } catch(PDOException $e) {
             echo $e;
         }

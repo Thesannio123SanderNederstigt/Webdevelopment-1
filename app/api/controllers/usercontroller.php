@@ -159,12 +159,12 @@ class userController extends apiController
         try {
             $userDTO = $this->createObjectFromPostedJson("Models\\userDTO");
             $user = $userDTO->userMapper();
-            $this->userService->create($user);
+            $newUser = $this->userService->create($user);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($user);
+        $this->respond($newUser);
     }
 
     public function update($id)
@@ -176,14 +176,23 @@ class userController extends apiController
         }
 
         try {
-            $user = $this->createObjectFromPostedJson("Models\\User");
             $cleanId = htmlspecialchars($id);
-            $this->userService->update($user, $cleanId);
+            $user = $this->createObjectFromPostedJson("Models\\User");
+
+            $exUser = $this->userService->getOne($cleanId);
+
+            if(!$exUser || $exUser == false)
+            {
+                $this->respondWithError(404, "De gebruiker kon niet worden gevonden");
+                return;
+            } 
+
+            $updatedUser = $this->userService->update($user, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($user);
+        $this->respond($updatedUser);
     }
 
     public function delete($id)
@@ -196,6 +205,15 @@ class userController extends apiController
 
         try {
             $cleanId = htmlspecialchars($id);
+
+            $exUser = $this->userService->getOne($cleanId);
+
+            if(!$exUser || $exUser == false)
+            {
+                $this->respondWithError(404, "De gebruiker kon niet worden gevonden");
+                return;
+            } 
+
             $this->userService->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
@@ -214,6 +232,14 @@ class userController extends apiController
 
         try {
             $cleanUserId = htmlspecialchars($userId);
+
+            $exUser = $this->userService->getOne($cleanUserId);
+
+            if(!$exUser || $exUser == false)
+            {
+                $this->respondWithError(404, "De gebruiker kon niet worden gevonden");
+                return;
+            } 
 
             $userBingocards = $this->bingocardService->getUserBingocards($cleanUserId);
     
@@ -251,6 +277,14 @@ class userController extends apiController
         try {
             $cleanUserId = htmlspecialchars($userId);
 
+            $exUser = $this->userService->getOne($cleanUserId);
+
+            if(!$exUser || $exUser == false)
+            {
+                $this->respondWithError(404, "De gebruiker kon niet worden gevonden");
+                return;
+            } 
+
             $userSportsclubs = array();
 
             $sportsclubIds = $this->userService->getUserSportsclubIds($cleanUserId);
@@ -282,6 +316,23 @@ class userController extends apiController
         try {
             $cleanUserId = htmlspecialchars($userId);
             $cleanSportsclubId = htmlspecialchars($sportsclubId);
+
+            $exUser = $this->userService->getOne($cleanUserId);
+
+            if(!$exUser || $exUser == false)
+            {
+                $this->respondWithError(404, "De gebruiker kon niet worden gevonden");
+                return;
+            } 
+
+            $exSportsclub = $this->sportsclubService->getOne($cleanSportsclubId);
+
+            if(!$exSportsclub || $exSportsclub == false)
+            {
+                $this->respondWithError(404, "De sportclub kon niet worden gevonden");
+                return;
+            } 
+
             $this->userService->addUserSportsclub($cleanUserId, $cleanSportsclubId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
@@ -302,6 +353,23 @@ class userController extends apiController
         try {
             $cleanUserId = htmlspecialchars($userId);
             $cleanSportsclubId = htmlspecialchars($sportsclubId);
+
+            $exUser = $this->userService->getOne($cleanUserId);
+
+            if(!$exUser || $exUser == false)
+            {
+                $this->respondWithError(404, "De gebruiker kon niet worden gevonden");
+                return;
+            } 
+
+            $exSportsclub = $this->sportsclubService->getOne($cleanSportsclubId);
+
+            if(!$exSportsclub || $exSportsclub == false)
+            {
+                $this->respondWithError(404, "De sportclub kon niet worden gevonden");
+                return;
+            } 
+
             $this->userService->deleteUserSportsclub($cleanUserId, $cleanSportsclubId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());

@@ -84,12 +84,12 @@ class cardItemController extends apiController
         try {
             $cardItemDTO = $this->createObjectFromPostedJson("Models\\cardItemDTO");
             $cardItem = $cardItemDTO->cardItemMapper();
-            $this->service->create($cardItem);
+            $newCardItem = $this->service->create($cardItem);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($cardItem);
+        $this->respond($newCardItem);
     }
 
     public function update($id)
@@ -105,12 +105,21 @@ class cardItemController extends apiController
             $cleanId = htmlspecialchars($id);
 
             $cardItem = $this->createObjectFromPostedJson("Models\\CardItem");
-            $this->service->update($cardItem, $cleanId);
+
+            $exCardItem = $this->service->getOne($cleanId);
+
+            if(!$exCardItem || $exCardItem == false)
+            {
+                $this->respondWithError(404, "Het kaart-item kon niet worden gevonden");
+                return;
+            } 
+
+            $updatedCardItem = $this->service->update($cardItem, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($cardItem);
+        $this->respond($updatedCardItem);
     }
 
     public function delete($id)
@@ -124,6 +133,14 @@ class cardItemController extends apiController
         try {
             //input (id) sanitazation
             $cleanId = htmlspecialchars($id);
+
+            $exCardItem = $this->service->getOne($cleanId);
+
+            if(!$exCardItem || $exCardItem == false)
+            {
+                $this->respondWithError(404, "Het kaart-item kon niet worden gevonden");
+                return;
+            } 
 
             $this->service->delete($cleanId);
         } catch (Exception $e) {

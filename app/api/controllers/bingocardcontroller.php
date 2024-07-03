@@ -43,7 +43,7 @@ class bingocardController extends apiController
 
             if(!$bingocards || $bingocards == false)
             {
-                $this->respondWithError(404, "gebruikers niet gevonden");
+                $this->respondWithError(404, "bingokaarten niet gevonden");
                 return;
             } else {
 
@@ -119,6 +119,12 @@ class bingocardController extends apiController
             $bingocardDTO = $this->createObjectFromPostedJson("Models\\bingocardDTO");
             $bingocard = $bingocardDTO->bingocardMapper();
 
+            if(!isset($bingocard->userId))
+            {
+                $this->respondWithError(404, "Er is geen (bestaand) gebruikers-id meegegeven");
+                return;
+            }
+
             $user = $this->userService->getOne($bingocard->getUserId());
     
             if(!$user || $user == false) 
@@ -126,13 +132,13 @@ class bingocardController extends apiController
                 $this->respondWithError(404, "Een corresponderende gebruiker (bij het opgegeven gebruikers-id) kon niet worden gevonden");
                 return;
             } else {
-                $this->bingocardService->create($bingocard);
+                $newBingocard = $this->bingocardService->create($bingocard);
             }
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($bingocard);
+        $this->respond($newBingocard);
     }
 
     public function update($id)
@@ -147,6 +153,20 @@ class bingocardController extends apiController
             $cleanId = htmlspecialchars($id);
             $bingocard = $this->createObjectFromPostedJson("Models\\Bingocard");
 
+            $exBingocard = $this->bingocardService->getOne($cleanId);
+
+            if(!$exBingocard || $exBingocard == false)
+            {
+                $this->respondWithError(404, "De bingokaart kon niet worden gevonden");
+                return;
+            }           
+
+            if(!isset($bingocard->userId))
+            {
+                $this->respondWithError(404, "Er is geen (bestaand) gebruikers-id meegegeven");
+                return;
+            }
+
             $user = $this->userService->getOne($bingocard->getUserId());
 
             if(!$user || $user == false)
@@ -154,13 +174,13 @@ class bingocardController extends apiController
                 $this->respondWithError(404, "Een corresponderende gebruiker (bij het opgegeven gebruikers-id) kon niet worden gevonden");
                 return;
             } else {
-                $this->bingocardService->update($bingocard, $cleanId);
+                $updatedBingocard = $this->bingocardService->update($bingocard, $cleanId);
             }
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($bingocard);
+        $this->respond($updatedBingocard);
     }
 
     public function updateLastAccessedOn($id)
@@ -173,6 +193,15 @@ class bingocardController extends apiController
 
         try {
             $cleanId = htmlspecialchars($id);
+
+            $exBingocard = $this->bingocardService->getOne($cleanId);
+
+            if(!$exBingocard || $exBingocard == false)
+            {
+                $this->respondWithError(404, "De bingokaart kon niet worden gevonden");
+                return;
+            } 
+
             $this->bingocardService->updateLastAccessedOn($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
@@ -191,6 +220,15 @@ class bingocardController extends apiController
 
         try {
             $cleanId = htmlspecialchars($id);
+
+            $exBingocard = $this->bingocardService->getOne($cleanId);
+
+            if(!$exBingocard || $exBingocard == false)
+            {
+                $this->respondWithError(404, "De bingokaart kon niet worden gevonden");
+                return;
+            } 
+            
             $this->bingocardService->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
@@ -209,6 +247,14 @@ class bingocardController extends apiController
 
         try {
             $cleanBingocardId = htmlspecialchars($bingocardId);
+
+            $exBingocard = $this->bingocardService->getOne($cleanBingocardId);
+
+            if(!$exBingocard || $exBingocard == false)
+            {
+                $this->respondWithError(404, "De bingokaart kon niet worden gevonden");
+                return;
+            } 
 
             $bingocardItems = array();
 
@@ -240,6 +286,23 @@ class bingocardController extends apiController
         try {
             $cleanBingocardId = htmlspecialchars($bingocardId);
             $cleanCardItemId = htmlspecialchars($cardItemId);
+
+            $exBingocard = $this->bingocardService->getOne($cleanBingocardId);
+
+            if(!$exBingocard || $exBingocard == false)
+            {
+                $this->respondWithError(404, "De bingokaart kon niet worden gevonden");
+                return;
+            } 
+
+            $exCardItem = $this->cardItemService->getOne($cleanCardItemId);
+
+            if(!$exCardItem || $exCardItem == false)
+            {
+                $this->respondWithError(404, "Het kaart-item kon niet worden gevonden");
+                return;
+            } 
+            
             $this->bingocardService->addBingocardItem($cleanBingocardId, $cleanCardItemId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
@@ -260,6 +323,24 @@ class bingocardController extends apiController
         try {
             $cleanBingocardId = htmlspecialchars($bingocardId);
             $cleanCardItemId = htmlspecialchars($cardItemId);
+
+            $exBingocard = $this->bingocardService->getOne($cleanBingocardId);
+
+            if(!$exBingocard || $exBingocard == false)
+            {
+                $this->respondWithError(404, "De bingokaart kon niet worden gevonden");
+                return;
+            } 
+
+            $exCardItem = $this->cardItemService->getOne($cleanCardItemId);
+
+            if(!$exCardItem || $exCardItem == false)
+            {
+                $this->respondWithError(404, "Het kaart-item kon niet worden gevonden");
+                return;
+            } 
+
+
             $this->bingocardService->deleteBingocardItem($cleanBingocardId, $cleanCardItemId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());

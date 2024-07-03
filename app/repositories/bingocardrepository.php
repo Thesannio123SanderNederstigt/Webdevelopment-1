@@ -99,6 +99,18 @@ class bingocardRepository extends Repository
         return $bingocard;
     }
 
+    function addMissingFields($existingBingocard, $bingocard)
+    {
+        $fullBingocard = new Bingocard();
+
+        !isset($bingocard->score) ? $fullBingocard->setScore($existingBingocard->getScore()) : $fullBingocard->setScore($bingocard->score);
+        !isset($bingocard->size) ? $fullBingocard->setSize($existingBingocard->getSize()) : $fullBingocard->setSize($bingocard->size);
+        !isset($bingocard->creationDate) ? $fullBingocard->setCreationDate($existingBingocard->getCreationDate()) : $fullBingocard->setCreationDate($bingocard->creationDate);
+        !isset($bingocard->lastAccessedOn) ? $fullBingocard->setLastAccessedOn($existingBingocard->getLastAccessedOn()) : $fullBingocard->setLastAccessedOn($bingocard->lastAccessedOn);
+
+        return $fullBingocard;
+    }
+
     function create($bingocard)
     {
         try{
@@ -115,11 +127,15 @@ class bingocardRepository extends Repository
     function update($bingocard, $id)
     {
         try{
+            $existingBingocard = $this->getOne($id);
+            $fullBingocard = $this->addMissingFields($existingBingocard, $bingocard);
+
             $stmt = $this->connection->prepare("UPDATE bingocard SET userId = ?,  score = ?, `size` = ?, creationDate = ?, lastAccessedOn = ? WHERE id = ?");
 
-            $stmt->execute([$bingocard->userId, $bingocard->score, $bingocard->size, $bingocard->creationDate, $bingocard->lastAccessedOn, $id]);
+            $stmt->execute([$bingocard->userId, $fullBingocard->score, $fullBingocard->size, $fullBingocard->creationDate, $fullBingocard->lastAccessedOn, $id]);
             
-            return $bingocard;
+            $fullBingocard->setUserId($bingocard->userId);
+            return $fullBingocard;
         } catch(PDOException $e) {
             echo $e;
         }

@@ -25,7 +25,7 @@ Class Sportsclub
         return $this;
     }
 
-    public function getclubname(): string
+    public function getClubname(): string
     {
         return $this->clubname;
     }

@@ -81,12 +81,12 @@ class sportsclubController extends apiController
         try {
             $sportsclubDTO = $this->createObjectFromPostedJson("Models\\sportsclubDTO");
             $sportsclub = $sportsclubDTO->sportsclubMapper();
-            $this->service->create($sportsclub);
+            $newSportsclub = $this->service->create($sportsclub);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($sportsclub);
+        $this->respond($newSportsclub);
     }
 
     public function update($id)
@@ -100,12 +100,21 @@ class sportsclubController extends apiController
         try {
             $cleanId = htmlspecialchars($id);
             $sportsclub = $this->createObjectFromPostedJson("Models\\Sportsclub");
-            $this->service->update($sportsclub, $cleanId);
+
+            $exSportsclub = $this->service->getOne($cleanId);
+
+            if(!$exSportsclub || $exSportsclub == false)
+            {
+                $this->respondWithError(404, "De sportclub kon niet worden gevonden");
+                return;
+            } 
+
+            $updatedSportsclub = $this->service->update($sportsclub, $cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());
         }
 
-        $this->respond($sportsclub);
+        $this->respond($updatedSportsclub);
     }
 
     public function delete($id)
@@ -118,6 +127,15 @@ class sportsclubController extends apiController
 
         try {
             $cleanId = htmlspecialchars($id);
+
+            $exSportsclub = $this->service->getOne($cleanId);
+
+            if(!$exSportsclub || $exSportsclub == false)
+            {
+                $this->respondWithError(404, "De sportclub kon niet worden gevonden");
+                return;
+            } 
+
             $this->service->delete($cleanId);
         } catch (Exception $e) {
             $this->respondWithError(500, $e->getMessage());

@@ -3,6 +3,7 @@ namespace Repositories;
 
 use PDO;
 use PDOException;
+use Models\cardItem;
 use Repositories\Repository;
 
 class cardItemRepository extends Repository
@@ -71,11 +72,14 @@ class cardItemRepository extends Repository
     function update($cardItem, $id)
     {
         try {
+            $existingcardItem = $this->getOne($id);
+            $fullcardItem = $this->addMissingFields($existingcardItem, $cardItem);
+
             $stmt = $this->connection->prepare("UPDATE carditem SET content = ?, category = ?, points = ?, isPremiumItem = ? WHERE id = ?");
 
-            $stmt->execute([$cardItem->content, $cardItem->category, $cardItem->points, $this->provideBooleanIntValue($cardItem->isPremiumItem), $id]);
+            $stmt->execute([$fullcardItem->content, $fullcardItem->category, $fullcardItem->points, $this->provideBooleanIntValue($fullcardItem->isPremiumItem), $id]);
 
-            return $cardItem;
+            return $fullcardItem;
         } catch(PDOException $e) {
             echo $e;
         }
@@ -94,6 +98,18 @@ class cardItemRepository extends Repository
             echo $e;
         }
         return true;
+    }
+
+    function addMissingFields($existingcardItem, $cardItem)
+    {
+        $fullcardItem = new cardItem();
+
+        !isset($cardItem->content) ? $fullcardItem->setContent($existingcardItem->getContent()) : $fullcardItem->setContent($cardItem->content);
+        !isset($cardItem->category) ? $fullcardItem->setCategory($existingcardItem->getCategory()) : $fullcardItem->setCategory($cardItem->category);
+        !isset($cardItem->points) ? $fullcardItem->setPoints($existingcardItem->getPoints()) : $fullcardItem->setPoints($cardItem->points);
+        !isset($cardItem->isPremiumItem) ? $fullcardItem->setIsPremiumItem($existingcardItem->getIsPremiumItem()) : $fullcardItem->setIsPremiumItem($cardItem->isPremiumItem);
+
+        return $fullcardItem;
     }
 }
 ?>

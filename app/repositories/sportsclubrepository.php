@@ -3,6 +3,7 @@ namespace Repositories;
 
 use PDO;
 use PDOException;
+use Models\Sportsclub;
 use Repositories\Repository;
 
 class sportsclubRepository extends Repository
@@ -69,11 +70,14 @@ class sportsclubRepository extends Repository
     function update($sportsclub, $id)
     {
         try {
+            $existingSportsclub = $this->getOne($id);
+            $fullSportsclub = $this->addMissingFields($existingSportsclub, $sportsclub);
+
             $stmt = $this->connection->prepare("UPDATE sportsclub SET clubname = ?, description = ?, foundedOn = ?, membersAmount = ? WHERE id = ?");
 
-            $stmt->execute([$sportsclub->clubname, $sportsclub->description, $sportsclub->foundedOn, $sportsclub->membersAmount, $id]);
+            $stmt->execute([$fullSportsclub->clubname, $fullSportsclub->description, $fullSportsclub->foundedOn, $fullSportsclub->membersAmount, $id]);
 
-            return $sportsclub;
+            return $fullSportsclub;
         } catch(PDOException $e) {
             echo $e;
         }
@@ -92,6 +96,18 @@ class sportsclubRepository extends Repository
             echo $e;
         }
         return true;
+    }
+
+    function addMissingFields($existingSportsclub, $sportsclub)
+    {
+        $fullSportsclub = new Sportsclub();
+
+        !isset($sportsclub->clubname) ? $fullSportsclub->setClubname($existingSportsclub->getClubname()) : $fullSportsclub->setClubname($sportsclub->clubname);
+        !isset($sportsclub->description) ? $fullSportsclub->setDescription($existingSportsclub->getDescription()) : $fullSportsclub->setDescription($sportsclub->description);
+        !isset($sportsclub->foundedOn) ? $fullSportsclub->setFoundedOn($existingSportsclub->getFoundedOn()) : $fullSportsclub->setFoundedOn($sportsclub->foundedOn);
+        !isset($sportsclub->membersAmount) ? $fullSportsclub->setMembersAmount($existingSportsclub->getMembersAmount()) : $fullSportsclub->setMembersAmount($sportsclub->membersAmount);
+
+        return $fullSportsclub;
     }
 }
 ?>

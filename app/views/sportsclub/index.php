@@ -36,7 +36,7 @@
 							  </section>
 							</td>
 							<td>
-								<textarea class="bingo-table-columns bingo-clubname-column" name="sportsclub-clubname"><?php echo $sportsclub->getclubname(); ?></textarea>
+								<textarea class="bingo-table-columns bingo-clubname-column" name="sportsclub-clubname"><?php echo $sportsclub->getClubname(); ?></textarea>
 							</td>
 							<td>
 								<textarea class="bingo-table-columns bingo-club-description-column" name="sportsclub-description"><?php echo $sportsclub->getDescription(); ?></textarea>
