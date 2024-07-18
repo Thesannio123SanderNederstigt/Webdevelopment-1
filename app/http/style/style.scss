@@ -192,8 +192,15 @@ footer {
     display: none !important;
 }
 
-.bingo-subtable-text {
-    display: flex !important;
+@media screen and (min-width: 1171px)
+{
+    .bingo-subtable-text {
+        display: flex !important;
+    }
+}
+
+#carditems-table-title-text, #bingocards-table-title-text, #sportsclubs-table-title-text {
+    margin-right: 0.5rem !important;
 }
 
 select, input, .bingo-table-buttons, .bingo-table-add-button {

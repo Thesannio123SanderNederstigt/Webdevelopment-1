@@ -23,7 +23,7 @@
 					<section class="card text-center border-dark overflow-hidden">
 						<section class="card-body position-relative card-categories">
 							<figure class="m-0 p-0">
-								<img class="img-fluid" loading="lazy" src="../assets/categorie-gebruikers.svg" alt="Users categorie" width="172">
+								<img class="img-fluid" loading="lazy" src="../assets/categorie-gebruikers.svg" alt="Gebruikers categorie" width="172">
 								<figcaption class="mb-0 mt-4 p-0">
 									<h4 class="categorie-text mb-2">Gebruikers</h4>
 								</figcaption>
@@ -38,7 +38,7 @@
 					<section class="card text-center border-dark overflow-hidden">
 						<section class="card-body position-relative card-categories">
 							<figure class="m-0 p-0">
-								<img class="img-fluid" loading="lazy" src="../assets/categorie-sportclubs.svg" alt="Users categorie" width="172">
+								<img class="img-fluid" loading="lazy" src="../assets/categorie-sportclubs.svg" alt="Sportclubs categorie" width="172">
 								<figcaption class="mb-0 mt-4 p-0">
 									<h4 class="categorie-text mb-2">Sportclubs</h4>
 								</figcaption>
@@ -53,7 +53,7 @@
 					<section class="card text-center border-dark overflow-hidden">
 						<section class="card-body position-relative card-categories">
 							<figure class="m-0 p-0">
-								<img class="img-fluid" loading="lazy" src="../assets/categorie-bingokaarten.svg" alt="Users categorie" width="172">
+								<img class="img-fluid" loading="lazy" src="../assets/categorie-bingokaarten.svg" alt="Bingokaarten categorie" width="172">
 								<figcaption class="mb-0 mt-4 p-0">
 									<h4 class="categorie-text mb-2">Bingokaarten</h4>
 								</figcaption>
@@ -68,7 +68,7 @@
 					<section class="card text-center border-dark overflow-hidden">
 						<section class="card-body position-relative card-categories">
 							<figure class="m-0 p-0">
-								<img class="img-fluid" loading="lazy" src="../assets/categorie-kaart-items.svg" alt="Users categorie" width="172">
+								<img class="img-fluid" loading="lazy" src="../assets/categorie-kaart-items.svg" alt="Kaart-items categorie" width="172">
 								<figcaption class="mb-0 mt-4 p-0">
 									<h4 class="categorie-text mb-2">Kaart-items</h4>
 								</figcaption>

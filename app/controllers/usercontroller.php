@@ -82,7 +82,12 @@ class UserController extends viewController
             $password = htmlspecialchars($_POST['nieuwe-user-password']);
             $email = htmlspecialchars($_POST['nieuwe-user-email']);
 
-            $userDTO = new userDTO($username, $password, $email);
+            //$userDTO = new userDTO($username, $password, $email);
+
+            $userDTO = new userDTO();
+            $userDTO->username = $username;
+            $userDTO->password = $password;
+            $userDTO->email = $email;
 
             $user = $userDTO->userMapper();
 

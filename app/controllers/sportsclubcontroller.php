@@ -38,7 +38,13 @@ class sportsclubController extends viewController
             $foundedOn = htmlspecialchars($_POST['nieuwe-sportsclub-foundedOn']);
             $membersAmount = htmlspecialchars($_POST['nieuwe-sportsclub-membersAmount']);
 
-            $sportsclubDTO = new sportsclubDTO($clubname, $description, $foundedOn, $membersAmount);
+            //$sportsclubDTO = new sportsclubDTO($clubname, $description, $foundedOn, $membersAmount);
+
+            $sportsclubDTO = new sportsclubDTO();
+            $sportsclubDTO->clubname = $clubname;
+            $sportsclubDTO->description = $description;
+            $sportsclubDTO->foundedOn = $foundedOn;
+            $sportsclubDTO->membersAmount = $membersAmount;
             
             $sportsclub = $sportsclubDTO->sportsclubMapper();
 

@@ -59,7 +59,11 @@ class bingocardController extends viewController
             $userId = htmlspecialchars($_POST['nieuwe-bingocard-userId']);
             $cleanSize = htmlspecialchars($_POST['nieuwe-bingocard-size']);
 
-            $bingocardDTO = new bingocardDTO($userId, $this->provideSize($cleanSize));
+            //$bingocardDTO = new bingocardDTO($userId, $this->provideSize($cleanSize));
+            
+            $bingocardDTO = new bingocardDTO();
+            $bingocardDTO->userId = $userId;
+            $bingocardDTO->size = $this->provideSize($cleanSize);
 
             $bingocard = $bingocardDTO->bingocardMapper();
 

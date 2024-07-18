@@ -176,9 +176,9 @@
 						</td>
 						<td>
 							<select name="new-bingocard-sizes">
-								<option name="drie_bij_drie" value="9" selected>9</option>
-								<option name="vier_bij_vier" value="16">16</option>
-								<option name="vijf_bij_vijf" value="25">25</option>
+								<option name="drie_bij_drie" value="9" selected>3x3</option>
+								<option name="vier_bij_vier" value="16">4x4</option>
+								<option name="vijf_bij_vijf" value="25">5x5</option>
 							</select>
 						</td>
 						<td>

@@ -85,7 +85,7 @@ function showSubtableSection(item_id, item_name)
 
     item_title_id_text.innerText = item_id;
     item_title_id_text.value = item_id;
-    item_title_id_text.style.cssText = 'margin-left: 0.5rem !important; color: #2F5597 !important';
+    item_title_id_text.style.cssText = 'color: #2F5597 !important';
 
     item_table_section.style.cssText = 'display: flex !important';
 }
@@ -515,7 +515,6 @@ function deleteUserSportsclub(sportsclubId)
         }).then(async res => {
             var result = await res.json();
 
-            console.log(`delete resultaat: ${result}`);
             if(result == true)
             {
                 getUserSportsclubs(gebruikersId);
@@ -549,10 +548,12 @@ function createUserSportsclub()
                     }).then(async res => {
                         var resultaat = await res.json();
             
-                        console.log(`addUserSportsclub resultaat: ${resultaat}`);
                         if(resultaat == true)
                         {
+                            document.getElementsByName('new-sportsclub-clubname')[0].value = '';
+                            document.getElementsByName('new-sportsclub-description')[0].value = '';
                             document.getElementsByName('new-sportsclub-foundedOn')[0].value = '1970-01-01';
+                            document.getElementsByName('new-sportsclub-membersAmount')[0].value = '';
 
                             getUserSportsclubs(gebruikersId);
                         }

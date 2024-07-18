@@ -38,7 +38,13 @@ class carditemController extends viewController
             $points = htmlspecialchars($_POST['nieuwe-cardItem-points']);
             $cleanIsPremiumItem = htmlspecialchars($_POST['nieuwe-cardItem-premium-items']);
 
-            $cardItemDTO = new cardItemDTO($content, $this->provideCategory($cleanCategory), $points, $this->provideBoolValue($cleanIsPremiumItem));
+            //$cardItemDTO = new cardItemDTO($content, $this->provideCategory($cleanCategory), $points, $this->provideBoolValue($cleanIsPremiumItem));
+
+            $cardItemDTO = new cardItemDTO();
+            $cardItemDTO->content = $content;
+            $cardItemDTO->category = $this->provideCategory($cleanCategory);
+            $cardItemDTO->points = $points;
+            $cardItemDTO->isPremiumItem = $this->provideBoolValue($cleanIsPremiumItem);
 
             $cardItem = $cardItemDTO->cardItemMapper();         
 
