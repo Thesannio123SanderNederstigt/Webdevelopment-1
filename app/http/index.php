@@ -3,6 +3,8 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
 
+date_default_timezone_set('Europe/Amsterdam');
+
 //note: error reporting/de weergave van errors (en de access control allow headers hierboven) zijn hier alleen
 //aangezet voor lokale draai, ontwikkel en test doeleinden! (m.a.w.: deze zouden hier niet staan in een live/productie applicatie omgeving)
 

@@ -72,7 +72,7 @@
 						<form name="create-bingocard-form" action="/bingocard/create/" method="POST">
 							<td><h6 class="bingo-nieuw-header-text"><b>Nieuwe bingokaart:</b></h6></td>
                             <td>
-                                <textarea class="bingo-table-columns" placeholder="<?php if(isset($_SESSION['user'])){ echo $_SESSION['user']['id'];}?>" name="nieuwe-bingocard-userId"></textarea>
+                                <textarea class="bingo-table-columns" name="nieuwe-bingocard-userId"><?php if(isset($_SESSION['user'])){ echo $_SESSION['user']['id'];}?></textarea>
                             </td>
 							<td>
 								<h6 class="bingo-nieuw-header-text">0</h6>
